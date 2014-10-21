@@ -17,6 +17,7 @@ Propel has some nice features you should know about:
  - Propel is an open-source project which is [well documented](http://propelorm.org/Propel/documentation/).
 
 THIS IS AN EXPERIMENTAL FORK TO PROVIDE SUPPORT FOR PERVASIVE DB.
+
 What's new :
  - Introduced a new target database type called "pervasive";
 What's working :
