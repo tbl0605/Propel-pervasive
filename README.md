@@ -1,4 +1,4 @@
-# Propel #
+# Propel #
 
 Propel is an open-source Object-Relational Mapping (ORM) for PHP5.
 
@@ -15,6 +15,16 @@ Propel has some nice features you should know about:
  - It's very flexible: you can simply extend Propel;
  - It uses PDO (PHP Data Objects) so it allows you to use the RDBMS of your choice (MySQL, SQLite, PostgreSQL, Oracle and MSSQL are supported);
  - Propel is an open-source project which is [well documented](http://propelorm.org/Propel/documentation/).
+
+THIS IS AN EXPERIMENTAL FORK TO PROVIDE SUPPORT FOR PERVASIVE DB.
+What's new :
+ - Introduced a new target database type called "pervasive";
+What's working :
+ - Create an XML Schema from an existing Pervasive DB Structure;
+What is working partially :
+ - All the rest;
+What's not working :
+ - Testsuite for Pervasive DB is missing;
 
 ## Installation ##
 

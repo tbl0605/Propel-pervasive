@@ -50,6 +50,7 @@ abstract class DBAdapter
         'oci'    => 'DBOracle',
         'pgsql'  => 'DBPostgres',
         'sqlite' => 'DBSQLite',
+        'pervasive' => 'DBPervasive',
         ''       => 'DBNone',
     );
 

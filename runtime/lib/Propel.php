@@ -174,6 +174,7 @@ class Propel
         'DBSQLite'            => 'adapter/DBSQLite.php',
         'DBSybase'            => 'adapter/DBSybase.php',
         'DBSQLSRV'            => 'adapter/DBSQLSRV.php',
+        'DBPervasive'         => 'adapter/DBPervasive.php',
 
         'PropelArrayCollection' => 'collection/PropelArrayCollection.php',
         'PropelCollection'    => 'collection/PropelCollection.php',

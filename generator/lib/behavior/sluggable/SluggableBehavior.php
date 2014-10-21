@@ -326,6 +326,8 @@ protected function makeSlugUnique(\$slug, \$separator = '" . $this->getParameter
         $platform = $this->getTable()->getDatabase()->getPlatform();
         if ($platform instanceof PgsqlPlatform) {
             $script .= "->where('q." . $this->getColumnForParameter('slug_column')->getPhpName() . " ' . (\$alreadyExists ? '~*' : '=') . ' ?', \$alreadyExists ? '^' . \$slug2 . '[0-9]+$' : \$slug2)";
+        } elseif ($platform instanceof PervasivePlatform) {
+            $script .= "->where('q." . $this->getColumnForParameter('slug_column')->getPhpName() . " ' . (\$alreadyExists ? '~' : '=') . ' ?', \$alreadyExists ? '^' . \$slug2 . '[0-9]+$' : \$slug2)";
         } elseif ($platform instanceof MssqlPlatform) {
             $script .= "->where('q." . $this->getColumnForParameter('slug_column')->getPhpName() . " ' . (\$alreadyExists ? 'like' : '=') . ' ?', \$alreadyExists ? '^' . \$slug2 . '[0-9]+$' : \$slug2)";
         } elseif ($platform instanceof OraclePlatform) {

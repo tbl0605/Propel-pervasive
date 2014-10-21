@@ -194,11 +194,31 @@ class PropelSQLTask extends AbstractPropelDataModelTask
                         ), Project::MSG_WARN);
                 }
 
+                if ($platform instanceof PervasivePlatform && $fk->hasOnUpdate() && $fk->getOnUpdate() == ForeignKey::SETNULL) {
+                    // there may be others that also won't work
+                    // we have to skip this because it's unsupported.
+                        $this->log(sprintf(
+                            'Ignoring the "ON UPDATE SET NULL" option for "%s" fk on "%s" table (unsupported by Pervasive).',
+                            $fk->getLocalColumnNames(),
+                            $table->getName()
+                        ), Project::MSG_WARN);
+                }
+
                 if ($platform instanceof MssqlPlatform && $fk->hasOnDelete() && $fk->getOnDelete() == ForeignKey::SETNULL) {
                     // there may be others that also won't work
                     // we have to skip this because it's unsupported.
                     $this->log(sprintf(
                         'Ignoring the "ON DELETE SET NULL" option for "%s" fk on "%s" table (unsupported by MSSQL).',
+                        $fk->getLocalColumnNames(),
+                        $table->getName()
+                    ), Project::MSG_WARN);
+                }
+
+                if ($platform instanceof PervasivePlatform && $fk->hasOnDelete() && $fk->getOnDelete() == ForeignKey::SETNULL) {
+                    // there may be others that also won't work
+                    // we have to skip this because it's unsupported.
+                    $this->log(sprintf(
+                        'Ignoring the "ON DELETE SET NULL" option for "%s" fk on "%s" table (unsupported by Pervasive).',
                         $fk->getLocalColumnNames(),
                         $table->getName()
                     ), Project::MSG_WARN);
