@@ -66,8 +66,12 @@ class PervasiveSchemaParser extends BaseSchemaParser
     );
 
     // TODO : Remove this hack...
-    protected function cleanMethod($schemaName)
+    protected function cleanMethod($schemaName, Task $task)
     {
+        if ($task instanceof PropelSchemaReverseTask && $task->isSamePhpName()) {
+            return $schemaName;
+        }
+
         $name = "";
         $regexp = '/([a-z0-9]+)/i';
         $matches = array();
@@ -119,7 +123,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
             }
             $table = new Table($name);
             // TODO : Remove...
-            $table->setPhpName($this->cleanMethod($name));
+            $table->setPhpName($this->cleanMethod($name, $task));
             $table->setIdMethod($database->getDefaultIdMethod());
             $database->addTable($table);
             $tables[] = $table;
@@ -440,7 +444,7 @@ SELECT TAB.XF$NAME TABLE_NAME
 
             $column = new Column($name);
             // TODO : Remove...
-            $column->setPhpName($this->cleanMethod($name));
+            $column->setPhpName($this->cleanMethod($name, $task));
             $column->setTable($table);
             $column->setDomainForType($propelType);
             // We may want to provide an option to include this:
@@ -594,9 +598,9 @@ SELECT DISTINCT
 
             if (! isset($indexes[$name])) {
                 if ($unique) {
-                    $indexes[$name] = new Unique($this->cleanMethod($name));
+                    $indexes[$name] = new Unique($this->cleanMethod($name, $task));
                 } else {
-                    $indexes[$name] = new Index($this->cleanMethod($name));
+                    $indexes[$name] = new Index($this->cleanMethod($name, $task));
                 }
                 $table->addIndex($indexes[$name]);
             }
