@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 require_once dirname(__FILE__) . '/../BaseSchemaParser.php';
 
 /**
@@ -65,6 +64,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
         "LOGICAL" => PropelTypes::SMALLINT // Type code = 7 // TODO : SQL_BIT doesn't exist -> ftBoolean or ftSmallint ?
     );
 
+
     // TODO : Remove this hack...
     protected function cleanMethod($schemaName, Task $task)
     {
@@ -89,9 +89,14 @@ class PervasiveSchemaParser extends BaseSchemaParser
             return $schemaName;
         }
 
-        if (strtolower($name) === 'id') {
-            $name = '_Id';
+        // A variable name cannot start with a number :
+        if (preg_match('/^[0-9]/', $name)) {
+            $name = NameGenerator::STD_SEPARATOR_CHAR . $name;
         }
+
+        // if (strtolower($name) === 'id') {
+        //     $name = '_Id';
+        // }
 
         return $name;
     }
@@ -159,7 +164,8 @@ class PervasiveSchemaParser extends BaseSchemaParser
         }
     }
 
-    private function calculatePropelTypeKey(& $row) {
+    private function calculatePropelTypeKey(& $row)
+    {
         switch ($row['DATATYPE']) {
         case '0':
             $row['PROPEL_TYPE_KEY'] = 'STRING';
@@ -377,7 +383,8 @@ class PervasiveSchemaParser extends BaseSchemaParser
     /**
      * Adds Columns to the specified table.
      *
-     * @param Table $table The Table model class to add columns to.
+     * @param Table $table
+     *            The Table model class to add columns to.
      */
     protected function addColumns(Table $table, Task $task = null)
     {
@@ -435,7 +442,6 @@ SELECT TAB.XF$NAME TABLE_NAME
                 $autoincrement = true;
             }
 
-
             $propelType = $this->getMappedPropelType($type);
             if ($propelType === null) {
                 $propelType = Column::DEFAULT_TYPE;
@@ -448,7 +454,7 @@ SELECT TAB.XF$NAME TABLE_NAME
             $column->setTable($table);
             $column->setDomainForType($propelType);
             // We may want to provide an option to include this:
-            // $column->getDomain()->replaceSqlType($type);
+        // $column->getDomain()->replaceSqlType($type);
             $column->getDomain()->replaceSize($size);
             $column->getDomain()->replaceScale($scale);
             if ($has_default) {
