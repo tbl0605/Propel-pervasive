@@ -454,7 +454,7 @@ SELECT TAB.XF$NAME TABLE_NAME
             $column->setTable($table);
             $column->setDomainForType($propelType);
             // We may want to provide an option to include this:
-        // $column->getDomain()->replaceSqlType($type);
+            // $column->getDomain()->replaceSqlType($type);
             $column->getDomain()->replaceSize($size);
             $column->getDomain()->replaceScale($scale);
             if ($has_default) {
