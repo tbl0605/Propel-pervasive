@@ -2189,8 +2189,13 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
                 \$this->$clo = null;
             }";
                 } elseif ($col->isPhpPrimitiveType()) {
-                    $script .= "
+                    if ($this->getPlatform() instanceof PervasivePlatform) {
+                        $script .= "
+            \$this->$clo = (\$row[\$startcol + $n] !== null) ? (" . $col->getPhpType() . ") rtrim(\$row[\$startcol + $n], ' ') : null;";
+                    } else {
+                        $script .= "
             \$this->$clo = (\$row[\$startcol + $n] !== null) ? (" . $col->getPhpType() . ") \$row[\$startcol + $n] : null;";
+                    }
                 } elseif ($col->getType() === PropelTypes::OBJECT) {
                     $script .= "
             \$this->$clo = \$row[\$startcol + $n];";
