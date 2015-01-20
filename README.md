@@ -18,14 +18,22 @@ Propel has some nice features you should know about:
 
 THIS IS AN EXPERIMENTAL FORK TO PROVIDE SUPPORT FOR PERVASIVE DB.
 
-What's new :
- - Introduced a new target database type called "pervasive";
-What's working :
+What's new:
+
+ - Introduced a new database type called "pervasive";
+ - Included some pending pull requests from the Propel's upstream (master) branch;
+
+What's working:
+
  - Create an XML Schema from an existing Pervasive DB Structure;
-What is working partially :
- - All the rest;
-What's not working :
+
+What's not working:
+
  - Testsuite for Pervasive DB is missing;
+
+What's partially working:
+
+ - All the rest;
 
 ## Installation ##
 
