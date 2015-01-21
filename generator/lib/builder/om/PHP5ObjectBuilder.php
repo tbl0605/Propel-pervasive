@@ -4420,7 +4420,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
     {
         $relCol = $this->getFKPhpNameAffix($crossFK, $plural = true);
         $collName = $this->getCrossFKVarName($crossFK);
-        $relatedObjectClassName = $this->getNewStubObjectBuilder($crossFK->getForeignTable())->getClassname();
+        $relatedObjectClassName = $this->getNewStubObjectBuilder($crossFK->getForeignTable())->getFullyQualifiedClassname();
 
         $script .= "
     /**
