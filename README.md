@@ -33,7 +33,7 @@ What's not working:
 
 What's partially working:
 
- - All the rest;
+ - All the rest (concerning the Pervasive DB support);
 
 ## Installation ##
 
