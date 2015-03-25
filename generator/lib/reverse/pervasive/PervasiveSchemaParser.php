@@ -10,7 +10,7 @@
 require_once dirname(__FILE__) . '/../BaseSchemaParser.php';
 
 /**
- * Microsoft SQL Server database schema parser.
+ * Pervasive database schema parser.
  *
  * @author     Thierry Blind
  * @version    $Revision$
