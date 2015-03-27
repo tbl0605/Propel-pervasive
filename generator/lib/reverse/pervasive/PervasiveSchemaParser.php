@@ -435,6 +435,7 @@ SELECT TAB.XF$NAME TABLE_NAME
             $size = $row['CHAR_LEN'];
             $is_nullable = $row['NULLABLE'] === 'YES';
             $has_default = $row['HAS_DEF_VAL'] === 'YES';
+            $default = $row['DEFAULT_VALUE'];
             //$precision = $row['PRECISION'];
             $scale = $row['SCALE'];
             $autoincrement = false;
@@ -458,7 +459,7 @@ SELECT TAB.XF$NAME TABLE_NAME
             $column->getDomain()->replaceSize($size);
             $column->getDomain()->replaceScale($scale);
             if ($has_default) {
-                $column->getDomain()->setDefaultValue(new ColumnDefaultValue($row['DEFAULT_VALUE'], ColumnDefaultValue::TYPE_VALUE));
+                $column->getDomain()->setDefaultValue(new ColumnDefaultValue($default, ColumnDefaultValue::TYPE_VALUE));
             }
             $column->setAutoIncrement($autoincrement);
             $column->setNotNull(! $is_nullable);
