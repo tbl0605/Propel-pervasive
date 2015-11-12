@@ -21,7 +21,7 @@ THIS IS AN EXPERIMENTAL FORK TO PROVIDE SUPPORT FOR PERVASIVE DB.
 What's new:
 
  - Introduced a new database type called "pervasive";
- - Included some pending pull requests from the Propel's upstream (master) branch;
+ - Included most pending pull requests from the Propel's upstream (master) branch;
 
 What's working:
 
@@ -33,7 +33,7 @@ What's not working:
 
 What's partially working:
 
- - All the rest (concerning the Pervasive DB support);
+ - All the rest is untested but is probably working (concerning the Pervasive DB support);
 
 ## Installation ##
 
