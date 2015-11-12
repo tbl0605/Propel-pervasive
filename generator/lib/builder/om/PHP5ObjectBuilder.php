@@ -1147,7 +1147,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      * @param PropelPDO \$con An optional PropelPDO connection to use for fetching this lazy-loaded column.";
         }
         $script .= "
-     * @return "               . $col->getPhpType() . "
+     * @return "               . (strlen($col->getPhpType()) > 0 ? $col->getPhpType() : 'StdClass') . "
      * @throws PropelException - if the stored enum key is unknown.
      */";
 
@@ -1260,7 +1260,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      * @param PropelPDO \$con An optional PropelPDO connection to use for fetching this lazy-loaded column.";
         }
         $script .= "
-     * @return " . $col->getPhpType() . "
+     * @return " . (strlen($col->getPhpType()) > 0 ? $col->getPhpType() : 'StdClass') . "
      */";
     }
 
@@ -1493,7 +1493,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
     /**
      * Set the value of [$clo] column.
      * " . $col->getDescription() . "
-     * @param  " . $col->getPhpType() . " \$v new value
+     * @param  " . (strlen($col->getPhpType()) == 0 ? 'StdClass' : $col->getPhpType()) . " \$v new value
      * @return "   . $this->getObjectClassname() . " The current object (for fluent API support)
      */";
     }
@@ -1892,7 +1892,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
     /**
      * Set the value of [$clo] column.
      * " . $col->getDescription() . "
-     * @param  " .             $col->getPhpType() . " \$v new value
+     * @param  " .             (strlen($col->getPhpType()) == 0 ? 'StdClass' : $col->getPhpType()) . " \$v new value
      * @return "               . $this->getObjectClassname() . " The current object (for fluent API support)
      * @throws PropelException - if the value is not accepted by this enum.
      */";
