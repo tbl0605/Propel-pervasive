@@ -115,7 +115,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
         // http://cs.pervasive.com/forums/p/951/3357.aspx
         // See also : call psp_tables(null, null, 'User table')
-        $stmt = $this->dbh->query('SELECT DISTINCT XF$NAME FROM X$FILE, X$FIELD WHERE XF$ID = XE$FILE AND XF$FLAGS & 16 <> 16 AND XE$DATATYPE NOT IN (227,255)');
+        $stmt = $this->dbh->query('SELECT DISTINCT XF$NAME FROM X$FILE, X$FIELD WHERE XF$ID = XE$FILE AND XF$FLAGS & 16 <> 16 AND XE$DATATYPE NOT IN (227, 255)');
 
         // First load the tables (important that this happen before filling out details of tables)
         $tables = array();
@@ -418,7 +418,7 @@ SELECT TAB.XF$NAME TABLE_NAME
     ON ATT.XA$ID = COL.XE$ID
    AND ATT.XA$TYPE = \'D\'
  WHERE TAB.XF$FLAGS & 16 <> 16
-   AND COL.XE$DATATYPE NOT IN (227,255)
+   AND COL.XE$DATATYPE NOT IN (227, 255)
    AND TAB.XF$NAME = \'' . $table->getName() . '\'
  ORDER BY COL.XE$OFFSET
      , COL.XE$NAME
@@ -582,7 +582,7 @@ SELECT DISTINCT
    AND IDX.XI$FLAGS & POWER(2,13) = 0
    AND COL.XE$ID = IDX.XI$FIELD
    AND COLIDX.XE$FILE = TAB.XF$ID
-   AND COLIDX.XE$DATATYPE = 255
+   AND COLIDX.XE$DATATYPE IN (227, 255)
    AND COLIDX.XE$OFFSET = IDX.XI$NUMBER
  ORDER BY IDX.XI$NUMBER
      , IDX.XI$PART
@@ -639,7 +639,7 @@ SELECT COL.XE$NAME
        SELECT 1
          FROM X$FIELD AS COLIDX
         WHERE COLIDX.XE$FILE = TAB.XF$ID
-          AND COLIDX.XE$DATATYPE = 255
+          AND COLIDX.XE$DATATYPE IN (227, 255)
           AND COLIDX.XE$OFFSET = IDX.XI$NUMBER
        )
    AND IDX.XI$FLAGS & 1 = 0
