@@ -27,52 +27,52 @@ class PervasiveSchemaParser extends BaseSchemaParser
     // http://docs.pervasive.com/products/database/psqlv11/wwhelp/wwhimpl/js/html/wwhelp.htm#href=ODBC/SQLSysTb.12.3.html
     // http://docs.pervasive.com/products/database/psqlv11/wwhelp/wwhimpl/js/html/wwhelp.htm#href=ODBC/SQLDtype.10.2.html#134810
     private static $propelTypeMap = array(
-        "AUTOINC2" => PropelTypes::SMALLINT, // Type code = 15
-        "AUTOINC4" => PropelTypes::INTEGER, // Type code = 15
-        "BFLOAT4" => PropelTypes::REAL, // Type code = 9
-        "BFLOAT8" => PropelTypes::DOUBLE, // Type code = 9
-        "CLOB/BLOB" => PropelTypes::LONGVARBINARY, // Type code = 21
-        "CURRENCY" => PropelTypes::DECIMAL, // Type code = 19
-        "DATE" => PropelTypes::DATE, // Type code = 3
-        "DATETIME" => PropelTypes::TIMESTAMP, // Type code =  30 // TODO : Check...
-        "DECIMAL" => PropelTypes::DECIMAL, // Type code = 5
-        "REAL" => PropelTypes::REAL, // Type code = 2
-        "DOUBLE" => PropelTypes::DOUBLE, // Type code = 2
-        "GUID" => PropelTypes::LONGVARBINARY, // Type code = 27 // SQL_GUID (UNIQUEIDENTIFIER)
-        "TINYINT" => PropelTypes::TINYINT, // Type code = 1
-        "SMALLINT" => PropelTypes::SMALLINT, // Type code = 1
-        "INTEGER" => PropelTypes::INTEGER, // Type code = 1
-        "BIGINT" => PropelTypes::BIGINT, // Type code = 1 // TODO : PropelTypes::SQL_DECIMAL doesn't exist
-        "MONEY" => PropelTypes::DECIMAL, // Type code = 6
-        "NUMERIC" => PropelTypes::NUMERIC, // Type code = 8
-        "NUMERICSA" => PropelTypes::NUMERIC, // Type code = 18
-        "NUMERICSLB" => PropelTypes::NUMERIC, // Type code = 28
-        "NUMERICSLS" => PropelTypes::NUMERIC, // Type code = 29
-        "NUMERICSTB" => PropelTypes::NUMERIC, // Type code = 31
-        "NUMERICSTS" => PropelTypes::NUMERIC, // Type code = 17
-        "STRING" => PropelTypes::CHAR, // Type code = 0 // TODO : SQL_BINARY or SQL_CHAR ?
-        "TIME" => PropelTypes::TIME, // Type code = 4
-        "TIMESTAMP" => PropelTypes::TIMESTAMP, // Type code = 20
-        "UNSIGNED1 BINARY" => PropelTypes::TINYINT, // Type code = 14
-        "UNSIGNED2 BINARY" => PropelTypes::SMALLINT, // Type code = 14
-        "UNSIGNED4 BINARY" => PropelTypes::INTEGER, // Type code = 14
-        "UNSIGNED8 BINARY" => PropelTypes::DECIMAL, // Type code = 14
+        'AUTOINC2' => PropelTypes::SMALLINT, // Type code = 15
+        'AUTOINC4' => PropelTypes::INTEGER, // Type code = 15
+        'BFLOAT4' => PropelTypes::REAL, // Type code = 9
+        'BFLOAT8' => PropelTypes::DOUBLE, // Type code = 9
+        'CLOB/BLOB' => PropelTypes::LONGVARBINARY, // Type code = 21
+        'CURRENCY' => PropelTypes::DECIMAL, // Type code = 19
+        'DATE' => PropelTypes::DATE, // Type code = 3
+        'DATETIME' => PropelTypes::TIMESTAMP, // Type code =  30 // TODO: Check...
+        'DECIMAL' => PropelTypes::DECIMAL, // Type code = 5
+        'REAL' => PropelTypes::REAL, // Type code = 2
+        'DOUBLE' => PropelTypes::DOUBLE, // Type code = 2
+        'GUID' => PropelTypes::LONGVARBINARY, // Type code = 27 // SQL_GUID (UNIQUEIDENTIFIER)
+        'TINYINT' => PropelTypes::TINYINT, // Type code = 1
+        'SMALLINT' => PropelTypes::SMALLINT, // Type code = 1
+        'INTEGER' => PropelTypes::INTEGER, // Type code = 1
+        'BIGINT' => PropelTypes::BIGINT, // Type code = 1 // TODO: PropelTypes::SQL_DECIMAL doesn't exist
+        'MONEY' => PropelTypes::DECIMAL, // Type code = 6
+        'NUMERIC' => PropelTypes::NUMERIC, // Type code = 8
+        'NUMERICSA' => PropelTypes::NUMERIC, // Type code = 18
+        'NUMERICSLB' => PropelTypes::NUMERIC, // Type code = 28
+        'NUMERICSLS' => PropelTypes::NUMERIC, // Type code = 29
+        'NUMERICSTB' => PropelTypes::NUMERIC, // Type code = 31
+        'NUMERICSTS' => PropelTypes::NUMERIC, // Type code = 17
+        'STRING' => PropelTypes::CHAR, // Type code = 0 // TODO: SQL_BINARY or SQL_CHAR ?
+        'TIME' => PropelTypes::TIME, // Type code = 4
+        'TIMESTAMP' => PropelTypes::TIMESTAMP, // Type code = 20
+        'UNSIGNED1 BINARY' => PropelTypes::TINYINT, // Type code = 14
+        'UNSIGNED2 BINARY' => PropelTypes::SMALLINT, // Type code = 14
+        'UNSIGNED4 BINARY' => PropelTypes::INTEGER, // Type code = 14
+        'UNSIGNED8 BINARY' => PropelTypes::DECIMAL, // Type code = 14
         // Type code = 25 or 26 not supported
-        "VARCHAR" => PropelTypes::VARCHAR, // Type code = 11
+        'VARCHAR' => PropelTypes::VARCHAR, // Type code = 11
         // http://docs.pervasive.com/products/database/psqlv11/pdac/wwhelp/wwhimpl/common/html/wwhelp.htm#href=pdacref.2.6.html&single=true
-        "BIT" => PropelTypes::BOOLEAN, // Type code = 16 // TODO : SQL_BIT doesn't exist -> ftBoolean
-        "LOGICAL" => PropelTypes::SMALLINT // Type code = 7 // TODO : SQL_BIT doesn't exist -> ftBoolean or ftSmallint ?
+        'BIT' => PropelTypes::BOOLEAN, // Type code = 16 // TODO: SQL_BIT doesn't exist -> ftBoolean
+        'LOGICAL' => PropelTypes::SMALLINT // Type code = 7 // TODO: SQL_BIT doesn't exist -> ftBoolean or ftSmallint ?
     );
 
 
-    // TODO : Remove this hack...
+    // TODO: Remove this hack...
     protected function cleanMethod($schemaName, Task $task)
     {
         if ($task instanceof PropelSchemaReverseTask && $task->isSamePhpName()) {
             return $schemaName;
         }
 
-        $name = "";
+        $name = '';
         $regexp = '/([a-z0-9]+)/i';
         $matches = array();
         $first = true;
@@ -89,7 +89,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
             return $schemaName;
         }
 
-        // A variable name cannot start with a number :
+        // A variable name cannot start with a number:
         if (preg_match('/^[0-9]/', $name)) {
             $name = NameGenerator::STD_SEPARATOR_CHAR . $name;
         }
@@ -114,7 +114,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
     {
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
         // http://cs.pervasive.com/forums/p/951/3357.aspx
-        // See also : call psp_tables(null, null, 'User table')
+        // See also: call psp_tables(null, null, 'User table')
         $stmt = $this->dbh->query('SELECT DISTINCT XF$NAME FROM X$FILE, X$FIELD WHERE XF$ID = XE$FILE AND XF$FLAGS & 16 <> 16 AND XE$DATATYPE NOT IN (227, 255)');
 
         // First load the tables (important that this happen before filling out details of tables)
@@ -127,7 +127,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
                 continue;
             }
             $table = new Table($name);
-            // TODO : Remove...
+            // TODO: Remove...
             $table->setPhpName($this->cleanMethod($name, $task));
             $table->setIdMethod($database->getDefaultIdMethod());
             $database->addTable($table);
@@ -164,6 +164,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
         }
     }
 
+    // http://www.pervasive.com/portals/55/documents/psqlv11/Accessing_the_DDF_Files_Through_Views.pdf
     private function calculatePropelTypeKey(& $row)
     {
         switch ($row['DATATYPE']) {
@@ -391,9 +392,9 @@ class PervasiveSchemaParser extends BaseSchemaParser
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
         // http://www.pervasive.com/portals/55/documents/psqlv11/Accessing_the_DDF_Files_Through_Views.pdf
         // http://support.pervasive.com/t5/tkb/articleprintpage/tkb-id/Database_KnowledgeBase/article-id/162
-        // TODO : XE$OFFSET is NOT unique (per table), find ordering used by Pervasive Control Center.
+        // TODO: XE$OFFSET is NOT unique (per table), find ordering used by Pervasive Control Center.
         // Actually it's neither by XE$ID nor by XE$NAME, arbitrarily we will use XE$NAME.
-        // See also : call psp_columns(null, '$table->getName()', null)
+        // See also: call psp_columns(null, '$table->getName()', null)
         $query = '
 SELECT TAB.XF$NAME TABLE_NAME
      , COL.XE$NAME COLUMN_NAME
@@ -446,11 +447,11 @@ SELECT TAB.XF$NAME TABLE_NAME
             $propelType = $this->getMappedPropelType($type);
             if ($propelType === null) {
                 $propelType = Column::DEFAULT_TYPE;
-                $this->warn("Column [" . $table->getName() . "." . $name . "] has a column type (" . $type . ") that Propel does not support.");
+                $this->warn('Column [' . $table->getName() . '.' . $name . '] has a column type (' . $type . ') that Propel does not support.');
             }
 
             $column = new Column($name);
-            // TODO : Remove...
+            // TODO: Remove...
             $column->setPhpName($this->cleanMethod($name, $task));
             $column->setTable($table);
             $column->setDomainForType($propelType);
@@ -476,7 +477,7 @@ SELECT TAB.XF$NAME TABLE_NAME
         $database = $table->getDatabase();
 
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
-        // See also : call psp_fkeys(null, '$table->getName()', null)
+        // See also: call psp_fkeys(null, '$table->getName()', null)
         $query = '
 SELECT A.XR$NAME RULE_NAME
      , TABSRC.XF$NAME FKTABLE
@@ -553,7 +554,7 @@ SELECT A.XR$NAME RULE_NAME
     protected function addIndexes(Table $table, Task $task = null)
     {
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
-        // See also : call psp_indexes(null, '$table->getName()')
+        // See also: call psp_indexes(null, '$table->getName()')
         //
         // Final Note - not all indexes have names.  If the DDFs have been migrated forward
         // from older versions, there might be index definitions in X$Index that do not have
@@ -561,7 +562,7 @@ SELECT A.XR$NAME RULE_NAME
         //
         // Use MOD(Xi$FLAGS,2) = 0 if you want to select only the named indexes.
         //
-        // NB : XE$OFFSET *should* be unique (per index), so add DISTINCT to be sure.
+        // NB: XE$OFFSET *should* be unique (per index), so add DISTINCT to be sure.
         $query = '
 SELECT DISTINCT
        COLIDX.XE$NAME INDEX_NAME
@@ -593,7 +594,7 @@ SELECT DISTINCT
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             array_walk($row, 'PervasiveSchemaParser::rtrim_to_utf8', $task);
 
-            $colName = $row["COLUMN_NAME"];
+            $colName = $row['COLUMN_NAME'];
             $name = $row['INDEX_NAME'];
             // Not all indexes have names.
             if (! strlen($name)) {
@@ -622,9 +623,9 @@ SELECT DISTINCT
     protected function addPrimaryKey(Table $table, Task $task = null)
     {
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
-        // See also : call psp_indexes(null, '$table->getName()')
+        // See also: call psp_indexes(null, '$table->getName()')
         //
-        // NB : XE$OFFSET *should* be unique (per index), so put it in an EXISTS clause to be sure.
+        // NB: XE$OFFSET *should* be unique (per index), so put it in an EXISTS clause to be sure.
         $query = '
 SELECT COL.XE$NAME
   FROM X$FILE AS TAB
