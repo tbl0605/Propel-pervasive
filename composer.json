@@ -1,6 +1,6 @@
 {
   "name": "tbl0605/propel1-pervasive",
-  "description": "Propel is an open-source Object-Relational Mapping (ORM) for PHP5.",
+  "description": "Propel is an open-source Object-Relational Mapping (ORM) for PHP5. This fork tries to add support for Pervasive DB.",
   "keywords": ["orm", "active record", "mapping", "database", "persistence"],
   "homepage": "http://www.propelorm.org/",
   "license": "MIT",
