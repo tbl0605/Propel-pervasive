@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../../../fixtures/generator/behavior/Foobar.php';
+require_once dirname(__FILE__).'/../../../fixtures/generator/behavior/Foobar.php';
 
 class NamespacedBehaviorTest extends PHPUnit_Framework_TestCase
 {

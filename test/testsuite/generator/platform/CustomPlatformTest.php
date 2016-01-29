@@ -9,7 +9,7 @@ class CustomPlatformTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $projectDir = realpath(__DIR__ . '/../../../fixtures/generator/platform/');
+        $projectDir = realpath(dirname(__FILE__) . '/../../../fixtures/generator/platform/');
         $platformClass = str_replace('/', '.', $projectDir) . '.CustomPlatform';
         $props = array(
             "propel.project" => "kfw-propel",

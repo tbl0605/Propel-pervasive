@@ -667,10 +667,11 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . "
      * Filter the query by primary key
      *
      * @param     mixed \$key Primary key to use for the query
+     * @param     string \$comparison Operator to use for the primary key comparison, defaults to Criteria::EQUAL
      *
      * @return " . $this->getStubQueryBuilder()->getClassname() . " The current query, for fluid interface
      */
-    public function filterByPrimaryKey(\$key)
+    public function filterByPrimaryKey(\$key, \$comparison = Criteria::EQUAL)
     {";
         $table = $this->getTable();
         $pks = $table->getPrimaryKey();
@@ -680,14 +681,14 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . "
             $const = $this->getColumnConstant($col);
             $script .= "
 
-        return \$this->addUsingAlias($const, \$key, Criteria::EQUAL);";
+        return \$this->addUsingAlias($const, \$key, \$comparison);";
         } else {
             // composite primary key
             $i = 0;
             foreach ($pks as $col) {
                 $const = $this->getColumnConstant($col);
                 $script .= "
-        \$this->addUsingAlias($const, \$key[$i], Criteria::EQUAL);";
+        \$this->addUsingAlias($const, \$key[$i], \$comparison);";
                 $i++;
             }
             $script .= "
@@ -1282,12 +1283,12 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . "
      * Filter the query by a related $fkPhpName object
      * using the $crossTableName table as cross reference
      *
-     * @param   $fkPhpName|PropelObjectCollection $objectName the related object to use as filter
+     * @param   $fkPhpName $objectName the related object to use as filter
      * @param     string \$comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return   $queryClass The current query, for fluid interface
      */
-    public function filterBy{$relName}($objectName, \$comparison = null)
+    public function filterBy{$relName}($objectName, \$comparison = Criteria::EQUAL)
     {
         return \$this
             ->use{$relationName}Query()
