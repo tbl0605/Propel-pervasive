@@ -94,10 +94,6 @@ class PervasiveSchemaParser extends BaseSchemaParser
             $name = NameGenerator::STD_SEPARATOR_CHAR . $name;
         }
 
-        // if (strtolower($name) === 'id') {
-        //     $name = '_Id';
-        // }
-
         return $name;
     }
 
