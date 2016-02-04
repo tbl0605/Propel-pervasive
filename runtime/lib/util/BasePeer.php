@@ -36,6 +36,9 @@ class BasePeer
     /** Array (hash) that contains cached validators */
     private static $validatorMap = array();
 
+    /** Last chance to rewrite SQL orders */
+    private static $sqlRewriter = null;
+
     /**
      * phpname type
      * e.g. 'AuthorId'
@@ -141,6 +144,9 @@ class BasePeer
                 }
                 $sql .= " WHERE " . implode(" AND ", $whereClause);
 
+                 if (self::$sqlRewriter !== null) {
+                    self::$sqlRewriter->rewrite($sql);
+                }
                 $stmt = $con->prepare($sql);
                 $db->bindValues($stmt, $params, $dbMap);
                 $stmt->execute();
@@ -183,6 +189,9 @@ class BasePeer
                 $tableName = $db->quoteIdentifierTable($tableName);
             }
             $sql = "DELETE FROM " . $tableName;
+            if (self::$sqlRewriter !== null) {
+                self::$sqlRewriter->rewrite($sql);
+            }
             $stmt = $con->prepare($sql);
             $stmt->execute();
 
@@ -290,6 +299,9 @@ class BasePeer
 
             $db->cleanupSQL($sql, $params, $criteria, $dbMap);
 
+            if (self::$sqlRewriter !== null) {
+                self::$sqlRewriter->rewrite($sql);
+            }
             $stmt = $con->prepare($sql);
             $db->bindValues($stmt, $params, $dbMap, $db);
             $stmt->execute();
@@ -431,6 +443,9 @@ class BasePeer
 
                 $db->cleanupSQL($sql, $params, $updateValues, $dbMap);
 
+                if (self::$sqlRewriter !== null) {
+                    self::$sqlRewriter->rewrite($sql);
+                }
                 $stmt = $con->prepare($sql);
 
                 // Replace ':p?' with the actual values
@@ -850,6 +865,9 @@ class BasePeer
             $db->applyLimit($sql, $criteria->getOffset(), $criteria->getLimit(), $criteria);
         }
 
+        if (self::$sqlRewriter !== null) {
+            self::$sqlRewriter->rewrite($sql);
+        }
         return $sql;
     }
 
@@ -899,5 +917,33 @@ class BasePeer
         }
 
         return null;
+    }
+
+    /**
+     * Returns the attached BasePeerSQLRewriter object, NULL if none is currently attached.
+     *
+     * @return BasePeerSQLRewriter|NULL
+     */
+    public static function getSQLRewriter()
+    {
+        return self::$sqlRewriter;
+    }
+
+    /**
+     * Attachs a BasePeerSQLRewriter object.
+     *
+     * @param BasePeerSQLRewriter $sqlRewriter
+     */
+    public static function setSQLRewriter(BasePeerSQLRewriter $sqlRewriter)
+    {
+        self::$sqlRewriter = $sqlRewriter;
+    }
+
+    /**
+     * Removes (if any) attached BasePeerSQLRewriter object.
+     */
+    public static function removeSQLRewriter()
+    {
+        self::$sqlRewriter = null;
     }
 }

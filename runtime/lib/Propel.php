@@ -231,6 +231,7 @@ class Propel
         'PropelQuery'         => 'query/PropelQuery.php',
 
         'BasePeer'            => 'util/BasePeer.php',
+        'BasePeerSQLRewriter' => 'util/BasePeerSQLRewriter.php',
         'NodePeer'            => 'util/NodePeer.php',
         'PeerInfo'            => 'util/PeerInfo.php',
         'PropelAutoloader'    => 'util/PropelAutoloader.php',
