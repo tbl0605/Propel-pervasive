@@ -1500,7 +1500,7 @@ class Criteria implements IteratorAggregate
             $sb .= "\nParams: ";
             $paramstr = array();
             foreach ($params as $param) {
-                $paramstr[] = $param['table'] . '.' . $param['column'] . ' => ' . var_export($param['value'], true);
+                $paramstr[] = $param['table'] . '.' . (isset($param['column']) ? $param['column'] : '') . ' => ' . var_export($param['value'], true);
             }
             $sb .= implode(", ", $paramstr);
         } catch (Exception $exc) {
