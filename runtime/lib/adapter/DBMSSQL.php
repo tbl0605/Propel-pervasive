@@ -330,4 +330,28 @@ class DBMSSQL extends DBAdapter
             }
         }
     }
+
+    /**
+     * @see       parent::getId()
+     *
+     * @param PDO    $con
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function getId(PDO $con, $name = NULL)
+    {
+        try {
+            // http://php.net/manual/fr/pdo.lastinsertid.php
+            // If the PDO driver does not support this capability, PDO::lastInsertId() triggers an IM001 SQLSTATE.
+            return $con->lastInsertId($name);
+        } catch (Exception $ex) {
+            if ($ex instanceof PDOException && $ex->getCode() === 'IM001') {
+                $stmt = $con->query("SELECT CAST(COALESCE(SCOPE_IDENTITY(), @@IDENTITY) AS int)");
+                $row = $stmt->fetch(PDO::FETCH_NUM);
+                return $row[0];
+            }
+            throw $ex;
+        }
+    }
 }
