@@ -56,7 +56,7 @@ class SortableBehaviorPeerBuilderModifier
 
     protected function getColumnAttribute($name)
     {
-        return strtolower($this->behavior->getColumnForParameter($name)->getPhpName());
+        return strtolower($this->behavior->getColumnForParameter($name)->getName());
     }
 
     protected function getColumnConstant($name)

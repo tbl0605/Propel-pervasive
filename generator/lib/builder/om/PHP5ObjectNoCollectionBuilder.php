@@ -60,7 +60,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
      **/
     protected function addLazyLoaderComment(&$script, Column $col)
     {
-        $clo = strtolower($col->getPhpName());
+        $clo = strtolower($col->getName());
 
         $script .= "
     /**
@@ -103,7 +103,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
     protected function addLazyLoaderBody(&$script, Column $col)
     {
         $platform = $this->getPlatform();
-        $clo = strtolower($col->getPhpName());
+        $clo = strtolower($col->getName());
 
         $script .= "
         \$c = \$this->buildPkeyCriteria();
@@ -217,7 +217,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
         $script .= "
         \$criteria = new Criteria(" . $this->getPeerClassname() . "::DATABASE_NAME);";
         foreach ($this->getTable()->getColumns() as $col) {
-            $clo = strtolower($col->getPhpName());
+            $clo = strtolower($col->getName());
             if ($col->isPrimaryKey()) {
                 $script .= "
         \$criteria->add(" . $this->getColumnConstant($col) . ", \$this->$clo);";
@@ -298,7 +298,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
         \$criteria = new Criteria(" . $this->getPeerClassname() . "::DATABASE_NAME);
 ";
         foreach ($this->getTable()->getColumns() as $col) {
-            $clo = strtolower($col->getPhpName());
+            $clo = strtolower($col->getName());
             $script .= "
         if (\$this->isColumnModified(" . $this->getColumnConstant($col) . ")) \$criteria->add(" . $this->getColumnConstant($col) . ", \$this->$clo);";
         }
@@ -424,7 +424,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
         // support for lazy load columns
         foreach ($table->getColumns() as $col) {
             if ($col->isLazyLoad()) {
-                $clo = strtolower($col->getPhpName());
+                $clo = strtolower($col->getName());
                 $script .= "
         // Reset the $clo lazy-load column
         \$this->" . $clo . " = null;
@@ -509,7 +509,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
 
             $column = $table->getColumn($columnName);
             $cptype = $column->getPhpType();
-            $clo = strtolower($column->getPhpName());
+            $clo = strtolower($column->getName());
             $localColumns[$foreignColumn->getPosition()] = '$this->' . $clo;
 
             if ($cptype == "integer" || $cptype == "float" || $cptype == "double") {
@@ -553,7 +553,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
             foreach ($argmap as $el) {
                 $fcol = $el['foreign'];
                 $lcol = $el['local'];
-                $clo = strtolower($lcol->getPhpName());
+                $clo = strtolower($lcol->getName());
                 $script .= "
             \$c->add(" . $fkPeerBuilder->getColumnConstant($fcol) . ", \$this->" . $clo . ");";
             }
@@ -658,7 +658,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
                     if ($colFK === null) {
                         throw new EngineException("Column $colFKName not found in " . $tblFK->getName());
                     }
-                    $clo = strtolower($column->getPhpName());
+                    $clo = strtolower($column->getName());
                     $script .= "
                 \$criteria->add(" . $fkPeerBuilder->getColumnConstant($colFK) . ", \$this->$clo);
 ";
@@ -677,7 +677,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
                     $flMap = $refFK->getForeignLocalMapping();
                     $colFKName = $flMap[$columnName];
                     $colFK = $tblFK->getColumn($colFKName);
-                    $clo = strtolower($column->getPhpName());
+                    $clo = strtolower($column->getName());
                     $script .= "
             \$criteria->add(" . $fkPeerBuilder->getColumnConstant($colFK) . ", \$this->$clo);
 ";
@@ -816,7 +816,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
             $lfmap = $refFK->getLocalForeignMapping();
             $localColumn = $this->getTable()->getColumn($lfmap[$colFKName]);
             $colFK = $refFK->getTable()->getColumn($colFKName);
-            $clo = strtolower($localColumn->getPhpName());
+            $clo = strtolower($localColumn->getName());
             $script .= "
                 \$criteria->add(" . $fkPeerBuilder->getColumnConstant($colFK) . ", \$this->$clo);
 ";
@@ -837,7 +837,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
             $lfmap = $refFK->getLocalForeignMapping();
             $localColumn = $this->getTable()->getColumn($lfmap[$colFKName]);
             $colFK = $refFK->getTable()->getColumn($colFKName);
-            $clo = strtolower($localColumn->getPhpName());
+            $clo = strtolower($localColumn->getName());
             $script .= "
 
                 \$criteria->add(" . $fkPeerBuilder->getColumnConstant($colFK) . ", \$this->$clo);
@@ -913,7 +913,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
             $localColumn = $this->getTable()->getColumn($lfmap[$colFKName]);
             $colFK = $refFK->getTable()->getColumn($colFKName);
 
-            $clo = strtolower($localColumn->getPhpName());
+            $clo = strtolower($localColumn->getName());
 
             $script .= "
                 \$criteria->add(" . $fkPeerBuilder->getColumnConstant($colFK) . ", \$this->$clo);
@@ -936,7 +936,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
             $lfmap = $refFK->getLocalForeignMapping();
             $localColumn = $this->getTable()->getColumn($lfmap[$colFKName]);
             $colFK = $refFK->getTable()->getColumn($colFKName);
-            $clo = strtolower($localColumn->getPhpName());
+            $clo = strtolower($localColumn->getName());
             $script .= "
 
                 \$criteria->add(" . $fkPeerBuilder->getColumnConstant($colFK) . ", \$this->$clo);
@@ -1001,7 +1001,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
         $params = array();
         foreach ($tblFK->getPrimaryKey() as $col) {
             $localColumn = $table->getColumn($lfmap[$col->getName()]);
-            $clo = strtolower($localColumn->getPhpName());
+            $clo = strtolower($localColumn->getName());
             $params[] = "\$this->$clo";
         }
 

@@ -479,7 +479,7 @@ class Column extends XMLElement
             return strtoupper($this->getPeerName());
         }
 
-        return strtoupper($this->getPhpName());
+        return strtoupper($this->getName());
     }
 
     /**

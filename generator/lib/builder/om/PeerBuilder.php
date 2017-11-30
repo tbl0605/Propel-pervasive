@@ -275,7 +275,7 @@ abstract class PeerBuilder extends OMBuilder
         if ($col->getPeerName()) {
             $const = strtoupper($col->getPeerName());
         } else {
-            $const = strtoupper($col->getPhpName());
+            $const = strtoupper($col->getName());
         }
         if ($phpName !== null) {
             return $phpName . 'Peer::' . $const;

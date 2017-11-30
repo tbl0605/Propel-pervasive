@@ -49,7 +49,7 @@ class VersionableBehaviorObjectBuilderModifier
 
     protected function getColumnAttribute($name = 'version_column')
     {
-        return strtolower($this->behavior->getColumnForParameter($name)->getPhpName());
+        return strtolower($this->behavior->getColumnForParameter($name)->getName());
     }
 
     protected function getColumnPhpName($name = 'version_column')

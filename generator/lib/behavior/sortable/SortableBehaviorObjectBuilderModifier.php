@@ -56,7 +56,7 @@ class SortableBehaviorObjectBuilderModifier
 
     protected function getColumnAttribute($name)
     {
-        return strtolower($this->behavior->getColumnForParameter($name)->getPhpName());
+        return strtolower($this->behavior->getColumnForParameter($name)->getName());
     }
 
     protected function getColumnPhpName($name)
@@ -201,7 +201,7 @@ protected \$oldScope;
             if ($this->behavior->hasMultipleScopes()) {
 
                 foreach ($this->behavior->getScopes() as $idx => $scope) {
-                    $name = strtolower($this->behavior->getTable()->getColumn($scope)->getPhpName());
+                    $name = strtolower($this->behavior->getTable()->getColumn($scope)->getName());
 
                     $search = "if (\$this->$name !== \$v) {";
                     $replace = $search . "
@@ -213,7 +213,7 @@ protected \$oldScope;
 
             } else {
                 $scope = current($this->behavior->getScopes());
-                $name = strtolower($this->behavior->getTable()->getColumn($scope)->getPhpName());
+                $name = strtolower($this->behavior->getTable()->getColumn($scope)->getName());
 
                 $search = "if (\$this->$name !== \$v) {";
                 $replace = $search . "
