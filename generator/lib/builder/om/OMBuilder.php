@@ -330,7 +330,7 @@ abstract class OMBuilder extends DataModelBuilder
         if ($col->getPeerName()) {
             $const = strtoupper($col->getPeerName());
         } else {
-            $const = strtoupper($col->getName());
+            $const = strtoupper($col->getPhpName());
         }
 
         return $classname . '::' . $const;

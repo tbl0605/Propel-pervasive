@@ -2103,7 +2103,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
     /**
      * Retrieve object using using composite pkey values.";
         foreach ($table->getPrimaryKey() as $col) {
-            $clo = strtolower($col->getName());
+            $clo = strtolower($col->getPhpName());
             $cptype = $col->getPhpType();
             $script .= "
      * @param   $cptype $" . $clo;
@@ -2116,7 +2116,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
 
         $php = array();
         foreach ($table->getPrimaryKey() as $col) {
-            $clo = strtolower($col->getName());
+            $clo = strtolower($col->getPhpName());
             $php[] = '$' . $clo;
         } /* foreach */
 
@@ -2134,7 +2134,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
         }
         \$criteria = new Criteria(" . $this->getPeerClassname() . "::DATABASE_NAME);";
         foreach ($table->getPrimaryKey() as $col) {
-            $clo = strtolower($col->getName());
+            $clo = strtolower($col->getPhpName());
             $script .= "
         \$criteria->add(" . $this->getColumnConstant($col) . ", $" . $clo . ");";
         }
