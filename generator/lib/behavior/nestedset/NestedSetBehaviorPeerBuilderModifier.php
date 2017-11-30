@@ -37,7 +37,7 @@ class NestedSetBehaviorPeerBuilderModifier
 
     protected function getColumnAttribute($name)
     {
-        return strtolower($this->getColumn($name)->getName());
+        return strtolower($this->getColumn($name)->getPhpName());
     }
 
     protected function getColumnConstant($name)

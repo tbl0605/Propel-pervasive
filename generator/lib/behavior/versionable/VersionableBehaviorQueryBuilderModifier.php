@@ -31,7 +31,7 @@ class VersionableBehaviorQueryBuilderModifier
 
     protected function getColumnAttribute($name = 'version_column')
     {
-        return strtolower($this->behavior->getColumnForParameter($name)->getName());
+        return strtolower($this->behavior->getColumnForParameter($name)->getPhpName());
     }
 
     protected function getColumnPhpName($name = 'version_column')
