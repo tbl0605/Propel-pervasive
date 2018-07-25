@@ -11,7 +11,7 @@
 require_once 'builder/sql/DataSQLBuilder.php';
 
 /**
- * MS SQL Server class for building data dump SQL.
+ * Pervasive class for building data dump SQL.
  *
  * @author     Hans Lellelid <hans@xmpl.org>
  * @package    propel.generator.builder.sql.pervasive
