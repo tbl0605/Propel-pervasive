@@ -1,8 +1,19 @@
 # Changelog Of The Propel 1.x Branch #
 
-## ????-??-??: Version 1.7.2 ##
+## 2019-11-05: Version 1.7.2 ##
 
-n/a
+SQL injection fix: Coerce offset and limit values to integers
+fix support for php 5.3
+Applying fix for migrate connection error 
+Honour value of 'disable_updated_at timestampable behaviour parameter
+Fixed diff generator when several identical columns were renamed
+Support column descriptions in reverse task
+
+Specific fixes made for the project Propel-pervasive:
+Add support for Pervasive DB
+Add class BasePeerSQLRewriter to rewrite SQL orders before issuing them
+Cleanups and merge of some pending pull requests from the official Propel project
+Other minor and random code fixes
 
 ## 2014-02-25: Version 1.7.1 ##
 
