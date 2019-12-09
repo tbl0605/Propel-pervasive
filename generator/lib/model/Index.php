@@ -220,7 +220,7 @@ class Index extends XMLElement
      *
      * @param string $name
      *
-     * @return numeric The size or NULL
+     * @return int The size or NULL
      */
     public function getColumnSize($name)
     {
