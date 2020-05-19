@@ -3,7 +3,7 @@
 ## ????-??-??: Version 1.7.4 ##
 
 ## 2020-05-19: Version 1.7.3 ##
-Support date types in the SQL Server database schema parser
+Support "date" type in the SQL Server database schema parser
 
 ## 2019-11-05: Version 1.7.2 ##
 
