@@ -29,6 +29,7 @@ class MssqlSchemaParser extends BaseSchemaParser
         "binary" => PropelTypes::BINARY,
         "bit" => PropelTypes::BOOLEAN,
         "char" => PropelTypes::CHAR,
+        "date" => PropelTypes::DATE,
         "datetime" => PropelTypes::TIMESTAMP,
         "decimal() identity"  => PropelTypes::DECIMAL,
         "decimal"  => PropelTypes::DECIMAL,
