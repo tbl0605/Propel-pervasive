@@ -162,7 +162,7 @@ class PropelArrayFormatter extends PropelFormatter
             return $this->alreadyHydratedObjects[$this->class][$mainKey];
         } else {
             // we still need to return a reference to something to avoid a warning
-            return $emptyVariable;
+            return $this->emptyVariable;
         }
     }
 }
