@@ -1,6 +1,9 @@
 # Changelog Of The Propel 1.x Branch #
 
-## ????-??-??: Version 1.7.4 ##
+## ????-??-??: Version 1.7.5 ##
+
+## 2020-09-11: Version 1.7.4 ##
+Fix support for php 7.4
 
 ## 2020-05-19: Version 1.7.3 ##
 Support "date" type in the SQL Server database schema parser
