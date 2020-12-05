@@ -1,6 +1,9 @@
 # Changelog Of The Propel 1.x Branch #
 
-## ????-??-??: Version 1.7.5 ##
+## ????-??-??: Version 1.7.6 ##
+
+## 2020-12-05: Version 1.7.5 ##
+Generator: retrieve the database tables in an orderly way
 
 ## 2020-09-11: Version 1.7.4 ##
 Fix support for php 7.4
