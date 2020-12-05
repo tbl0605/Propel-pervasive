@@ -77,7 +77,7 @@ class OracleSchemaParser extends BaseSchemaParser
     public function parse(Database $database, Task $task = null)
     {
         $tables = array();
-        $stmt = $this->dbh->query("SELECT OBJECT_NAME FROM USER_OBJECTS WHERE OBJECT_TYPE = 'TABLE'");
+        $stmt = $this->dbh->query("SELECT OBJECT_NAME FROM USER_OBJECTS WHERE OBJECT_TYPE = 'TABLE' ORDER BY OBJECT_NAME");
 
         $seqPattern = $this->getGeneratorConfig()->getBuildProperty('oracleAutoincrementSequencePattern');
 

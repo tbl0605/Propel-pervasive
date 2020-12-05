@@ -78,7 +78,7 @@ class MssqlSchemaParser extends BaseSchemaParser
      */
     public function parse(Database $database, Task $task = null)
     {
-        $stmt = $this->dbh->query("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME <> 'dtproperties'");
+        $stmt = $this->dbh->query("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME <> 'dtproperties' ORDER BY TABLE_NAME");
 
         // First load the tables (important that this happen before filling out details of tables)
         $tables = array();

@@ -111,7 +111,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
         // http://cs.pervasive.com/forums/p/951/3357.aspx
         // See also: call psp_tables(null, null, 'User table')
-        $stmt = $this->dbh->query('SELECT DISTINCT XF$NAME FROM X$FILE, X$FIELD WHERE XF$ID = XE$FILE AND XF$FLAGS & 16 <> 16 AND XE$DATATYPE NOT IN (227, 255)');
+        $stmt = $this->dbh->query('SELECT DISTINCT XF$NAME FROM X$FILE, X$FIELD WHERE XF$ID = XE$FILE AND XF$FLAGS & 16 <> 16 AND XE$DATATYPE NOT IN (227, 255) ORDER BY XF$NAME');
 
         // First load the tables (important that this happen before filling out details of tables)
         $tables = array();
