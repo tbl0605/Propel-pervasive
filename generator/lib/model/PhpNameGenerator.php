@@ -100,7 +100,11 @@ class PhpNameGenerator implements NameGenerator
         $name = "";
         $tok = strtok($schemaName, self::STD_SEPARATOR_CHAR);
         while ($tok !== false) {
-            $name .= ucfirst(strtolower($tok));
+            // https://www.php.net/manual/fr/function.strtolower.php#78560
+            $outputString = utf8_decode($tok);
+            $outputString = ucfirst(strtolower($outputString));
+            $outputString = utf8_encode($outputString);
+            $name .= $outputString;
             $tok = strtok(self::STD_SEPARATOR_CHAR);
         }
 
@@ -128,8 +132,12 @@ class PhpNameGenerator implements NameGenerator
         $regexp = '/([a-z0-9]+)/i';
         $matches = array();
         if (preg_match_all($regexp, $schemaName, $matches)) {
-            foreach ($matches[1] AS $tok) {
-                $name .= ucfirst(strtolower($tok));
+            foreach ($matches[1] as $tok) {
+                // https://www.php.net/manual/fr/function.strtolower.php#78560
+                $outputString = utf8_decode($tok);
+                $outputString = ucfirst(strtolower($outputString));
+                $outputString = utf8_encode($outputString);
+                $name .= $outputString;
             }
         } else {
             return $schemaName;
