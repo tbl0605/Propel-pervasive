@@ -165,7 +165,11 @@ class PhpNameGenerator implements NameGenerator
         $name = "";
         $tok = strtok($schemaName, self::STD_SEPARATOR_CHAR);
         while ($tok !== false) {
-            $name .= ucfirst($tok);
+            // https://www.php.net/manual/fr/function.strtolower.php#78560
+            $outputString = utf8_decode($tok);
+            $outputString = ucfirst($outputString);
+            $outputString = utf8_encode($outputString);
+            $name .= $outputString;
             $tok = strtok(self::STD_SEPARATOR_CHAR);
         }
 
