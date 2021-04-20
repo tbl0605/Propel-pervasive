@@ -1,6 +1,7 @@
 # Changelog Of The Propel 1.x Branch #
 
-## ????-??-??: Version 1.7.7 ##
+## 2021-04-20: Version 1.7.7 ##
+Generator: avoid using current php encoding in place of DB encoding
 
 ## 2021-02-09: Version 1.7.6 ##
 Generator (MssqlSchemaParser): add support for datetime2 fields
