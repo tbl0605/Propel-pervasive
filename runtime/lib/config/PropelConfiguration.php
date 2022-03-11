@@ -47,6 +47,7 @@ class PropelConfiguration implements ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return array_key_exists($offset, $this->parameters);
@@ -58,6 +59,7 @@ class PropelConfiguration implements ArrayAccess
      * @param integer $offset
      * @param mixed   $value
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->parameters[$offset] = $value;
@@ -71,6 +73,7 @@ class PropelConfiguration implements ArrayAccess
      *
      * @return array
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->parameters[$offset];
@@ -81,6 +84,7 @@ class PropelConfiguration implements ArrayAccess
      *
      * @param integer $offset
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->parameters[$offset]);
