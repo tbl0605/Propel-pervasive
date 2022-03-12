@@ -455,7 +455,8 @@ class PropelPDO extends PDO
      *
      * @return PDOStatement
      */
-    public function query(string $query, ?int $fetchMode = null, mixed ...$fetchModeArgs): PDOStatement|false
+    #[\ReturnTypeWillChange]
+    public function query(string $query, ?int $fetchMode = null, mixed ...$fetchModeArgs): PDOStatement
     {
         if ($this->useDebug) {
             $debug = $this->getDebugSnapshot();
