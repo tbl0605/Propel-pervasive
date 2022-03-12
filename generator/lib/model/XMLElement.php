@@ -8,8 +8,6 @@
  * @license    MIT License
  */
 
-require_once dirname(__FILE__) . '/VendorInfo.php';
-
 /**
  * An abstract class for elements represented by XML tags (e.g. Column, Table).
  *
@@ -216,3 +214,7 @@ abstract class XMLElement
         return $this->toString();
     }
 }
+
+// Must be called after definition of class XMLElement,
+// to avoid cyclic dependencies under PHP 8.1
+require_once dirname(__FILE__) . '/VendorInfo.php';
