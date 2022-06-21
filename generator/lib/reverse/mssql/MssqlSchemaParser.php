@@ -224,10 +224,14 @@ class MssqlSchemaParser extends BaseSchemaParser
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $colName = $this->cleanDelimitedIdentifiers($row["COLUMN_NAME"]);
             $name = $this->cleanDelimitedIdentifiers($row['INDEX_NAME']);
+            $unique = (string) $row['UNIQUE'] === '1';
 
-            // FIXME -- Add UNIQUE support
-            if (!isset($indexes[$name])) {
-                $indexes[$name] = new Index($name);
+            if (! isset($indexes[$name])) {
+                if ($unique) {
+                    $indexes[$name] = new Unique($name);
+                } else {
+                    $indexes[$name] = new Index($name);
+                }
                 $table->addIndex($indexes[$name]);
             }
 
