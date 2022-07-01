@@ -1,5 +1,7 @@
 # Changelog Of The Propel 1.x Branch #
 
+## ????-??-??: Version 1.7.10 ##
+
 ## 2022-07-01: Version 1.7.9 ##
 - Mssql schema parser: add basic unique indexes support
 - Mssql schema parser: better IDENTITY support (for the BIGINT, SMALLINT and TINYINT types)
