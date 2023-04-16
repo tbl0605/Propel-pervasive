@@ -281,7 +281,7 @@ class VersionableBehavior extends Behavior
     public function getPeerBuilderModifier()
     {
         if (is_null($this->peerBuilderModifier)) {
-            $this->peerBuilderModifier = new VersionableBehaviorPeerBuilderModifier($this);
+            $this->peerBuilderModifier = new VersionableBehaviorPeerBuilderModifier();
         }
 
         return $this->peerBuilderModifier;

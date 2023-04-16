@@ -955,7 +955,7 @@ class Criteria implements IteratorAggregate
         foreach ($conditions as $condition) {
             $left = $condition[0];
             $right = $condition[1];
-            $operator = isset($condition[2]) ? $condition[2] : JOIN::EQUAL;
+            $operator = isset($condition[2]) ? $condition[2] : Join::EQUAL;
             if ($pos = strrpos($left, '.')) {
                 $leftTableAlias = substr($left, 0, $pos);
                 $leftColumnName = substr($left, $pos + 1);

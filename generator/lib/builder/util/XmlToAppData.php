@@ -66,7 +66,6 @@ class XmlToAppData
     {
         $this->app = new AppData($defaultPlatform);
         $this->defaultPackage = $defaultPackage;
-        $this->firstPass = true;
         $this->encoding = $encoding;
     }
 

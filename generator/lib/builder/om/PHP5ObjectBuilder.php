@@ -1360,7 +1360,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
 
         $script .= "
     /**
-     * Load the value for the lazy-loaded [$clDesc] column.
+     * Load the value for the lazy-loaded [$cloDesc] column.
      *
      * This method performs an additional query to return the value for
      * the [$cloDesc] column, since it is not populated by
