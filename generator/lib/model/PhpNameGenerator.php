@@ -101,9 +101,9 @@ class PhpNameGenerator implements NameGenerator
         $tok = strtok($schemaName, self::STD_SEPARATOR_CHAR);
         while ($tok !== false) {
             // https://www.php.net/manual/fr/function.strtolower.php#78560
-            $outputString = utf8_decode($tok);
+            $outputString = mb_convert_encoding($tok, 'ISO-8859-1', 'UTF-8');
             $outputString = ucfirst(strtolower($outputString));
-            $outputString = utf8_encode($outputString);
+            $outputString = mb_convert_encoding($outputString, 'UTF-8', 'ISO-8859-1');
             $name .= $outputString;
             $tok = strtok(self::STD_SEPARATOR_CHAR);
         }
@@ -134,9 +134,9 @@ class PhpNameGenerator implements NameGenerator
         if (preg_match_all($regexp, $schemaName, $matches)) {
             foreach ($matches[1] as $tok) {
                 // https://www.php.net/manual/fr/function.strtolower.php#78560
-                $outputString = utf8_decode($tok);
+                $outputString = mb_convert_encoding($tok, 'ISO-8859-1', 'UTF-8');
                 $outputString = ucfirst(strtolower($outputString));
-                $outputString = utf8_encode($outputString);
+                $outputString = mb_convert_encoding($outputString, 'UTF-8', 'ISO-8859-1');
                 $name .= $outputString;
             }
         } else {
@@ -166,9 +166,9 @@ class PhpNameGenerator implements NameGenerator
         $tok = strtok($schemaName, self::STD_SEPARATOR_CHAR);
         while ($tok !== false) {
             // https://www.php.net/manual/fr/function.strtolower.php#78560
-            $outputString = utf8_decode($tok);
+            $outputString = mb_convert_encoding($tok, 'ISO-8859-1', 'UTF-8');
             $outputString = ucfirst($outputString);
-            $outputString = utf8_encode($outputString);
+            $outputString = mb_convert_encoding($outputString, 'UTF-8', 'ISO-8859-1');
             $name .= $outputString;
             $tok = strtok(self::STD_SEPARATOR_CHAR);
         }
