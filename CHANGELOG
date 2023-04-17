@@ -1,5 +1,7 @@
 # Changelog Of The Propel 1.x Branch #
 
+## ????-??-??: Version 1.7.12 ##
+
 ## 2023-04-17: Version 1.7.11 ##
 - Fix some errors found by PHPStan
 - PHP 8.2 compatibility fixes: replacement of deprecated strftime(), utf8_decode() and utf8_encode() functions
