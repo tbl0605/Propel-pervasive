@@ -193,7 +193,7 @@ class DefaultPlatform implements PropelPlatformInterface
     }
 
     /**
-     * @return The RDBMS-specific SQL fragment for autoincrement.
+     * @return string The RDBMS-specific SQL fragment for autoincrement.
      */
     public function getAutoIncrement()
     {
@@ -1128,7 +1128,7 @@ ALTER TABLE %s ADD
     }
 
     /**
-     * @see        Platform::supportsSchemas()
+     * @see        PropelPlatformInterface::supportsSchemas()
      */
     public function supportsSchemas()
     {
@@ -1136,7 +1136,7 @@ ALTER TABLE %s ADD
     }
 
     /**
-     * @see        Platform::supportsMigrations()
+     * @see        PropelPlatformInterface::supportsMigrations()
      */
     public function supportsMigrations()
     {

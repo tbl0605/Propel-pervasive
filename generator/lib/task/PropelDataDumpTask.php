@@ -104,7 +104,7 @@ class PropelDataDumpTask extends AbstractPropelDataModelTask
     /**
      * Get the database name to dump
      *
-     * @return The DatabaseName value
+     * @return string The DatabaseName value
      */
     public function getDatabaseName()
     {
@@ -114,7 +114,7 @@ class PropelDataDumpTask extends AbstractPropelDataModelTask
     /**
      * Set the database name
      *
-     * @param   $v The new DatabaseName value
+     * @param string $v The new DatabaseName value
      */
     public function setDatabaseName($v)
     {
@@ -124,7 +124,7 @@ class PropelDataDumpTask extends AbstractPropelDataModelTask
     /**
      * Get the database url
      *
-     * @return The DatabaseUrl value
+     * @return string The DatabaseUrl value
      */
     public function getDatabaseUrl()
     {

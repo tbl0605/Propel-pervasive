@@ -271,7 +271,7 @@ class TableMap
     /**
      * Sets the name of the sequence used to generate a key
      *
-     * @param   $pkInfo information needed to generate a key
+     * @param object $pkInfo information needed to generate a key
      */
     public function setPrimaryKeyMethodInfo($pkInfo)
     {
@@ -281,7 +281,7 @@ class TableMap
     /**
      * Get the name of the sequence used to generate a primary key
      *
-     * @return An Object.
+     * @return object An Object.
      */
     public function getPrimaryKeyMethodInfo()
     {

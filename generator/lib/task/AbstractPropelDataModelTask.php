@@ -153,7 +153,7 @@ abstract class AbstractPropelDataModelTask extends AbstractPropelTask
      * Return the data models that have been
      * processed.
      *
-     * @return List data models
+     * @return array List data models
      */
     public function getDataModels()
     {
@@ -167,7 +167,7 @@ abstract class AbstractPropelDataModelTask extends AbstractPropelTask
     /**
      * Return the data model to database name map.
      *
-     * @return Hashtable data model name to database name map.
+     * @return array Hashtable data model name to database name map.
      */
     public function getDataModelDbMap()
     {

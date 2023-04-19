@@ -194,7 +194,7 @@ class XmlToDataSQL extends AbstractHandler
     /**
      * Handles closing elements of the xml file.
      *
-     * @param   $name The local name (without prefix), or the empty string if
+     * @param string $name The local name (without prefix), or the empty string if
      *         Namespace processing is not being performed.
      */
     public function endElement($name)

@@ -251,7 +251,7 @@ class Criteria implements IteratorAggregate
     /**
      * Default operator for combination of criterions
      *
-     * @see        addUsingOperator
+     * @see        Criteria::addUsingOperator()
      * @var        string Criteria::LOGICAL_AND or Criteria::LOGICAL_OR
      */
     protected $defaultCombineOperator = Criteria::LOGICAL_AND;

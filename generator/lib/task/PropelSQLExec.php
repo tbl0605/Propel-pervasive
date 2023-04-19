@@ -69,7 +69,7 @@ class PropelSQLExec extends AbstractPropelTask
     /**
      * Set the sqldbmap properties file.
      *
-     * @param   $sqldbmap filename for the sqldbmap
+     * @param string $sqldbmap filename for the sqldbmap
      */
     public function setSqlDbMap($sqldbmap)
     {
@@ -79,7 +79,7 @@ class PropelSQLExec extends AbstractPropelTask
     /**
      * Get the sqldbmap properties file.
      *
-     * @return filename for the sqldbmap
+     * @return PhingFile filename for the sqldbmap
      */
     public function getSqlDbMap()
     {

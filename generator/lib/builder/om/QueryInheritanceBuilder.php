@@ -309,7 +309,7 @@ class " . $this->getClassname() . " extends " . $baseClassname . " {
     /**
      * Adds findOneOrCreate function for this object.
      *
-     * @param unknown $script
+     * @param Inheritance $script
      */
     protected function addFindOneOrCreate(&$script)
     {

@@ -44,7 +44,7 @@ class Inheritance extends XMLElement
     /**
      * Get the value of key.
      *
-     * @return value of key.
+     * @return string value of key.
      */
     public function getKey()
     {
@@ -54,7 +54,7 @@ class Inheritance extends XMLElement
     /**
      * Set the value of key.
      *
-     * @param   $v Value to assign to key.
+     * @param string $v Value to assign to key.
      */
     public function setKey($v)
     {

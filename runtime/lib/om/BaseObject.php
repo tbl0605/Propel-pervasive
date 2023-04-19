@@ -269,7 +269,7 @@ abstract class BaseObject
      *
      * @param      obj The object to compare to.
      *
-     * @return Whether equal to the object specified.
+     * @return boolean Whether equal to the object specified.
      */
     public function equals($obj)
     {

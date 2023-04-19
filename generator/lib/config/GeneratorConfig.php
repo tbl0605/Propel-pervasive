@@ -158,7 +158,7 @@ class GeneratorConfig implements GeneratorConfigInterface
      *
      * @param PDO $con
      *
-     * @return Platform
+     * @return PropelPlatformInterface
      * @throws BuildException
      */
     public function getConfiguredPlatform(PDO $con = null, $database = null)

@@ -93,7 +93,7 @@ interface PropelPlatformInterface
     public function getNullString($notNull);
 
     /**
-     * @return The RDBMS-specific SQL fragment for autoincrement.
+     * @return string The RDBMS-specific SQL fragment for autoincrement.
      */
     public function getAutoIncrement();
 

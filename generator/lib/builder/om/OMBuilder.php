@@ -273,7 +273,7 @@ abstract class OMBuilder extends DataModelBuilder
      * to invoke methods of the peer classes.
      *
      * @return string (e.g. 'MyPeer')
-     * @see        StubPeerBuilder::getClassname()
+     * @see        PeerBuilder::getClassname()
      */
     public function getPeerClassname()
     {
@@ -286,7 +286,7 @@ abstract class OMBuilder extends DataModelBuilder
      * to invoke methods of the query classes.
      *
      * @return string (e.g. 'Myquery')
-     * @see        StubQueryBuilder::getClassname()
+     * @see        ObjectBuilder::getClassname()
      */
     public function getQueryClassname()
     {
@@ -299,7 +299,7 @@ abstract class OMBuilder extends DataModelBuilder
      * to invoke methods of the object classes.
      *
      * @return string (e.g. 'My')
-     * @see        StubPeerBuilder::getClassname()
+     * @see        PeerBuilder::getClassname()
      */
     public function getObjectClassname()
     {

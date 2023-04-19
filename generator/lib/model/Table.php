@@ -570,7 +570,7 @@ class Table extends ScopedElement implements IDMethod
     /**
      * Creates a delimiter-delimited string list of column names
      *
-     * @see        Platform::getColumnList() if quoting is required
+     * @see        PropelPlatformInterface::getColumnListDDL() if quoting is required
      *
      * @param      array Column[] or string[]
      * @param string $delim The delimiter to use in separating the column names.
@@ -657,7 +657,7 @@ class Table extends ScopedElement implements IDMethod
     /**
      * Gets the value of base class for classes produced from this table.
      *
-     * @return The base class for classes produced from this table.
+     * @return string The base class for classes produced from this table.
      */
     public function getBaseClass()
     {
@@ -683,7 +683,7 @@ class Table extends ScopedElement implements IDMethod
     /**
      * Get the value of basePeer.
      *
-     * @return value of basePeer.
+     * @return string value of basePeer.
      */
     public function getBasePeer()
     {
@@ -1430,7 +1430,7 @@ class Table extends ScopedElement implements IDMethod
      * Is table read-only, in which case only accessors (and relationship setters)
      * will be created.
      *
-     * @return boolan Value of readOnly.
+     * @return boolean Value of readOnly.
      */
     public function isReadOnly()
     {

@@ -819,7 +819,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      * @param string &$script The script will be modified in this method.
      * @param Column $col     The current column.
      *
-     * @see        addTemporalAccessor
+     * @see        PHP5ObjectBuilder::addTemporalAccessor()
      **/
     public function addTemporalAccessorComment(&$script, Column $col)
     {
@@ -876,7 +876,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      * @param string &$script The script will be modified in this method.
      * @param Column $col     The current column.
      *
-     * @see        addTemporalAccessor
+     * @see        PHP5ObjectBuilder::addTemporalAccessor()
      **/
     public function addTemporalAccessorOpen(&$script, Column $col)
     {
@@ -933,7 +933,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      * @param string &$script The script will be modified in this method.
      * @param Column $col     The current column.
      *
-     * @see        addTemporalAccessor
+     * @see        PHP5ObjectBuilder::addTemporalAccessor()
      **/
     protected function addTemporalAccessorBody(&$script, Column $col)
     {
@@ -1036,7 +1036,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      * @param string &$script The script will be modified in this method.
      * @param Column $col     The current column.
      *
-     * @see        addTemporalAccessorClose
+     * @see        PHP5ObjectBuilder::addTemporalAccessorClose()
      **/
     protected function addTemporalAccessorClose(&$script, Column $col)
     {
@@ -2042,7 +2042,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addHasOnlyDefaultValues
+     * @see        PHP5ObjectBuilder::addHasOnlyDefaultValues()
      **/
     protected function addHasOnlyDefaultValuesComment(&$script)
     {
@@ -2062,7 +2062,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addHasOnlyDefaultValues
+     * @see        PHP5ObjectBuilder::addHasOnlyDefaultValues()
      **/
     protected function addHasOnlyDefaultValuesOpen(&$script)
     {
@@ -2076,7 +2076,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addHasOnlyDefaultValues
+     * @see        PHP5ObjectBuilder::addHasOnlyDefaultValues()
      **/
     protected function addHasOnlyDefaultValuesBody(&$script)
     {
@@ -2107,7 +2107,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addHasOnlyDefaultValues
+     * @see        PHP5ObjectBuilder::addHasOnlyDefaultValues()
      **/
     protected function addHasOnlyDefaultValuesClose(&$script)
     {
@@ -2537,7 +2537,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addGetByName
+     * @see        PHP5ObjectBuilder::addGetByName()
      **/
     protected function addGetByNameComment(&$script)
     {
@@ -2560,7 +2560,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addGetByName
+     * @see        PHP5ObjectBuilder::addGetByName()
      **/
     protected function addGetByNameOpen(&$script)
     {
@@ -2575,7 +2575,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addGetByName
+     * @see        PHP5ObjectBuilder::addGetByName()
      **/
     protected function addGetByNameBody(&$script)
     {
@@ -2589,7 +2589,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addGetByName
+     * @see        PHP5ObjectBuilder::addGetByName()
      **/
     protected function addGetByNameClose(&$script)
     {
@@ -2618,7 +2618,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addGetByPosition
+     * @see        PHP5ObjectBuilder::addGetByPosition()
      **/
     protected function addGetByPositionComment(&$script)
     {
@@ -2637,7 +2637,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addGetByPosition
+     * @see        PHP5ObjectBuilder::addGetByPosition()
      **/
     protected function addGetByPositionOpen(&$script)
     {
@@ -2651,7 +2651,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addGetByPosition
+     * @see        PHP5ObjectBuilder::addGetByPosition()
      **/
     protected function addGetByPositionBody(&$script)
     {
@@ -2679,7 +2679,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
      *
      * @param string &$script The script will be modified in this method.
      *
-     * @see        addGetByPosition
+     * @see        PHP5ObjectBuilder::addGetByPosition()
      **/
     protected function addGetByPositionClose(&$script)
     {

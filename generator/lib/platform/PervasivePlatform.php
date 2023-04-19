@@ -152,7 +152,7 @@ class PervasivePlatform extends DefaultPlatform
 
     /**
      *
-     * @see Platform::supportsSchemas()
+     * @see PropelPlatformInterface::supportsSchemas()
      */
     public function supportsSchemas()
     {

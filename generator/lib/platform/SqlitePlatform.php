@@ -161,7 +161,7 @@ DROP TABLE IF EXISTS " . $this->quoteIdentifier($table->getName()) . ";
     }
 
     /**
-     * @see        Platform::supportsMigrations()
+     * @see        PropelPlatformInterface::supportsMigrations()
      */
     public function supportsMigrations()
     {
