@@ -66,6 +66,38 @@ class MssqlSchemaParser extends BaseSchemaParser
         "sql_variant" => PropelTypes::VARCHAR,
     );
 
+    // TODO: Remove this hack...
+    protected function cleanMethod($schemaName, Task $task)
+    {
+        if ($task instanceof PropelSchemaReverseTask && $task->isSamePhpName()) {
+            return $schemaName;
+        }
+
+        $name = '';
+        $regexp = '/([a-z0-9]+)/i';
+        $matches = array();
+        $first = true;
+        if (preg_match_all($regexp, $schemaName, $matches)) {
+            foreach ($matches[1] as $tok) {
+                if ($first) {
+                    $name = $tok;
+                    $first = false;
+                    continue;
+                }
+                $name .= NameGenerator::STD_SEPARATOR_CHAR . ucfirst($tok);
+            }
+        } else {
+            return $schemaName;
+        }
+
+        // A variable name cannot start with a number:
+        if (preg_match('/^[0-9]/', $name)) {
+            $name = NameGenerator::STD_SEPARATOR_CHAR . $name;
+        }
+
+        return $name;
+    }
+
     /**
      * @see        BaseSchemaParser::getTypeMapping()
      */
@@ -89,6 +121,8 @@ class MssqlSchemaParser extends BaseSchemaParser
                 continue;
             }
             $table = new Table($name);
+            // TODO: Remove...
+            $table->setPhpName($this->cleanMethod($name, $task));
             $table->setIdMethod($database->getDefaultIdMethod());
             $database->addTable($table);
             $tables[] = $table;
@@ -96,13 +130,13 @@ class MssqlSchemaParser extends BaseSchemaParser
 
         // Now populate only columns.
         foreach ($tables as $table) {
-            $this->addColumns($table);
+            $this->addColumns($table, $task);
         }
 
         // Now add indexes and constraints.
         foreach ($tables as $table) {
             $this->addForeignKeys($table);
-            $this->addIndexes($table);
+            $this->addIndexes($table, $task);
             $this->addPrimaryKey($table);
         }
 
@@ -114,7 +148,7 @@ class MssqlSchemaParser extends BaseSchemaParser
      *
      * @param Table $table The Table model class to add columns to.
      */
-    protected function addColumns(Table $table)
+    protected function addColumns(Table $table, Task $task = null)
     {
         $stmt = $this->dbh->query("sp_columns '" . $table->getName() . "'");
 
@@ -139,6 +173,8 @@ class MssqlSchemaParser extends BaseSchemaParser
             }
 
             $column = new Column($name);
+            // TODO: Remove...
+            $column->setPhpName($this->cleanMethod($name, $task));
             $column->setTable($table);
             $column->setDomainForType($propelType);
             // We may want to provide an option to include this:
@@ -216,7 +252,7 @@ class MssqlSchemaParser extends BaseSchemaParser
     /**
      * Load indexes for this table
      */
-    protected function addIndexes(Table $table)
+    protected function addIndexes(Table $table, Task $task = null)
     {
         $stmt = $this->dbh->query("sp_indexes_rowset '" . $table->getName() . "'");
 
@@ -228,9 +264,9 @@ class MssqlSchemaParser extends BaseSchemaParser
 
             if (! isset($indexes[$name])) {
                 if ($unique) {
-                    $indexes[$name] = new Unique($name);
+                    $indexes[$name] = new Unique($this->cleanMethod($name, $task));
                 } else {
-                    $indexes[$name] = new Index($name);
+                    $indexes[$name] = new Index($this->cleanMethod($name, $task));
                 }
                 $table->addIndex($indexes[$name]);
             }
