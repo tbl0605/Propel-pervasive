@@ -121,7 +121,7 @@ class MssqlSchemaParser extends BaseSchemaParser
         // Now add indexes and constraints.
         foreach ($tables as $table) {
             $this->addForeignKeys($table);
-            $this->addIndexes($table, $task);
+            $this->addIndexes($table);
             $this->addPrimaryKey($table);
         }
 
@@ -237,7 +237,7 @@ class MssqlSchemaParser extends BaseSchemaParser
     /**
      * Load indexes for this table
      */
-    protected function addIndexes(Table $table, Task $task = null)
+    protected function addIndexes(Table $table)
     {
         $stmt = $this->dbh->query("sp_indexes_rowset '" . $table->getName() . "'");
 
@@ -249,9 +249,9 @@ class MssqlSchemaParser extends BaseSchemaParser
 
             if (! isset($indexes[$name])) {
                 if ($unique) {
-                    $indexes[$name] = new Unique($this->cleanMethod($name, $task));
+                    $indexes[$name] = new Unique($name);
                 } else {
-                    $indexes[$name] = new Index($this->cleanMethod($name, $task));
+                    $indexes[$name] = new Index($name);
                 }
                 $table->addIndex($indexes[$name]);
             }
