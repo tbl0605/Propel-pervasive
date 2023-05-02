@@ -203,7 +203,7 @@ class GeneratorConfig implements GeneratorConfigInterface
         $clazz = $this->getClassname("reverseParserClass");
         $parser = new $clazz();
         if (!$parser instanceof SchemaParser) {
-            throw new BuildException("Specified platform class ($clazz) does implement SchemaParser interface.", $this->getLocation());
+            throw new BuildException("Specified platform class ($clazz) does implement SchemaParser interface.");
         }
         $parser->setConnection($con);
         $parser->setMigrationTable($this->getBuildProperty('migrationTable'));
