@@ -64,7 +64,6 @@ class PervasiveSchemaParser extends BaseSchemaParser
         'LOGICAL' => PropelTypes::SMALLINT // Type code = 7 // TODO: SQL_BIT doesn't exist -> ftBoolean or ftSmallint ?
     );
 
-
     // TODO: Remove this hack...
     protected function cleanMethod($schemaName, Task $task)
     {

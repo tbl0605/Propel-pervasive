@@ -73,22 +73,7 @@ class MssqlSchemaParser extends BaseSchemaParser
             return $schemaName;
         }
 
-        $name = '';
-        $regexp = '/([a-z0-9]+)/i';
-        $matches = array();
-        $first = true;
-        if (preg_match_all($regexp, $schemaName, $matches)) {
-            foreach ($matches[1] as $tok) {
-                if ($first) {
-                    $name = $tok;
-                    $first = false;
-                    continue;
-                }
-                $name .= NameGenerator::STD_SEPARATOR_CHAR . ucfirst($tok);
-            }
-        } else {
-            return $schemaName;
-        }
+        $name = NameFactory::generateName(NameFactory::PHP_GENERATOR, array($schemaName, NameGenerator::CONV_METHOD_CLEAN));
 
         // A variable name cannot start with a number:
         if (preg_match('/^[0-9]/', $name)) {
