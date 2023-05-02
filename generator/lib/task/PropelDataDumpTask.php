@@ -268,7 +268,7 @@ class PropelDataDumpTask extends AbstractPropelDataModelTask
         // 1) First create the Data XML -> database name map.
         $this->createDataDbMap();
 
-        // 2) Now go create the XML files from teh database(s)
+        // 2) Now go create the XML files from the database(s)
         foreach ($this->getDataModels() as $dataModel) { // there is really one 1 db per datamodel
             foreach ($dataModel->getDatabases() as $database) {
 
