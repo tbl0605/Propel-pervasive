@@ -1,6 +1,10 @@
 # Changelog Of The Propel 1.x Branch #
 
-## ????-??-??: Version 1.7.12 ##
+## 2023-05-04: Version 1.7.12 ##
+- Fix some PHPDocs errors
+- Spelling fixes
+- Sql Server: add some tweaks originally created for Pervasive
+- Avoid "Call to undefined method GeneratorConfig::getLocation()"
 
 ## 2023-04-17: Version 1.7.11 ##
 - Fix some errors found by PHPStan
