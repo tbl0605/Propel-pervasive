@@ -50,7 +50,8 @@ class PervasiveSchemaParser extends BaseSchemaParser
         'NUMERICSLS' => PropelTypes::NUMERIC, // Type code = 29
         'NUMERICSTB' => PropelTypes::NUMERIC, // Type code = 31
         'NUMERICSTS' => PropelTypes::NUMERIC, // Type code = 17
-        'STRING' => PropelTypes::CHAR, // Type code = 0 // TODO: SQL_BINARY or SQL_CHAR ?
+        'STRING' => PropelTypes::CHAR, // Type code = 0
+        'BINARY' => PropelTypes::BINARY, // Type code = 0, Flag = 4096
         'TIME' => PropelTypes::TIME, // Type code = 4
         'TIMESTAMP' => PropelTypes::TIMESTAMP, // Type code = 20
         'UNSIGNED1 BINARY' => PropelTypes::TINYINT, // Type code = 14
@@ -164,7 +165,14 @@ class PervasiveSchemaParser extends BaseSchemaParser
     {
         switch ($row['DATATYPE']) {
         case '0':
-            $row['PROPEL_TYPE_KEY'] = 'STRING';
+            switch ($row['IS_BINARY']) {
+            case 'YES':
+                $row['PROPEL_TYPE_KEY'] = 'BINARY';
+                break;
+            default:
+                $row['PROPEL_TYPE_KEY'] = 'STRING';
+                break;
+            }
             break;
         case '1':
             switch ($row['COL_SIZE']) {
@@ -398,6 +406,11 @@ SELECT TAB.XF$NAME TABLE_NAME
      , COL.XE$SIZE CHAR_LEN
      , COL.XE$SIZE PRECISION
      , COL.XE$DEC SCALE
+     , COL.XE$OFFSET OFFSET
+     , CASE
+          WHEN COL.XE$FLAGS & 4096 = 4096 THEN \'YES\'
+          ELSE \'NO\'
+       END IS_BINARY
      , CASE
           WHEN COL.XE$FLAGS & 4 = 4 THEN \'YES\'
           ELSE \'NO\'
