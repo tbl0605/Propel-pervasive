@@ -144,7 +144,7 @@ class MssqlSchemaParser extends BaseSchemaParser
             $size = $row['LENGTH'];
             $is_nullable = $row['NULLABLE'];
             $default = $row['COLUMN_DEF'];
-            $precision = $row['PRECISION'];
+            //$precision = $row['PRECISION'];
             $scale = $row['SCALE'];
             $autoincrement = false;
             if (substr(strtolower($type), -strlen("int identity")) === "int identity") {

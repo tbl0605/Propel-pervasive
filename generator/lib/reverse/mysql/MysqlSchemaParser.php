@@ -388,9 +388,10 @@ class MysqlSchemaParser extends BaseSchemaParser
             $colName = $row["Column_name"];
             $name = $row["Key_name"];
 
-            if ($name == "PRIMARY") {
-                continue;
-            }
+            // Thierry Blind: we also want to enumerate the fields from the "PRIMARY" key.
+            //if ($name == "PRIMARY") {
+            //    continue;
+            //}
 
             if (!isset($indexes[$name])) {
                 $isUnique = ($row["Non_unique"] == 0);
