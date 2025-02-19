@@ -203,12 +203,13 @@ class MysqlSchemaParser extends BaseSchemaParser
             if ($matches[3]) {
                 $sqlType = $row['Type'];
             }
-            foreach (self::$defaultTypeSizes as $type => $defaultSize) {
-                if ($nativeType == $type && $size == $defaultSize && $scale === null) {
-                    $size = null;
-                    continue;
-                }
-            }
+            // Thierry Blind: we *always* keep the column size information, even if it's the default size.
+            //foreach (self::$defaultTypeSizes as $type => $defaultSize) {
+            //    if ($nativeType == $type && $size == $defaultSize && $scale === null) {
+            //        $size = null;
+            //        break;
+            //    }
+            //}
         } elseif (preg_match('/^(\w+)\(/', $row['Type'], $matches)) {
             $nativeType = $matches[1];
             if ($nativeType == 'enum') {
