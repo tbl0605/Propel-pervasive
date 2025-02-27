@@ -1,6 +1,9 @@
 # Changelog Of The Propel 1.x Branch #
 
-## ????-??-??: Version 1.7.14 ##
+## 2025-02-27: Version 1.7.14 ##
+- comment some unused variable
+- MySQL: create the index corresponding to the PRIMARY key
+- MySQL: keep all column size informations
 
 ## 2024-08-28: Version 1.7.13 ##
 - Pervasive schema parser: add BINARY support
