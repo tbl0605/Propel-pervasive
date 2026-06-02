@@ -630,7 +630,7 @@ class ModelCriteria extends Criteria
      */
     public function getJoin($name)
     {
-        return $this->joins[$name];
+        return $this->joins[$name ?? ''];
     }
 
     /**
@@ -873,7 +873,7 @@ class ModelCriteria extends Criteria
         $this->addRelationSelectColumns($relation);
 
         // list the join for later hydration in the formatter
-        $this->with[$relation] = new ModelWith($join);
+        $this->with[$relation ?? ''] = new ModelWith($join);
 
         return $this;
     }
@@ -1113,7 +1113,7 @@ class ModelCriteria extends Criteria
      */
     public function addRelationSelectColumns($relation)
     {
-        $join = $this->joins[$relation];
+        $join = $this->joins[$relation ?? ''];
         call_user_func(array($join->getTableMap()->getPeerClassname(), 'addSelectColumns'), $this, $join->getRelationAlias());
 
         return $this;

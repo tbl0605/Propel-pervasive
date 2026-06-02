@@ -64,9 +64,9 @@ class DatabaseMap
      */
     public function addTable($tableName)
     {
-        $this->tables[$tableName] = new TableMap($tableName, $this);
+        $this->tables[$tableName ?? ''] = new TableMap($tableName, $this);
 
-        return $this->tables[$tableName];
+        return $this->tables[$tableName ?? ''];
     }
 
     /**
@@ -126,7 +126,7 @@ class DatabaseMap
             throw new PropelException("Cannot fetch TableMap for undefined table: " . $name);
         }
 
-        return $this->tables[$name];
+        return $this->tables[$name ?? ''];
     }
 
     /**
@@ -174,14 +174,14 @@ class DatabaseMap
     public function getTableByPhpName($phpName)
     {
         if (array_key_exists($phpName, $this->tablesByPhpName)) {
-            return $this->tablesByPhpName[$phpName];
+            return $this->tablesByPhpName[$phpName ?? ''];
         } elseif (defined($phpName . '::PEER')) {
             $peerClass = constant($phpName . '::PEER');
             $tmClass = constant($peerClass . '::TM_CLASS');
 
             $this->addTableFromMapClass($tmClass);
 
-            return $this->tablesByPhpName[$phpName];
+            return $this->tablesByPhpName[$phpName ?? ''];
         } else {
             throw new PropelException("Cannot fetch TableMap for undefined table phpName: " . $phpName);
         }

@@ -72,7 +72,7 @@ class PropelSqlManager
             throw new InvalidArgumentException(sprintf('Unknown datasource "%s"', $datasource));
         }
 
-        return $this->connections[$datasource];
+        return $this->connections[$datasource ?? ''];
     }
 
     /**

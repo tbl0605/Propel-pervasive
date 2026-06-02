@@ -180,7 +180,7 @@ class DefaultPlatform implements PropelPlatformInterface
             throw new EngineException("Cannot map unknown Propel type " . var_export($propelType, true) . " to native database type.");
         }
 
-        return $this->schemaDomainMap[$propelType];
+        return $this->schemaDomainMap[$propelType ?? ''];
     }
 
     /**

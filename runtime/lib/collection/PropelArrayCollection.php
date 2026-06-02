@@ -189,7 +189,7 @@ class PropelArrayCollection extends PropelCollection
     {
         $ret = array();
         foreach ($this as $obj) {
-            $ret[$obj[$keyColumn]] = $obj[$valueColumn];
+            $ret[$obj[$keyColumn ?? '']] = $obj[$valueColumn ?? ''];
         }
 
         return $ret;

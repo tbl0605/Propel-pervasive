@@ -314,16 +314,16 @@ class TableMap
 
         if ($pk) {
             $col->setPrimaryKey(true);
-            $this->primaryKeys[$name] = $col;
+            $this->primaryKeys[$name ?? ''] = $col;
         }
 
         if ($fkTable && $fkColumn) {
             $col->setForeignKey($fkTable, $fkColumn);
-            $this->foreignKeys[$name] = $col;
+            $this->foreignKeys[$name ?? ''] = $col;
         }
 
-        $this->columns[$name] = $col;
-        $this->columnsByPhpName[$phpName] = $col;
+        $this->columns[$name ?? ''] = $col;
+        $this->columnsByPhpName[$phpName ?? ''] = $col;
         $this->columnsByInsensitiveCase[strtolower($phpName)] = $col;
 
         return $col;
@@ -381,7 +381,7 @@ class TableMap
             throw new PropelException("Cannot fetch ColumnMap for undefined column: " . $name);
         }
 
-        return $this->columns[$name];
+        return $this->columns[$name ?? ''];
     }
 
     /**
@@ -608,7 +608,7 @@ class TableMap
                 $relation->getForeignTable()->getColumn($foreign)
             );
         }
-        $this->relations[$name] = $relation;
+        $this->relations[$name ?? ''] = $relation;
 
         return $relation;
     }
@@ -641,7 +641,7 @@ class TableMap
             throw new PropelException('Calling getRelation() on an unknown relation, ' . $name);
         }
 
-        return $this->relations[$name];
+        return $this->relations[$name ?? ''];
     }
 
     /**

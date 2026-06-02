@@ -337,7 +337,7 @@ abstract class BaseObject
             throw new PropelException('Cannot get value of inexistent virtual column ' . $name);
         }
 
-        return $this->virtualColumns[$name];
+        return $this->virtualColumns[$name ?? ''];
     }
 
     /**
@@ -350,7 +350,7 @@ abstract class BaseObject
      */
     public function setVirtualColumn($name, $value)
     {
-        $this->virtualColumns[$name] = $value;
+        $this->virtualColumns[$name ?? ''] = $value;
 
         return $this;
     }

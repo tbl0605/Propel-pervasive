@@ -1210,7 +1210,7 @@ class Table extends ScopedElement implements IDMethod
      */
     public function getBehavior($name)
     {
-        return $this->behaviors[$name];
+        return $this->behaviors[$name ?? ''];
     }
 
     /**
@@ -1679,7 +1679,7 @@ class Table extends ScopedElement implements IDMethod
             if ($caseInsensitive) {
                 return $this->columnsByLowercaseName[strtolower($name)];
             } else {
-                return $this->columnsByName[$name];
+                return $this->columnsByName[$name ?? ''];
             }
         }
 

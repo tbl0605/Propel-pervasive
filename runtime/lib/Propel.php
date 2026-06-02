@@ -578,18 +578,18 @@ class Propel
      */
     public static function getMasterConnection($name)
     {
-        if (!isset(self::$connectionMap[$name]['master'])) {
+        if (!isset(self::$connectionMap[$name ?? '']['master'])) {
             // load connection parameter for master connection
-            $conparams = isset(self::$configuration['datasources'][$name]['connection']) ? self::$configuration['datasources'][$name]['connection'] : null;
+            $conparams = isset(self::$configuration['datasources'][$name ?? '']['connection']) ? self::$configuration['datasources'][$name ?? '']['connection'] : null;
             if (empty($conparams)) {
                 throw new PropelException('No connection information in your runtime configuration file for datasource [' . $name . ']');
             }
             // initialize master connection
             $con = Propel::initConnection($conparams, $name);
-            self::$connectionMap[$name]['master'] = $con;
+            self::$connectionMap[$name ?? '']['master'] = $con;
         }
 
-        return self::$connectionMap[$name]['master'];
+        return self::$connectionMap[$name ?? '']['master'];
     }
 
     /**

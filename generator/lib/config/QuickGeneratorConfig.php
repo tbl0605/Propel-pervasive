@@ -89,7 +89,7 @@ class QuickGeneratorConfig implements GeneratorConfigInterface
      */
     public function getConfiguredBuilder(Table $table, $type)
     {
-        $class = $this->builders[$type];
+        $class = $this->builders[$type ?? ''];
         require_once dirname(__FILE__) . '/../builder/om/' . $class . '.php';
         $builder = new $class($table);
         $builder->setGeneratorConfig($this);

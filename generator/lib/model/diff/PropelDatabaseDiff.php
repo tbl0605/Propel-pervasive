@@ -43,7 +43,7 @@ class PropelDatabaseDiff
      */
     public function addAddedTable($tableName, Table $addedTable)
     {
-        $this->addedTables[$tableName] = $addedTable;
+        $this->addedTables[$tableName ?? ''] = $addedTable;
     }
 
     /**
@@ -53,7 +53,7 @@ class PropelDatabaseDiff
      */
     public function removeAddedTable($tableName)
     {
-        unset($this->addedTables[$tableName]);
+        unset($this->addedTables[$tableName ?? '']);
     }
 
     /**
@@ -85,7 +85,7 @@ class PropelDatabaseDiff
      */
     public function getAddedTable($tableName)
     {
-        return $this->addedTables[$tableName];
+        return $this->addedTables[$tableName ?? ''];
     }
 
     /**
@@ -106,7 +106,7 @@ class PropelDatabaseDiff
      */
     public function addRemovedTable($tableName, Table $removedTable)
     {
-        $this->removedTables[$tableName] = $removedTable;
+        $this->removedTables[$tableName ?? ''] = $removedTable;
     }
 
     /**
@@ -116,7 +116,7 @@ class PropelDatabaseDiff
      */
     public function removeRemovedTable($tableName)
     {
-        unset($this->removedTables[$tableName]);
+        unset($this->removedTables[$tableName ?? '']);
     }
 
     /**
@@ -148,7 +148,7 @@ class PropelDatabaseDiff
      */
     public function getRemovedTable($tableName)
     {
-        return $this->removedTables[$tableName];
+        return $this->removedTables[$tableName ?? ''];
     }
 
     /**
@@ -169,7 +169,7 @@ class PropelDatabaseDiff
      */
     public function addModifiedTable($tableName, PropelTableDiff $modifiedTable)
     {
-        $this->modifiedTables[$tableName] = $modifiedTable;
+        $this->modifiedTables[$tableName ?? ''] = $modifiedTable;
     }
 
     /**
@@ -210,7 +210,7 @@ class PropelDatabaseDiff
      */
     public function addRenamedTable($fromName, $toName)
     {
-        $this->renamedTables[$fromName] = $toName;
+        $this->renamedTables[$fromName ?? ''] = $toName;
     }
 
     /**

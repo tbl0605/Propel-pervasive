@@ -99,7 +99,7 @@ class GeneratorConfig implements GeneratorConfigInterface
      */
     public function setBuildProperty($name, $value)
     {
-        $this->buildProperties[$name] = $value;
+        $this->buildProperties[$name ?? ''] = $value;
     }
 
     /**

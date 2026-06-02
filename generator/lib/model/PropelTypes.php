@@ -229,7 +229,7 @@ class PropelTypes
      */
     public static function getPhpNative($propelType)
     {
-        return self::$propelToPHPNativeMap[$propelType];
+        return self::$propelToPHPNativeMap[$propelType ?? ''];
     }
 
     /**
@@ -241,7 +241,7 @@ class PropelTypes
      */
     public static function getCreoleType($type)
     {
-        return self::$propelTypeToCreoleTypeMap[$type];
+        return self::$propelTypeToCreoleTypeMap[$type ?? ''];
     }
 
     /**
@@ -251,7 +251,7 @@ class PropelTypes
      */
     public static function getPDOType($type)
     {
-        return self::$propelTypeToPDOTypeMap[$type];
+        return self::$propelTypeToPDOTypeMap[$type ?? ''];
     }
 
     /**
@@ -261,7 +261,7 @@ class PropelTypes
      */
     public static function getPdoTypeString($type)
     {
-        return self::$pdoTypeNames[self::$propelTypeToPDOTypeMap[$type]];
+        return self::$pdoTypeNames[self::$propelTypeToPDOTypeMap[$type ?? ''] ?? ''];
     }
 
     /**

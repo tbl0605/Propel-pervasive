@@ -114,7 +114,7 @@ class XmlToAppData
             return;
         }
         // store current schema file path
-        $this->schemasTagsStack[$xmlFile] = array();
+        $this->schemasTagsStack[$xmlFile ?? ''] = array();
         $this->currentXmlFile = $xmlFile;
 
         $parser = xml_parser_create();

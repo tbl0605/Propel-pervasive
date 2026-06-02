@@ -379,7 +379,7 @@ class Database extends ScopedElement
             if ($caseInsensitive) {
                 return $this->tablesByLowercaseName[strtolower($name)];
             } else {
-                return $this->tablesByName[$name];
+                return $this->tablesByName[$name ?? ''];
             }
         }
 
@@ -583,7 +583,7 @@ class Database extends ScopedElement
      */
     public function getBehavior($name)
     {
-        return $this->behaviors[$name];
+        return $this->behaviors[$name ?? ''];
     }
 
     /**
