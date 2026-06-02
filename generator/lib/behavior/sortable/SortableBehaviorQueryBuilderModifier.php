@@ -208,7 +208,7 @@ $paramsDoc";
  *
  * @return    {$this->objectClassname}
  */
-public function findOneByRank(\$rank, " . ($useScope ? "$methodSignature, " : "") . "PropelPDO \$con = null)
+public function findOneByRank(\$rank, " . ($useScope ? "$methodSignature, " : "") . "?PropelPDO \$con = null)
 {";
 
         if ($useScope) {
@@ -290,7 +290,7 @@ $paramsDoc
  * @param     PropelPDO \$con optional connection
  * @return    integer highest position
  */
-public function getMaxRank(" . ($useScope ? "$methodSignature, " : "") . "PropelPDO \$con = null)
+public function getMaxRank(" . ($useScope ? "$methodSignature, " : "") . "?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection({$this->peerClassname}::DATABASE_NAME);
@@ -328,7 +328,7 @@ public function getMaxRank(" . ($useScope ? "$methodSignature, " : "") . "Propel
  * @param     PropelPDO \$con optional connection
  * @return    int highest position
  */
-public function getMaxRankArray(" . ($useScope ? "\$scope, " : "") . "PropelPDO \$con = null)
+public function getMaxRankArray(" . ($useScope ? "\$scope, " : "") . "?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection({$this->peerClassname}::DATABASE_NAME);
@@ -364,7 +364,7 @@ public function getMaxRankArray(" . ($useScope ? "\$scope, " : "") . "PropelPDO 
  * @return    boolean true if the reordering took place, false if a database problem prevented it
  * @throws Exception
  */
-public function reorder(array \$order, PropelPDO \$con = null)
+public function reorder(array \$order, ?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection($peerClassname::DATABASE_NAME);

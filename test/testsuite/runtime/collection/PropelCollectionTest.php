@@ -199,7 +199,7 @@ class PropelCollectionTest extends BookstoreTestBase
         $col = new PropelCollection();
         $col->setData($data);
         foreach ($col as $key => $value) {
-            $this->assertEquals((boolean) ($key % 2), $col->isOdd(), 'isOdd() returns true only when the key is odd');
+            $this->assertEquals((bool) ($key % 2), $col->isOdd(), 'isOdd() returns true only when the key is odd');
         }
     }
 
@@ -211,7 +211,7 @@ class PropelCollectionTest extends BookstoreTestBase
         $col = new PropelCollection();
         $col->setData($data);
         foreach ($col as $key => $value) {
-            $this->assertEquals(!(boolean) ($key % 2), $col->isEven(), 'isEven() returns true only when the key is even');
+            $this->assertEquals(!(bool) ($key % 2), $col->isEven(), 'isEven() returns true only when the key is even');
         }
     }
 

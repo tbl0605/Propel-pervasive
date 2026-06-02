@@ -62,7 +62,7 @@ class XmlToAppData
      * @param string                  $defaultPackage  the default PHP package used for the om
      * @param string                  $encoding        The database encoding.
      */
-    public function __construct(PropelPlatformInterface $defaultPlatform = null, $defaultPackage = null, $encoding = 'iso-8859-1')
+    public function __construct(?PropelPlatformInterface $defaultPlatform = null, $defaultPackage = null, $encoding = 'iso-8859-1')
     {
         $this->app = new AppData($defaultPlatform);
         $this->defaultPackage = $defaultPackage;
@@ -400,7 +400,7 @@ class XmlToAppData
 
     protected function isAlreadyParsed($filePath)
     {
-        return isset($this->schemasTagsStack[$filePath]);
+        return isset($this->schemasTagsStack[$filePath ?? '']);
     }
 
     /**

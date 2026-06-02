@@ -274,8 +274,8 @@ class PropelTypes
      */
     public static function getPropelType($sqlType)
     {
-        if (isset(self::$creoleToPropelTypeMap[$sqlType])) {
-            return self::$creoleToPropelTypeMap[$sqlType];
+        if (isset(self::$creoleToPropelTypeMap[$sqlType ?? ''])) {
+            return self::$creoleToPropelTypeMap[$sqlType ?? ''];
         }
     }
 

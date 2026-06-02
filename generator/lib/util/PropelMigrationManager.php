@@ -49,16 +49,16 @@ class PropelMigrationManager
 
     public function getConnection($datasource)
     {
-        if (!isset($this->connections[$datasource])) {
+        if (!isset($this->connections[$datasource ?? ''])) {
             throw new InvalidArgumentException(sprintf('Unknown datasource "%s"', $datasource));
         }
 
-        return $this->connections[$datasource];
+        return $this->connections[$datasource ?? ''];
     }
 
     public function getPdoConnection($datasource)
     {
-        if (!isset($this->pdoConnections[$datasource])) {
+        if (!isset($this->pdoConnections[$datasource ?? ''])) {
             $buildConnection = $this->getConnection($datasource);
             $dsn = str_replace("@DB@", $datasource, $buildConnection['dsn']);
 
@@ -68,10 +68,10 @@ class PropelMigrationManager
 
             $pdo = new PropelPDO($dsn, $username, $password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->pdoConnections[$datasource] = $pdo;
+            $this->pdoConnections[$datasource ?? ''] = $pdo;
         }
 
-        return $this->pdoConnections[$datasource];
+        return $this->pdoConnections[$datasource ?? ''];
     }
 
     public function getPlatform($datasource)

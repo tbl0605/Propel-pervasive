@@ -115,7 +115,7 @@ class PropelSQLExec extends AbstractPropelTask
      */
     public function getBuildConnection($database)
     {
-        if (!isset($this->buildConnections[$database])) {
+        if (!isset($this->buildConnections[$database ?? ''])) {
             // fallback to default connection settings from build.properties
             return array(
                 'dsn'      => $this->url,
@@ -124,7 +124,7 @@ class PropelSQLExec extends AbstractPropelTask
             );
         }
 
-        return $this->buildConnections[$database];
+        return $this->buildConnections[$database ?? ''];
     }
 
     /**
@@ -188,7 +188,7 @@ class PropelSQLExec extends AbstractPropelTask
      */
     public function setAutoCommit($autocommit)
     {
-        $this->autocommit = (boolean) $autocommit;
+        $this->autocommit = (bool) $autocommit;
     }
 
     /**
@@ -259,18 +259,18 @@ class PropelSQLExec extends AbstractPropelTask
         $databases = array();
         foreach ($map->getProperties() as $sqlfile => $database) {
 
-            if (!isset($databases[$database])) {
-                $databases[$database] = array();
+            if (!isset($databases[$database ?? ''])) {
+                $databases[$database ?? ''] = array();
             }
 
             // We want to make sure that the base schemas
             // are inserted first.
             if (strpos($sqlfile, "schema.sql") !== false) {
                 // add to the beginning of the array
-                array_unshift($databases[$database], $sqlfile);
+                array_unshift($databases[$database ?? ''], $sqlfile);
             } else {
                 // add to the end of the array
-                array_push($databases[$database], $sqlfile);
+                array_push($databases[$database ?? ''], $sqlfile);
             }
         }
 

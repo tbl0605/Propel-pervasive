@@ -501,8 +501,8 @@ class ForeignKey extends XMLElement
     public function getMappedForeignColumn($local)
     {
         $m = $this->getLocalForeignMapping();
-        if (isset($m[$local])) {
-            return $m[$local];
+        if (isset($m[$local ?? ''])) {
+            return $m[$local ?? ''];
         }
 
         return null;
@@ -516,8 +516,8 @@ class ForeignKey extends XMLElement
     public function getMappedLocalColumn($foreign)
     {
         $m = $this->getForeignLocalMapping();
-        if (isset($m[$foreign])) {
-            return $m[$foreign];
+        if (isset($m[$foreign ?? ''])) {
+            return $m[$foreign ?? ''];
         }
 
         return null;

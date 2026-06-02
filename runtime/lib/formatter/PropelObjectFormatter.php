@@ -45,12 +45,12 @@ class PropelObjectFormatter extends PropelFormatter
                     list($object, $col) = call_user_func(array($this->peer, 'populateObject'), $row);
                     $pk = $object->getPrimaryKey();
 
-                    if (isset($objectsByPks[$pk])) {
-                        $this->mainObject = $objectsByPks[$pk];
+                    if (isset($objectsByPks[$pk ?? ''])) {
+                        $this->mainObject = $objectsByPks[$pk ?? ''];
                     }
                     $object = $this->getAllObjectsFromRow($row);
 
-                    $objectsByPks[$pk] = $object;
+                    $objectsByPks[$pk ?? ''] = $object;
                 } else {
                     $object = $this->getAllObjectsFromRow($row);
                     $pk = $object->getPrimaryKey();

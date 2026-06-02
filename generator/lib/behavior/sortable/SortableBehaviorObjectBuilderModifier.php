@@ -359,7 +359,7 @@ public function isFirst()
  *
  * @return    boolean
  */
-public function isLast(PropelPDO \$con = null)
+public function isLast(?PropelPDO \$con = null)
 {
     return \$this->{$this->getColumnGetter()}() == {$this->queryClassname}::create()->getMaxRankArray(" . ($useScope ? "\$this->getScopeValue(), " : '') . "\$con);
 }
@@ -379,7 +379,7 @@ public function isLast(PropelPDO \$con = null)
  *
  * @return    {$this->objectClassname}
  */
-public function getNext(PropelPDO \$con = null)
+public function getNext(?PropelPDO \$con = null)
 {";
         $script .= "
 
@@ -422,7 +422,7 @@ public function getNext(PropelPDO \$con = null)
  *
  * @return    {$this->objectClassname}
  */
-public function getPrevious(PropelPDO \$con = null)
+public function getPrevious(?PropelPDO \$con = null)
 {";
         $script .= "
 
@@ -466,7 +466,7 @@ public function getPrevious(PropelPDO \$con = null)
  *
  * @throws    PropelException
  */
-public function insertAtRank(\$rank, PropelPDO \$con = null)
+public function insertAtRank(\$rank, ?PropelPDO \$con = null)
 {";
         $script .= "
     \$maxRank = {$this->queryClassname}::create()->getMaxRankArray(" . ($useScope ? "\$this->getScopeValue(), " : '') . "\$con);
@@ -502,7 +502,7 @@ public function insertAtRank(\$rank, PropelPDO \$con = null)
  *
  * @throws    PropelException
  */
-public function insertAtBottom(PropelPDO \$con = null)
+public function insertAtBottom(?PropelPDO \$con = null)
 {";
         $script .= "
     \$this->{$this->getColumnSetter()}({$this->queryClassname}::create()->getMaxRankArray(" . ($useScope ? "\$this->getScopeValue(), " : '') . "\$con) + 1);
@@ -543,7 +543,7 @@ public function insertAtTop()
  * @throws    Exception
  * @throws    PropelException
  */
-public function moveToRank(\$newRank, PropelPDO \$con = null)
+public function moveToRank(\$newRank, ?PropelPDO \$con = null)
 {
     if (\$this->isNew()) {
         throw new PropelException('New objects cannot be moved. Please use insertAtRank() instead');
@@ -594,7 +594,7 @@ public function moveToRank(\$newRank, PropelPDO \$con = null)
  *
  * @throws Exception if the database cannot execute the two updates
  */
-public function swapWith(\$object, PropelPDO \$con = null)
+public function swapWith(\$object, ?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection({$this->peerClassname}::DATABASE_NAME);
@@ -638,7 +638,7 @@ $script .= "
  * @return    {$this->objectClassname} the current object
  * @throws Exception
  */
-public function moveUp(PropelPDO \$con = null)
+public function moveUp(?PropelPDO \$con = null)
 {
     if (\$this->isFirst()) {
         return \$this;
@@ -671,7 +671,7 @@ public function moveUp(PropelPDO \$con = null)
  * @return    {$this->objectClassname} the current object
  * @throws Exception
  */
-public function moveDown(PropelPDO \$con = null)
+public function moveDown(?PropelPDO \$con = null)
 {
     if (\$this->isLast(\$con)) {
         return \$this;
@@ -704,7 +704,7 @@ public function moveDown(PropelPDO \$con = null)
  *
  * @return    {$this->objectClassname} the current object
  */
-public function moveToTop(PropelPDO \$con = null)
+public function moveToTop(?PropelPDO \$con = null)
 {
     if (\$this->isFirst()) {
         return \$this;
@@ -726,7 +726,7 @@ public function moveToTop(PropelPDO \$con = null)
  * @return integer the old object's rank
  * @throws Exception
  */
-public function moveToBottom(PropelPDO \$con = null)
+public function moveToBottom(?PropelPDO \$con = null)
 {
     if (\$this->isLast(\$con)) {
         return false;
@@ -761,7 +761,7 @@ public function moveToBottom(PropelPDO \$con = null)
  * @return    {$this->objectClassname} the current object
  * @throws PropelException
  */
-public function removeFromList(PropelPDO \$con = null)
+public function removeFromList(?PropelPDO \$con = null)
 {";
         if ($useScope) {
           $script .= "

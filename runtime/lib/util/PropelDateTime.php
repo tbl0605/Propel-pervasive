@@ -48,7 +48,7 @@ class PropelDateTime extends DateTime
      *
      * @throws PropelException
      */
-    public static function newInstance($value, DateTimeZone $timeZone = null, $dateTimeClass = 'DateTime')
+    public static function newInstance($value, ?DateTimeZone $timeZone = null, $dateTimeClass = 'DateTime')
     {
         if ($value instanceof DateTime) {
             return $value;

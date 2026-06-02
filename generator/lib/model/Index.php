@@ -212,7 +212,7 @@ class Index extends XMLElement
      */
     public function hasColumnSize($name)
     {
-        return isset($this->indexColumnSizes[$name]);
+        return isset($this->indexColumnSizes[$name ?? '']);
     }
 
     /**
@@ -224,8 +224,8 @@ class Index extends XMLElement
      */
     public function getColumnSize($name)
     {
-        if (isset($this->indexColumnSizes[$name])) {
-            return $this->indexColumnSizes[$name];
+        if (isset($this->indexColumnSizes[$name ?? ''])) {
+            return $this->indexColumnSizes[$name ?? ''];
         }
 
         return null; // just to be explicit
@@ -280,12 +280,12 @@ class Index extends XMLElement
      */
     public function hasColumnAtPosition($pos, $name, $size = null, $caseInsensitive = false)
     {
-        if (!isset($this->indexColumns[$pos])) {
+        if (!isset($this->indexColumns[$pos ?? ''])) {
             return false;
         }
         $test = $caseInsensitive ?
-            strtolower($this->indexColumns[$pos]) != strtolower($name) :
-            $this->indexColumns[$pos] != $name;
+            strtolower($this->indexColumns[$pos ?? '']) != strtolower($name) :
+            $this->indexColumns[$pos ?? ''] != $name;
         if ($test) {
             return false;
         }

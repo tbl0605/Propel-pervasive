@@ -301,7 +301,7 @@ class Database extends ScopedElement
      */
     public function setHeavyIndexing($v)
     {
-        $this->heavyIndexing = (boolean) $v;
+        $this->heavyIndexing = (bool) $v;
     }
 
     /**
@@ -407,8 +407,8 @@ class Database extends ScopedElement
      */
     public function getTableByPhpName($phpName)
     {
-        if (isset($this->tablesByPhpName[$phpName])) {
-            return $this->tablesByPhpName[$phpName];
+        if (isset($this->tablesByPhpName[$phpName ?? ''])) {
+            return $this->tablesByPhpName[$phpName ?? ''];
         }
 
         return null; // just to be explicit
@@ -505,8 +505,8 @@ class Database extends ScopedElement
      */
     public function getDomain($domainName)
     {
-        if (isset($this->domainMap[$domainName])) {
-            return $this->domainMap[$domainName];
+        if (isset($this->domainMap[$domainName ?? ''])) {
+            return $this->domainMap[$domainName ?? ''];
         }
 
         return null; // just to be explicit

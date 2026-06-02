@@ -72,8 +72,8 @@ abstract class XMLElement
     public function getAttribute($name, $defaultValue = null)
     {
         $name = strtolower($name);
-        if (isset($this->attributes[$name])) {
-            return $this->attributes[$name];
+        if (isset($this->attributes[$name ?? ''])) {
+            return $this->attributes[$name ?? ''];
         } else {
             return $defaultValue;
         }
@@ -151,8 +151,8 @@ abstract class XMLElement
      */
     public function getVendorInfoForType($type)
     {
-        if (isset($this->vendorInfos[$type])) {
-            return $this->vendorInfos[$type];
+        if (isset($this->vendorInfos[$type ?? ''])) {
+            return $this->vendorInfos[$type ?? ''];
         } else {
             // return an empty object
             return new VendorInfo($type);

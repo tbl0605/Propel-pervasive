@@ -125,8 +125,8 @@ class Behavior extends XMLElement
 
     public function getParameter($name)
     {
-        if (isset($this->parameters[$name])) {
-            return $this->parameters[$name];
+        if (isset($this->parameters[$name ?? ''])) {
+            return $this->parameters[$name ?? ''];
         }
 
         return null;

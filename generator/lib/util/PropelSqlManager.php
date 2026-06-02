@@ -63,7 +63,7 @@ class PropelSqlManager
 
     public function hasConnection($connection)
     {
-        return isset($this->connections[$connection]);
+        return isset($this->connections[$connection ?? '']);
     }
 
     public function getConnection($datasource)
@@ -204,15 +204,15 @@ class PropelSqlManager
                 continue;
             }
 
-            if (!isset($statementsToInsert[$database])) {
-                $statementsToInsert[$database] = array();
+            if (!isset($statementsToInsert[$database ?? ''])) {
+                $statementsToInsert[$database ?? ''] = array();
             }
             if (null === $database || (null !== $database && $database === $datasource)) {
                 $filename = $this->getWorkingDirectory() . DIRECTORY_SEPARATOR . $sqlFile;
 
                 if (file_exists($filename)) {
                     foreach (PropelSQLParser::parseFile($filename) as $sql) {
-                        $statementsToInsert[$database][] = $sql;
+                        $statementsToInsert[$database ?? ''][] = $sql;
                     }
                 }
             }

@@ -340,18 +340,18 @@ class PropelConvertConfTask extends AbstractPropelDataModelTask
                         $baseClass = $table->getBaseClass();
                         if ($baseClass !== null) {
                             $className = ClassTools::classname($baseClass);
-                            if (!isset($classMap[$className])) {
+                            if (!isset($classMap[$className ?? ''])) {
                                 $classPath = ClassTools::getFilePath($baseClass);
-                                $classMap[$className] = $classPath;
+                                $classMap[$className ?? ''] = $classPath;
                             }
                         }
 
                         $basePeer = $table->getBasePeer();
                         if ($basePeer !== null) {
                             $className = ClassTools::classname($basePeer);
-                            if (!isset($classMap[$className])) {
+                            if (!isset($classMap[$className ?? ''])) {
                                 $classPath = ClassTools::getFilePath($basePeer);
-                                $classMap[$className] = $classPath;
+                                $classMap[$className ?? ''] = $classPath;
                             }
                         }
 

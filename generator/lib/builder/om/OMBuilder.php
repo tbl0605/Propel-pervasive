@@ -201,10 +201,10 @@ abstract class OMBuilder extends DataModelBuilder
 
     public function declareClassNamespace($class, $namespace = '')
     {
-        if (isset($this->declaredClasses[$namespace]) && in_array($class, $this->declaredClasses[$namespace])) {
+        if (isset($this->declaredClasses[$namespace ?? '']) && in_array($class, $this->declaredClasses[$namespace ?? ''])) {
             return;
         }
-        $this->declaredClasses[$namespace][] = $class;
+        $this->declaredClasses[$namespace ?? ''][] = $class;
     }
 
     public function declareClass($fullyQualifiedClassName)

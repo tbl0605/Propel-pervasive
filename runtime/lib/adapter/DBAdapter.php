@@ -66,7 +66,7 @@ abstract class DBAdapter
      */
     public static function factory($driver)
     {
-        $adapterClass = isset(self::$adapters[$driver]) ? self::$adapters[$driver] : null;
+        $adapterClass = isset(self::$adapters[$driver ?? '']) ? self::$adapters[$driver ?? ''] : null;
         if ($adapterClass !== null) {
             $a = new $adapterClass();
 

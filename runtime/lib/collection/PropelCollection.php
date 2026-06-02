@@ -65,6 +65,39 @@ class PropelCollection extends ArrayObject implements Serializable
     }
 
     /**
+     * {@inheritDoc}
+     */
+    #[\ReturnTypeWillChange]
+    public function exchangeArray($input)
+    {
+        $this->clearIterator();
+
+        return parent::exchangeArray($input);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    #[\ReturnTypeWillChange]
+    public function offsetSet($key, $value)
+    {
+        $this->clearIterator();
+
+        parent::offsetSet($key, $value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    #[\ReturnTypeWillChange]
+    public function offsetUnset($key)
+    {
+        $this->clearIterator();
+
+        parent::offsetUnset($key);
+    }
+
+    /**
      * Gets the position of the internal pointer
      * This position can be later used in seek()
      *
@@ -190,7 +223,7 @@ class PropelCollection extends ArrayObject implements Serializable
      */
     public function isOdd()
     {
-        return (boolean) ($this->getInternalIterator()->key() % 2);
+        return (bool) ($this->getInternalIterator()->key() % 2);
     }
 
     /**
@@ -400,7 +433,7 @@ class PropelCollection extends ArrayObject implements Serializable
     #[\ReturnTypeWillChange]
     public function getIterator()
     {
-        $this->iterator = new ArrayIterator($this);
+        $this->iterator = new ArrayIterator($this->getArrayCopy());
 
         return $this->iterator;
     }

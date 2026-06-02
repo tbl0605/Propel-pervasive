@@ -197,7 +197,7 @@ public static function sortableApplyScopeCriteria(Criteria \$criteria, \$scope, 
  * @param     PropelPDO \$con optional connection
  * @return    int highest position
  */
-public static function getMaxRank(" . ($useScope ? "\$scope = null, " : "") . "PropelPDO \$con = null)
+public static function getMaxRank(" . ($useScope ? "\$scope = null, " : "") . "?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection({$this->peerClassname}::DATABASE_NAME);
@@ -235,7 +235,7 @@ public static function getMaxRank(" . ($useScope ? "\$scope = null, " : "") . "P
  *
  * @return {$this->objectClassname}
  */
-public static function retrieveByRank(\$rank, " . ($useScope ? "\$scope = null, " : "") . "PropelPDO \$con = null)
+public static function retrieveByRank(\$rank, " . ($useScope ? "\$scope = null, " : "") . "?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection($peerClassname::DATABASE_NAME);
@@ -270,7 +270,7 @@ public static function retrieveByRank(\$rank, " . ($useScope ? "\$scope = null, 
  * @return    boolean true if the reordering took place, false if a database problem prevented it
  * @throws Exception
  */
-public static function reorder(array \$order, PropelPDO \$con = null)
+public static function reorder(array \$order, ?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection($peerClassname::DATABASE_NAME);
@@ -311,7 +311,7 @@ public static function reorder(array \$order, PropelPDO \$con = null)
  *
  * @return    array list of sortable objects
  */
-public static function doSelectOrderByRank(Criteria \$criteria = null, \$order = Criteria::ASC, PropelPDO \$con = null)
+public static function doSelectOrderByRank(?Criteria \$criteria = null, \$order = Criteria::ASC, ?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection($peerClassname::DATABASE_NAME);
@@ -349,7 +349,7 @@ public static function doSelectOrderByRank(Criteria \$criteria = null, \$order =
  *
  * @return    array list of sortable objects
  */
-public static function retrieveList(\$scope, \$order = Criteria::ASC, PropelPDO \$con = null)
+public static function retrieveList(\$scope, \$order = Criteria::ASC, ?PropelPDO \$con = null)
 {
     \$c = new Criteria();
     {$this->peerClassname}::sortableApplyScopeCriteria(\$c, \$scope);
@@ -371,7 +371,7 @@ public static function retrieveList(\$scope, \$order = Criteria::ASC, PropelPDO 
  *
  * @return    array list of sortable objects
  */
-public static function countList(\$scope, PropelPDO \$con = null)
+public static function countList(\$scope, ?PropelPDO \$con = null)
 {
     \$c = new Criteria();
     {$this->peerClassname}::sortableApplyScopeCriteria(\$c, \$scope);
@@ -393,7 +393,7 @@ public static function countList(\$scope, PropelPDO \$con = null)
  *
  * @return    int number of deleted objects
  */
-public static function deleteList(\$scope, PropelPDO \$con = null)
+public static function deleteList(\$scope, ?PropelPDO \$con = null)
 {
     \$c = new Criteria();
     {$this->peerClassname}::sortableApplyScopeCriteria(\$c, \$scope);
@@ -421,7 +421,7 @@ public static function deleteList(\$scope, PropelPDO \$con = null)
         $script .= "
  * @param      PropelPDO \$con Connection to use.
  */
-public static function shiftRank(\$delta, \$first = null, \$last = null, " . ($useScope ? "\$scope = null, " : "") . "PropelPDO \$con = null)
+public static function shiftRank(\$delta, \$first = null, \$last = null, " . ($useScope ? "\$scope = null, " : "") . "?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection($peerClassname::DATABASE_NAME, Propel::CONNECTION_WRITE);

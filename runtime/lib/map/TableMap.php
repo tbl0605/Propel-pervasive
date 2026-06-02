@@ -360,7 +360,7 @@ class TableMap
             $name = ColumnMap::normalizeName($name);
         }
 
-        return isset($this->columns[$name]);
+        return isset($this->columns[$name ?? '']);
     }
 
     /**
@@ -393,7 +393,7 @@ class TableMap
      */
     public function hasColumnByPhpName($phpName)
     {
-        return isset($this->columnsByPhpName[$phpName]);
+        return isset($this->columnsByPhpName[$phpName ?? '']);
     }
 
     /**
@@ -406,11 +406,11 @@ class TableMap
      */
     public function getColumnByPhpName($phpName)
     {
-        if (!isset($this->columnsByPhpName[$phpName])) {
+        if (!isset($this->columnsByPhpName[$phpName ?? ''])) {
             throw new PropelException("Cannot fetch ColumnMap for undefined column phpName: " . $phpName);
         }
 
-        return $this->columnsByPhpName[$phpName];
+        return $this->columnsByPhpName[$phpName ?? ''];
     }
 
     public function hasColumnByInsensitiveCase($colName)
@@ -421,11 +421,11 @@ class TableMap
     public function getColumnByInsensitiveCase($colName)
     {
         $colName = strtolower($colName);
-        if (!isset($this->columnsByInsensitiveCase[$colName])) {
+        if (!isset($this->columnsByInsensitiveCase[$colName ?? ''])) {
             throw new PropelException("Cannot fetch ColumnMap for undefined column name: " . $colName);
         }
 
-        return $this->columnsByInsensitiveCase[$colName];
+        return $this->columnsByInsensitiveCase[$colName ?? ''];
     }
 
     /**

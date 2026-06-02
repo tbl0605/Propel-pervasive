@@ -99,8 +99,8 @@ class PropelArrayFormatter extends PropelFormatter
         // we hydrate the main object even in case of a one-to-many relationship
         // in order to get the $col variable increased anyway
         $obj = $this->getSingleObjectFromRow($row, $this->class, $col);
-        if (!isset($this->alreadyHydratedObjects[$this->class][$mainKey])) {
-            $this->alreadyHydratedObjects[$this->class][$mainKey] = $obj->toArray();
+        if (!isset($this->alreadyHydratedObjects[$this->class][$mainKey ?? ''])) {
+            $this->alreadyHydratedObjects[$this->class][$mainKey ?? ''] = $obj->toArray();
             $mainObjectIsNew = true;
         }
 
@@ -126,40 +126,40 @@ class PropelArrayFormatter extends PropelFormatter
             // we hydrate the main object even in case of a one-to-many relationship
             // in order to get the $col variable increased anyway
             $secondaryObject = $this->getSingleObjectFromRow($row, $class, $col);
-            if (!isset($this->alreadyHydratedObjects[$relAlias][$key])) {
+            if (!isset($this->alreadyHydratedObjects[$relAlias ?? ''][$key ?? ''])) {
 
                 if ($secondaryObject->isPrimaryKeyNull()) {
-                    $this->alreadyHydratedObjects[$relAlias][$key] = array();
+                    $this->alreadyHydratedObjects[$relAlias ?? ''][$key ?? ''] = array();
                 } else {
-                    $this->alreadyHydratedObjects[$relAlias][$key] = $secondaryObject->toArray();
+                    $this->alreadyHydratedObjects[$relAlias ?? ''][$key ?? ''] = $secondaryObject->toArray();
                 }
             }
 
             if ($modelWith->isPrimary()) {
-                $arrayToAugment = &$this->alreadyHydratedObjects[$this->class][$mainKey];
+                $arrayToAugment = &$this->alreadyHydratedObjects[$this->class][$mainKey ?? ''];
             } else {
                 $arrayToAugment = &$hydrationChain[$modelWith->getLeftPhpName()];
             }
 
             if ($modelWith->isAdd()) {
-                if (!isset($arrayToAugment[$modelWith->getRelationName()]) || !in_array($this->alreadyHydratedObjects[$relAlias][$key], $arrayToAugment[$modelWith->getRelationName()])) {
-                    $arrayToAugment[$modelWith->getRelationName()][] = &$this->alreadyHydratedObjects[$relAlias][$key];
+                if (!isset($arrayToAugment[$modelWith->getRelationName()]) || !in_array($this->alreadyHydratedObjects[$relAlias ?? ''][$key ?? ''], $arrayToAugment[$modelWith->getRelationName()])) {
+                    $arrayToAugment[$modelWith->getRelationName()][] = &$this->alreadyHydratedObjects[$relAlias ?? ''][$key ?? ''];
                 }
             } else {
-                $arrayToAugment[$modelWith->getRelationName()] = &$this->alreadyHydratedObjects[$relAlias][$key];
+                $arrayToAugment[$modelWith->getRelationName()] = &$this->alreadyHydratedObjects[$relAlias ?? ''][$key ?? ''];
             }
 
-            $hydrationChain[$modelWith->getRightPhpName()] = &$this->alreadyHydratedObjects[$relAlias][$key];
+            $hydrationChain[$modelWith->getRightPhpName()] = &$this->alreadyHydratedObjects[$relAlias ?? ''][$key ?? ''];
         }
 
         // columns added using withColumn()
         foreach ($this->getAsColumns() as $alias => $clause) {
-            $this->alreadyHydratedObjects[$this->class][$mainKey][$alias] = $row[$col];
+            $this->alreadyHydratedObjects[$this->class][$mainKey ?? ''][$alias ?? ''] = $row[$col ?? ''];
             $col++;
         }
 
         if ($mainObjectIsNew) {
-            return $this->alreadyHydratedObjects[$this->class][$mainKey];
+            return $this->alreadyHydratedObjects[$this->class][$mainKey ?? ''];
         } else {
             // we still need to return a reference to something to avoid a warning
             return $this->emptyVariable;

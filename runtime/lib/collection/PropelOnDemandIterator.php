@@ -100,7 +100,7 @@ class PropelOnDemandIterator implements Iterator
         }
         $this->currentRow = $this->stmt->fetch(PDO::FETCH_NUM);
         $this->currentKey++;
-        $this->isValid = (boolean) $this->currentRow;
+        $this->isValid = (bool) $this->currentRow;
         if (!$this->isValid) {
             $this->closeCursor();
             if ($this->enableInstancePoolingOnFinish) {
@@ -135,6 +135,6 @@ class PropelOnDemandIterator implements Iterator
      */
     public function valid()
     {
-        return (boolean) $this->isValid;
+        return (bool) $this->isValid;
     }
 }

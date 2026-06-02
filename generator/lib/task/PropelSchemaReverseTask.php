@@ -267,7 +267,7 @@ class PropelSchemaReverseTask extends PDOTask
      */
     public function setSamePhpName($v)
     {
-        $this->samePhpName = (boolean) $v;
+        $this->samePhpName = (bool) $v;
     }
 
     /**
@@ -277,7 +277,7 @@ class PropelSchemaReverseTask extends PDOTask
      */
     public function setAddVendorInfo($v)
     {
-        $this->addVendorInfo = (boolean) $v;
+        $this->addVendorInfo = (bool) $v;
     }
 
     /**
@@ -301,10 +301,10 @@ class PropelSchemaReverseTask extends PDOTask
         foreach ($exprs as $expr) {
             $expr = trim($expr);
             if (!empty($expr)) {
-                if (!isset(self::$validatorBitMap[$expr])) {
+                if (!isset(self::$validatorBitMap[$expr ?? ''])) {
                     throw new BuildException("Unable to interpret validator in expression ('$v'): " . $expr);
                 }
-                $bits |= self::$validatorBitMap[$expr];
+                $bits |= self::$validatorBitMap[$expr ?? ''];
             }
         }
 
@@ -549,12 +549,12 @@ class PropelSchemaReverse_ValidatorSet
     public function getValidator(Column $column)
     {
         $key = $column->getName();
-        if (!isset($this->validators[$key])) {
-            $this->validators[$key] = new Validator();
-            $this->validators[$key]->setColumn($column);
+        if (!isset($this->validators[$key ?? ''])) {
+            $this->validators[$key ?? ''] = new Validator();
+            $this->validators[$key ?? '']->setColumn($column);
         }
 
-        return $this->validators[$key];
+        return $this->validators[$key ?? ''];
     }
 
     /**

@@ -124,7 +124,7 @@ class DebugPDOStatement extends PDOStatement
     public function bindValue($pos, $value, $type = PDO::PARAM_STR)
     {
         $debug = $this->pdo->getDebugSnapshot();
-        $typestr = isset(self::$typeMap[$type]) ? self::$typeMap[$type] : '(default)';
+        $typestr = isset(self::$typeMap[$type ?? '']) ? self::$typeMap[$type ?? ''] : '(default)';
         $return = parent::bindValue($pos, $value, $type);
         $valuestr = $type == PDO::PARAM_LOB ? '[LOB value]' : var_export($value, true);
         $msg = sprintf('Binding %s at position %s w/ PDO type %s', $valuestr, $pos, $typestr);
@@ -155,7 +155,7 @@ class DebugPDOStatement extends PDOStatement
     {
         $originalValue = $value;
         $debug = $this->pdo->getDebugSnapshot();
-        $typestr = isset(self::$typeMap[$type]) ? self::$typeMap[$type] : '(default)';
+        $typestr = isset(self::$typeMap[$type ?? '']) ? self::$typeMap[$type ?? ''] : '(default)';
         $return = parent::bindParam($pos, $value, $type, $length, $driver_options);
         $valuestr = $length > 100 ? '[Large value]' : var_export($value, true);
         $msg = sprintf('Binding %s at position %s w/ PDO type %s', $valuestr, $pos, $typestr);

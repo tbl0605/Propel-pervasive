@@ -205,7 +205,7 @@ class Criterion
      */
     public function setIgnoreCase($b)
     {
-        $this->ignoreStringCase = (boolean) $b;
+        $this->ignoreStringCase = (bool) $b;
 
         return $this;
     }

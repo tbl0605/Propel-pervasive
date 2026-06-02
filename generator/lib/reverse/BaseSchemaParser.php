@@ -68,7 +68,7 @@ abstract class BaseSchemaParser implements SchemaParser
     /**
      * @param PDO $dbh Optional database connection
      */
-    public function __construct(PDO $dbh = null)
+    public function __construct(?PDO $dbh = null)
     {
         if ($dbh) {
             $this->setConnection($dbh);
@@ -190,8 +190,8 @@ abstract class BaseSchemaParser implements SchemaParser
         if ($this->nativeToPropelTypeMap === null) {
             $this->nativeToPropelTypeMap = $this->getTypeMapping();
         }
-        if (isset($this->nativeToPropelTypeMap[$nativeType])) {
-            return $this->nativeToPropelTypeMap[$nativeType];
+        if (isset($this->nativeToPropelTypeMap[$nativeType ?? ''])) {
+            return $this->nativeToPropelTypeMap[$nativeType ?? ''];
         }
 
         return null;
@@ -210,7 +210,7 @@ abstract class BaseSchemaParser implements SchemaParser
             $this->reverseTypeMap = array_flip($this->getTypeMapping());
         }
 
-        return isset($this->reverseTypeMap[$propelType]) ? $this->reverseTypeMap[$propelType] : null;
+        return isset($this->reverseTypeMap[$propelType ?? '']) ? $this->reverseTypeMap[$propelType ?? ''] : null;
     }
 
     /**

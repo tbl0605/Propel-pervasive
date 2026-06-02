@@ -785,7 +785,7 @@ public function compareVersions(\$fromVersionNumber, \$toVersionNumber, \$keys =
  *
  * @return PropelCollection|{$versionARClassname}[] List of {$versionARClassname} objects
  */
-public function getLastVersions(\$number = 10, \$criteria = null, PropelPDO \$con = null)
+public function getLastVersions(\$number = 10, \$criteria = null, ?PropelPDO \$con = null)
 {
     \$criteria = {$this->getVersionQueryClassName()}::create(null, \$criteria);
     \$criteria->addDescendingOrderByColumn({$versionPeer}::VERSION);

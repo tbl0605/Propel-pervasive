@@ -7,13 +7,13 @@
  *
  * @return <?php echo $i18nTablePhpName ?>
  */
-public function getTranslation($locale = '<?php echo $defaultLocale ?>', PropelPDO $con = null)
+public function getTranslation($locale = '<?php echo $defaultLocale ?>', ?PropelPDO $con = null)
 {
-    if (!isset($this->currentTranslations[$locale])) {
+    if (!isset($this->currentTranslations[$locale ?? ''])) {
         if (null !== $this-><?php echo $i18nListVariable ?>) {
             foreach ($this-><?php echo $i18nListVariable ?> as $translation) {
                 if ($translation->get<?php echo $localeColumnName ?>() == $locale) {
-                    $this->currentTranslations[$locale] = $translation;
+                    $this->currentTranslations[$locale ?? ''] = $translation;
 
                     return $translation;
                 }
@@ -26,10 +26,10 @@ public function getTranslation($locale = '<?php echo $defaultLocale ?>', PropelP
             $translation = <?php echo $i18nQueryName ?>::create()
                 ->filterByPrimaryKey(array($this->getPrimaryKey(), $locale))
                 ->findOneOrCreate($con);
-            $this->currentTranslations[$locale] = $translation;
+            $this->currentTranslations[$locale ?? ''] = $translation;
         }
         $this->add<?php echo $i18nSetterMethod ?>($translation);
     }
 
-    return $this->currentTranslations[$locale];
+    return $this->currentTranslations[$locale ?? ''];
 }

@@ -10,7 +10,7 @@
  *
  * @return     <?php echo $archiveTablePhpName ?> The archive object based on this object
  */
-public function archive(PropelPDO $con = null)
+public function archive(?PropelPDO $con = null)
 {
     if ($this->isNew()) {
         throw new PropelException('New objects cannot be archived. You must save the current object before calling archive().');

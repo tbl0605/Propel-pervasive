@@ -106,8 +106,8 @@ class VendorInfo extends XMLElement
      */
     public function getParameter($name)
     {
-        if (isset($this->parameters[$name])) {
-            return $this->parameters[$name];
+        if (isset($this->parameters[$name ?? ''])) {
+            return $this->parameters[$name ?? ''];
         }
 
         return null; // just to be explicit
@@ -122,7 +122,7 @@ class VendorInfo extends XMLElement
      */
     public function hasParameter($name)
     {
-        return isset($this->parameters[$name]);
+        return isset($this->parameters[$name ?? '']);
     }
 
     /**

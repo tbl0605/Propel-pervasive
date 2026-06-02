@@ -122,7 +122,7 @@ class DatabaseMap
      */
     public function getTable($name)
     {
-        if (!isset($this->tables[$name])) {
+        if (!isset($this->tables[$name ?? ''])) {
             throw new PropelException("Cannot fetch TableMap for undefined table: " . $name);
         }
 

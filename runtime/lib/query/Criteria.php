@@ -371,8 +371,8 @@ class Criteria implements IteratorAggregate
      */
     public function getColumnForAs($as)
     {
-        if (isset($this->asColumns[$as])) {
-            return $this->asColumns[$as];
+        if (isset($this->asColumns[$as ?? ''])) {
+            return $this->asColumns[$as ?? ''];
         }
 
         return null;
@@ -427,8 +427,8 @@ class Criteria implements IteratorAggregate
      */
     public function getTableForAlias($alias)
     {
-        if (isset($this->aliases[$alias])) {
-            return $this->aliases[$alias];
+        if (isset($this->aliases[$alias ?? ''])) {
+            return $this->aliases[$alias ?? ''];
         }
 
         return null;
@@ -445,8 +445,8 @@ class Criteria implements IteratorAggregate
      */
     public function getTableNameAndAlias($tableAliasOrName)
     {
-        if (isset($this->aliases[$tableAliasOrName])) {
-            return array($this->aliases[$tableAliasOrName], $tableAliasOrName);
+        if (isset($this->aliases[$tableAliasOrName ?? ''])) {
+            return array($this->aliases[$tableAliasOrName ?? ''], $tableAliasOrName);
         } else {
             return array($tableAliasOrName, null);
         }
@@ -519,7 +519,7 @@ class Criteria implements IteratorAggregate
      */
     public function setUseTransaction($v)
     {
-        $this->useTransaction = (boolean) $v;
+        $this->useTransaction = (bool) $v;
     }
 
     /**
@@ -589,8 +589,8 @@ class Criteria implements IteratorAggregate
      */
     public function getColumnName($name)
     {
-        if (isset($this->map[$name])) {
-            return $this->map[$name]->getColumn();
+        if (isset($this->map[$name ?? ''])) {
+            return $this->map[$name ?? '']->getColumn();
         }
 
         return null;
@@ -628,8 +628,8 @@ class Criteria implements IteratorAggregate
      */
     public function getComparison($key)
     {
-        if (isset($this->map[$key])) {
-            return $this->map[$key]->getComparison();
+        if (isset($this->map[$key ?? ''])) {
+            return $this->map[$key ?? '']->getComparison();
         }
 
         return null;
@@ -695,8 +695,8 @@ class Criteria implements IteratorAggregate
      */
     public function getTableName($name)
     {
-        if (isset($this->map[$name])) {
-            return $this->map[$name]->getTable();
+        if (isset($this->map[$name ?? ''])) {
+            return $this->map[$name ?? '']->getTable();
         }
 
         return null;
@@ -711,8 +711,8 @@ class Criteria implements IteratorAggregate
      */
     public function getValue($name)
     {
-        if (isset($this->map[$name])) {
-            return $this->map[$name]->getValue();
+        if (isset($this->map[$name ?? ''])) {
+            return $this->map[$name ?? '']->getValue();
         }
 
         return null;
@@ -1092,7 +1092,7 @@ class Criteria implements IteratorAggregate
      */
     public function hasSelectQuery($alias)
     {
-        return isset($this->selectQueries[$alias]);
+        return isset($this->selectQueries[$alias ?? '']);
     }
 
     public function forgeSelectQueryAlias()
@@ -1186,7 +1186,7 @@ class Criteria implements IteratorAggregate
      */
     public function setIgnoreCase($b)
     {
-        $this->ignoreCase = (boolean) $b;
+        $this->ignoreCase = (bool) $b;
 
         return $this;
     }
@@ -1216,7 +1216,7 @@ class Criteria implements IteratorAggregate
      */
     public function setSingleRecord($b)
     {
-        $this->singleRecord = (boolean) $b;
+        $this->singleRecord = (bool) $b;
 
         return $this;
     }
@@ -1468,9 +1468,9 @@ class Criteria implements IteratorAggregate
      */
     public function remove($key)
     {
-        if (isset($this->map[$key])) {
-            $removed = $this->map[$key];
-            unset($this->map[$key]);
+        if (isset($this->map[$key ?? ''])) {
+            $removed = $this->map[$key ?? ''];
+            unset($this->map[$key ?? '']);
             if ($removed instanceof Criterion) {
                 return $removed->getValue();
             }

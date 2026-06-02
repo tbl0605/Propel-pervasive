@@ -107,12 +107,12 @@ class TestAllHooksObjectBuilderModifier
 
   public function preDelete($builder)
   {
-    return '$this->preDelete = 1;$this->preDeleteIsBeforeDelete = isset(Table3Peer::$instances[$this->id]);$this->preDeleteBuilder="' . get_class($builder) . '";';
+    return '$this->preDelete = 1;$this->preDeleteIsBeforeDelete = isset(Table3Peer::$instances[$this->id ?? ""]);$this->preDeleteBuilder="' . get_class($builder) . '";';
   }
 
   public function postDelete($builder)
   {
-    return '$this->postDelete = 1;$this->postDeleteIsBeforeDelete = isset(Table3Peer::$instances[$this->id]);$this->postDeleteBuilder="' . get_class($builder) . '";';
+    return '$this->postDelete = 1;$this->postDeleteIsBeforeDelete = isset(Table3Peer::$instances[$this->id ?? ""]);$this->postDeleteBuilder="' . get_class($builder) . '";';
   }
 
   public function postHydrate($builder)

@@ -106,7 +106,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
         return self::$propelTypeMap;
     }
 
-    public function parse(Database $database, Task $task = null)
+    public function parse(Database $database, ?Task $task = null)
     {
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
         // http://cs.pervasive.com/forums/p/951/3357.aspx
@@ -390,7 +390,7 @@ class PervasiveSchemaParser extends BaseSchemaParser
      * @param Table $table
      *            The Table model class to add columns to.
      */
-    protected function addColumns(Table $table, Task $task = null)
+    protected function addColumns(Table $table, ?Task $task = null)
     {
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
         // http://www.pervasive.com/portals/55/documents/psqlv11/Accessing_the_DDF_Files_Through_Views.pdf
@@ -480,7 +480,7 @@ SELECT TAB.XF$NAME TABLE_NAME
     /**
      * Load foreign keys for this table.
      */
-    protected function addForeignKeys(Table $table, Task $task = null)
+    protected function addForeignKeys(Table $table, ?Task $task = null)
     {
         $database = $table->getDatabase();
 
@@ -559,7 +559,7 @@ SELECT A.XR$NAME RULE_NAME
     /**
      * Load indexes for this table
      */
-    protected function addIndexes(Table $table, Task $task = null)
+    protected function addIndexes(Table $table, ?Task $task = null)
     {
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
         // See also: call psp_indexes(null, '$table->getName()')
@@ -628,7 +628,7 @@ SELECT DISTINCT
     /**
      * Loads the primary key for this table.
      */
-    protected function addPrimaryKey(Table $table, Task $task = null)
+    protected function addPrimaryKey(Table $table, ?Task $task = null)
     {
         // ftp://ftp.agris.com/Pervasive/PVSW10.3/Books/SQL_Engine_Reference.pdf
         // See also: call psp_indexes(null, '$table->getName()')

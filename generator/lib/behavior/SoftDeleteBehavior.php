@@ -59,7 +59,7 @@ class SoftDeleteBehavior extends Behavior
 /**
  * Bypass the soft_delete behavior and force a hard delete of the current object
  */
-public function forceDelete(PropelPDO \$con = null)
+public function forceDelete(?PropelPDO \$con = null)
 {
     if (\$isSoftDeleteEnabled = {$peerClassName}::isSoftDeleteEnabled()) { {$peerClassName}::disableSoftDelete();
     }
@@ -80,7 +80,7 @@ public function forceDelete(PropelPDO \$con = null)
  *
  * @return		 int The number of rows affected by this update and any referring fk objects' save() operations.
  */
-public function unDelete(PropelPDO \$con = null)
+public function unDelete(?PropelPDO \$con = null)
 {
     \$this->{$this->getColumnSetter()}(null);
 
@@ -172,7 +172,7 @@ public function includeDeleted()
  *
  * @return		int Number of updated rows
  */
-public function softDelete(PropelPDO \$con = null)
+public function softDelete(?PropelPDO \$con = null)
 {
     return \$this->update(array('{$this->getColumnForParameter('deleted_column')->getPhpName()}' => time()), \$con);
 }
@@ -189,7 +189,7 @@ public function softDelete(PropelPDO \$con = null)
  *
  * @return		int Number of deleted rows
  */
-public function forceDelete(PropelPDO \$con = null)
+public function forceDelete(?PropelPDO \$con = null)
 {
     return {$this->builder->getPeerClassname()}::doForceDelete(\$this, \$con);
 }
@@ -206,7 +206,7 @@ public function forceDelete(PropelPDO \$con = null)
  *
  * @return		int Number of deleted rows
  */
-public function forceDeleteAll(PropelPDO \$con = null)
+public function forceDeleteAll(?PropelPDO \$con = null)
 {
     return {$this->builder->getPeerClassname()}::doForceDeleteAll(\$con);}
 ";
@@ -222,7 +222,7 @@ public function forceDeleteAll(PropelPDO \$con = null)
  *
  * @return		int The number of rows affected by this update and any referring fk objects' save() operations.
  */
-public function unDelete(PropelPDO \$con = null)
+public function unDelete(?PropelPDO \$con = null)
 {
     return \$this->update(array('{$this->getColumnForParameter('deleted_column')->getPhpName()}' => null), \$con);
 }
@@ -362,7 +362,7 @@ public static function isSoftDeleteEnabled()
  * @throws		 PropelException Any exceptions caught during processing will be
  *							rethrown wrapped into a PropelException.
  */
-public static function doSoftDelete(\$values, PropelPDO \$con = null)
+public static function doSoftDelete(\$values, ?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection({$this->getTable()->getPhpName()}Peer::DATABASE_NAME, Propel::CONNECTION_WRITE);
@@ -414,7 +414,7 @@ public static function doSoftDelete(\$values, PropelPDO \$con = null)
  * @throws		 PropelException Any exceptions caught during processing will be
  *							rethrown wrapped into a PropelException.
  */
-public static function doDelete2(\$values, PropelPDO \$con = null)
+public static function doDelete2(\$values, ?PropelPDO \$con = null)
 {
     if ({$this->builder->getPeerClassname()}::isSoftDeleteEnabled()) {
         return {$this->builder->getPeerClassname()}::doSoftDelete(\$values, \$con);
@@ -435,7 +435,7 @@ public static function doDelete2(\$values, PropelPDO \$con = null)
  * @throws		 PropelException Any exceptions caught during processing will be
  *							rethrown wrapped into a PropelException.
  */
-public static function doSoftDeleteAll(PropelPDO \$con = null)
+public static function doSoftDeleteAll(?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection({$this->builder->getPeerClassname()}::DATABASE_NAME, Propel::CONNECTION_WRITE);
@@ -462,7 +462,7 @@ public static function doSoftDeleteAll(PropelPDO \$con = null)
  * @throws		 PropelException Any exceptions caught during processing will be
  *							rethrown wrapped into a PropelException.
  */
-public static function doDeleteAll2(PropelPDO \$con = null)
+public static function doDeleteAll2(?PropelPDO \$con = null)
 {
     if ({$this->builder->getPeerClassname()}::isSoftDeleteEnabled()) {
         return {$this->builder->getPeerClassname()}::doSoftDeleteAll(\$con);

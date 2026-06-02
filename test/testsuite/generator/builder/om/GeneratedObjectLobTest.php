@@ -62,8 +62,8 @@ class GeneratedObjectLobTest extends BookstoreEmptyTestBase
             $basename = array_rand($this->sampleLobFiles);
         }
 
-        if (isset($this->sampleLobFiles[$basename])) {
-            return $this->sampleLobFiles[$basename];
+        if (isset($this->sampleLobFiles[$basename ?? ''])) {
+            return $this->sampleLobFiles[$basename ?? ''];
         } else {
             throw new Exception("Invalid base LOB filename: $basename");
         }

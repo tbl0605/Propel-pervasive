@@ -265,7 +265,7 @@ class AggregateColumnBehaviorTest extends BookstoreTestBase
 class TestableComment extends AggregateComment
 {
     // overrides the parent save() to bypass behavior hooks
-    public function save(PropelPDO $con = null)
+    public function save(?PropelPDO $con = null)
     {
         $con->beginTransaction();
         try {
@@ -281,7 +281,7 @@ class TestableComment extends AggregateComment
     }
 
     // overrides the parent delete() to bypass behavior hooks
-    public function delete(PropelPDO $con = null)
+    public function delete(?PropelPDO $con = null)
     {
         $con->beginTransaction();
         try {

@@ -236,7 +236,7 @@ abstract class AbstractPropelDataModelTask extends AbstractPropelTask
      */
     public function setPackageObjectModel($v)
     {
-        $this->packageObjectModel = (boolean) $v;
+        $this->packageObjectModel = (bool) $v;
     }
 
     /**
@@ -246,7 +246,7 @@ abstract class AbstractPropelDataModelTask extends AbstractPropelTask
      */
     public function setValidate($v)
     {
-        $this->validate = (boolean) $v;
+        $this->validate = (bool) $v;
     }
 
     /**

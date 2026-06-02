@@ -46,7 +46,7 @@ class DefaultPlatform implements PropelPlatformInterface
      *
      * @param PDO $con Optional database connection to use in this platform.
      */
-    public function __construct(PDO $con = null)
+    public function __construct(?PDO $con = null)
     {
         if ($con) {
             $this->setConnection($con);
@@ -59,7 +59,7 @@ class DefaultPlatform implements PropelPlatformInterface
      *
      * @param PDO $con Database connection to use in this platform.
      */
-    public function setConnection(PDO $con = null)
+    public function setConnection(?PDO $con = null)
     {
         $this->con = $con;
     }
@@ -176,7 +176,7 @@ class DefaultPlatform implements PropelPlatformInterface
      */
     public function getDomainForType($propelType)
     {
-        if (!isset($this->schemaDomainMap[$propelType])) {
+        if (!isset($this->schemaDomainMap[$propelType ?? ''])) {
             throw new EngineException("Cannot map unknown Propel type " . var_export($propelType, true) . " to native database type.");
         }
 

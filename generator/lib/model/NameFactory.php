@@ -53,11 +53,11 @@ class NameFactory
      */
     protected static function getAlgorithm($name)
     {
-        if (!isset(self::$algorithms[$name])) {
-            self::$algorithms[$name] = new $name();
+        if (!isset(self::$algorithms[$name ?? ''])) {
+            self::$algorithms[$name ?? ''] = new $name();
         }
 
-        return self::$algorithms[$name];
+        return self::$algorithms[$name ?? ''];
     }
 
     /**

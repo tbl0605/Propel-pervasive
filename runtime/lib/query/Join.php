@@ -125,7 +125,7 @@ class Join
             throw new PropelException("Unable to create join because the left column count isn't equal to the right column count");
         }
         foreach ($lefts as $key => $left) {
-            $this->addCondition($left, $rights[$key], isset($operators[$key]) ? $operators[$key] : self::EQUAL);
+            $this->addCondition($left, $rights[$key], isset($operators[$key ?? '']) ? $operators[$key ?? ''] : self::EQUAL);
         }
     }
 

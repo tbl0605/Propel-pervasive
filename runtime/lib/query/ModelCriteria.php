@@ -439,14 +439,14 @@ class ModelCriteria extends Criteria
         if ($class == $this->getModelAliasOrName()) {
             // column of the Criteria's model
             $tableMap = $this->getTableMap();
-        } elseif (isset($this->joins[$class])) {
+        } elseif (isset($this->joins[$class ?? ''])) {
             // column of a relations's model
-            $tableMap = $this->joins[$class]->getTableMap();
+            $tableMap = $this->joins[$class ?? '']->getTableMap();
         } else {
             throw new PropelException('Unknown model or alias ' . $class);
         }
         foreach ($tableMap->getColumns() as $column) {
-            if (isset($this->aliases[$class])) {
+            if (isset($this->aliases[$class ?? ''])) {
                 $this->addGroupByColumn($class . '.' . $column->getName());
             } else {
                 $this->addGroupByColumn($column->getFullyQualifiedName());
@@ -672,14 +672,14 @@ class ModelCriteria extends Criteria
             if ($leftName == $this->getModelAliasOrName()) {
                 $previousJoin = $this->getPreviousJoin();
                 $tableMap = $this->getTableMap();
-            } elseif (isset($this->joins[$leftName])) {
-                $previousJoin = $this->joins[$leftName];
+            } elseif (isset($this->joins[$leftName ?? ''])) {
+                $previousJoin = $this->joins[$leftName ?? ''];
                 $tableMap = $previousJoin->getTableMap();
             } else {
                 throw new PropelException('Unknown table or alias ' . $leftName);
             }
         }
-        $leftTableAlias = isset($this->aliases[$leftName]) ? $leftName : null;
+        $leftTableAlias = isset($this->aliases[$leftName ?? '']) ? $leftName : null;
 
         // find the RelationMap in the TableMap using the $relationName
         if (!$tableMap->hasRelation($relationName)) {
@@ -727,10 +727,10 @@ class ModelCriteria extends Criteria
      */
     public function addJoinCondition($name, $clause, $value = null, $operator = null, $bindingType = null)
     {
-        if (!isset($this->joins[$name])) {
+        if (!isset($this->joins[$name ?? ''])) {
             throw new PropelException(sprintf('Adding a condition to a nonexistent join, %s. Try calling join() first.', $name));
         }
-        $join = $this->joins[$name];
+        $join = $this->joins[$name ?? ''];
         if (!$join->getJoinCondition() instanceof Criterion) {
             $join->buildJoinCondition($this);
         }
@@ -762,13 +762,13 @@ class ModelCriteria extends Criteria
      */
     public function setJoinCondition($name, $condition)
     {
-        if (!isset($this->joins[$name])) {
+        if (!isset($this->joins[$name ?? ''])) {
             throw new PropelException(sprintf('Setting a condition to a nonexistent join, %s. Try calling join() first.', $name));
         }
         if ($condition instanceof Criterion) {
             $this->getJoin($name)->setJoinCondition($condition);
-        } elseif (isset($this->namedCriterions[$condition])) {
-            $this->getJoin($name)->setJoinCondition($this->namedCriterions[$condition]);
+        } elseif (isset($this->namedCriterions[$condition ?? ''])) {
+            $this->getJoin($name)->setJoinCondition($this->namedCriterions[$condition ?? '']);
         } else {
             throw new PropelException(sprintf('Cannot add condition %s on join %s. setJoinCondition() expects either a Criterion, or a condition added by way of condition()', $condition, $name));
         }
@@ -854,10 +854,10 @@ class ModelCriteria extends Criteria
      */
     public function with($relation)
     {
-        if (!isset($this->joins[$relation])) {
+        if (!isset($this->joins[$relation ?? ''])) {
             throw new PropelException('Unknown relation name or alias ' . $relation);
         }
-        $join = $this->joins[$relation];
+        $join = $this->joins[$relation ?? ''];
         if ($join->getRelationMap()->getType() == RelationMap::MANY_TO_MANY) {
             throw new PropelException('with() does not allow hydration for many-to-many relationships');
         } elseif ($join->getRelationMap()->getType() == RelationMap::ONE_TO_MANY) {
@@ -952,19 +952,19 @@ class ModelCriteria extends Criteria
      */
     public function useQuery($relationName, $secondaryCriteriaClass = null)
     {
-        if (!isset($this->joins[$relationName])) {
+        if (!isset($this->joins[$relationName ?? ''])) {
             throw new PropelException('Unknown class or alias ' . $relationName);
         }
-        $className = $this->joins[$relationName]->getTableMap()->getPhpName();
+        $className = $this->joins[$relationName ?? '']->getTableMap()->getPhpName();
         if (null === $secondaryCriteriaClass) {
             $secondaryCriteria = PropelQuery::from($className);
         } else {
             $secondaryCriteria = new $secondaryCriteriaClass();
         }
         if ($className != $relationName) {
-            $secondaryCriteria->setModelAlias($relationName, $relationName == $this->joins[$relationName]->getRelationMap()->getName() ? false : true);
+            $secondaryCriteria->setModelAlias($relationName, $relationName == $this->joins[$relationName ?? '']->getRelationMap()->getName() ? false : true);
         }
-        $secondaryCriteria->setPrimaryCriteria($this, $this->joins[$relationName]);
+        $secondaryCriteria->setPrimaryCriteria($this, $this->joins[$relationName ?? '']);
 
         return $secondaryCriteria;
     }
@@ -978,7 +978,7 @@ class ModelCriteria extends Criteria
      */
     public function endUse()
     {
-        if (isset($this->aliases[$this->modelAlias])) {
+        if (isset($this->aliases[$this->modelAlias ?? ''])) {
             $this->removeAlias($this->modelAlias);
         }
         $primaryCriteria = $this->getPrimaryCriteria();
@@ -2056,9 +2056,9 @@ class ModelCriteria extends Criteria
         if ($prefix == $this->getModelAliasOrName() || $prefix == $this->getTableMap()->getName()) {
             // column of the Criteria's model, or column name from Criteria's peer
             $tableMap = $this->getTableMap();
-        } elseif (isset($this->joins[$prefix])) {
+        } elseif (isset($this->joins[$prefix ?? ''])) {
             // column of a relations's model
-            $tableMap = $this->joins[$prefix]->getTableMap();
+            $tableMap = $this->joins[$prefix ?? '']->getTableMap();
         } elseif ($this->hasSelectQuery($prefix)) {
             return $this->getColumnFromSubQuery($prefix, $phpName, $failSilently);
         } elseif ($failSilently) {
@@ -2069,7 +2069,7 @@ class ModelCriteria extends Criteria
 
         if ($tableMap->hasColumnByPhpName($phpName)) {
             $column = $tableMap->getColumnByPhpName($phpName);
-            if (isset($this->aliases[$prefix])) {
+            if (isset($this->aliases[$prefix ?? ''])) {
                 $this->currentAlias = $prefix;
                 $realColumnName = $prefix . '.' . $column->getName();
             } else {
@@ -2082,7 +2082,7 @@ class ModelCriteria extends Criteria
             $realColumnName = $column->getFullyQualifiedName();
 
             return array($column, $realColumnName);
-        } elseif (isset($this->asColumns[$phpName])) {
+        } elseif (isset($this->asColumns[$phpName ?? ''])) {
             // aliased column
             return array(null, $phpName);
         } elseif ($tableMap->hasColumnByInsensitiveCase($phpName)) {
@@ -2117,7 +2117,7 @@ class ModelCriteria extends Criteria
             $realColumnName = $class . '.' . $column->getName();
 
             return array($column, $realColumnName);
-        } elseif (isset($subQueryCriteria->asColumns[$phpName])) {
+        } elseif (isset($subQueryCriteria->asColumns[$phpName ?? ''])) {
             // aliased column
             return array(null, $class . '.' . $phpName);
         } elseif ($failSilently) {
@@ -2337,7 +2337,7 @@ class ModelCriteria extends Criteria
     }
 
     /**
-     * @param PropelPDO $con = null
+     * @param ?PropelPDO $con = null
      *
      * @return boolean
      */

@@ -111,8 +111,8 @@ class PropelConfiguration implements ArrayAccess
     public function getParameter($name, $default = null)
     {
         $flattenedParameters = $this->getFlattenedParameters();
-        if (isset($flattenedParameters[$name])) {
-            return $flattenedParameters[$name];
+        if (isset($flattenedParameters[$name ?? ''])) {
+            return $flattenedParameters[$name ?? ''];
         }
 
         return $default;

@@ -479,12 +479,12 @@ class Propel
             }
         }
 
-        if (!isset(self::$dbMaps[$name])) {
+        if (!isset(self::$dbMaps[$name ?? ''])) {
             $clazz = self::$databaseMapClass;
-            self::$dbMaps[$name] = new $clazz($name);
+            self::$dbMaps[$name ?? ''] = new $clazz($name);
         }
 
-        return self::$dbMaps[$name];
+        return self::$dbMaps[$name ?? ''];
     }
 
     /**
@@ -760,16 +760,16 @@ class Propel
             $name = self::getDefaultDB();
         }
 
-        if (!isset(self::$adapterMap[$name])) {
-            if (!isset(self::$configuration['datasources'][$name]['adapter'])) {
+        if (!isset(self::$adapterMap[$name ?? ''])) {
+            if (!isset(self::$configuration['datasources'][$name ?? '']['adapter'])) {
                 throw new PropelException("Unable to find adapter for datasource [" . $name . "].");
             }
-            $db = DBAdapter::factory(self::$configuration['datasources'][$name]['adapter']);
+            $db = DBAdapter::factory(self::$configuration['datasources'][$name ?? '']['adapter']);
             // register the adapter for this name
-            self::$adapterMap[$name] = $db;
+            self::$adapterMap[$name ?? ''] = $db;
         }
 
-        return self::$adapterMap[$name];
+        return self::$adapterMap[$name ?? ''];
     }
 
     /**
@@ -824,8 +824,8 @@ class Propel
      */
     public static function autoload($className)
     {
-        if (isset(self::$autoloadMap[$className])) {
-            require self::$baseDir . self::$autoloadMap[$className];
+        if (isset(self::$autoloadMap[$className ?? ''])) {
+            require self::$baseDir . self::$autoloadMap[$className ?? ''];
 
             return true;
         }

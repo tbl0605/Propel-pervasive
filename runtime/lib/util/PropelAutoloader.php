@@ -82,7 +82,7 @@ class PropelAutoloader
      */
     public function addClassPath($class, $path)
     {
-        $this->classes[$class] = $path;
+        $this->classes[$class ?? ''] = $path;
     }
 
     /**
@@ -94,7 +94,7 @@ class PropelAutoloader
      */
     public function getClassPath($class)
     {
-        return isset($this->classes[$class]) ? $this->classes[$class] : null;
+        return isset($this->classes[$class ?? '']) ? $this->classes[$class ?? ''] : null;
     }
 
     /**
@@ -106,8 +106,8 @@ class PropelAutoloader
      */
     public function autoload($class)
     {
-        if (isset($this->classes[$class])) {
-            require $this->classes[$class];
+        if (isset($this->classes[$class ?? ''])) {
+            require $this->classes[$class ?? ''];
 
             return true;
         }

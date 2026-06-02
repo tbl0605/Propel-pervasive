@@ -94,7 +94,7 @@ class MssqlSchemaParser extends BaseSchemaParser
     /**
      *
      */
-    public function parse(Database $database, Task $task = null)
+    public function parse(Database $database, ?Task $task = null)
     {
         $stmt = $this->dbh->query("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME <> 'dtproperties' ORDER BY TABLE_NAME");
 
@@ -133,7 +133,7 @@ class MssqlSchemaParser extends BaseSchemaParser
      *
      * @param Table $table The Table model class to add columns to.
      */
-    protected function addColumns(Table $table, Task $task = null)
+    protected function addColumns(Table $table, ?Task $task = null)
     {
         $stmt = $this->dbh->query("sp_columns '" . $table->getName() . "'");
 
