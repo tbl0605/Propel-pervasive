@@ -604,14 +604,14 @@ class Propel
      */
     public static function getSlaveConnection($name)
     {
-        if (!isset(self::$connectionMap[$name]['slave'])) {
+        if (!isset(self::$connectionMap[$name ?? '']['slave'])) {
 
-            $slaveconfigs = isset(self::$configuration['datasources'][$name]['slaves']) ? self::$configuration['datasources'][$name]['slaves'] : null;
+            $slaveconfigs = isset(self::$configuration['datasources'][$name ?? '']['slaves']) ? self::$configuration['datasources'][$name ?? '']['slaves'] : null;
 
             if (empty($slaveconfigs)) {
                 // no slaves configured for this datasource
                 // fallback to the master connection
-                self::$connectionMap[$name]['slave'] = self::getMasterConnection($name);
+                self::$connectionMap[$name ?? '']['slave'] = self::getMasterConnection($name);
             } else {
                 // Initialize a new slave
                 if (isset($slaveconfigs['connection']['dsn'])) {
@@ -629,11 +629,11 @@ class Propel
 
                 // initialize slave connection
                 $con = Propel::initConnection($conparams, $name);
-                self::$connectionMap[$name]['slave'] = $con;
+                self::$connectionMap[$name ?? '']['slave'] = $con;
             }
         } // if datasource slave not set
 
-        return self::$connectionMap[$name]['slave'];
+        return self::$connectionMap[$name ?? '']['slave'];
     }
 
     /**

@@ -219,7 +219,7 @@ class PropelMigrationManager
             $files = scandir($path);
             foreach ($files as $file) {
                 if (preg_match('/^PropelMigration_(\d+)\.php$/', $file, $matches)) {
-                    $migrationTimestamps[] = (integer) $matches[1];
+                    $migrationTimestamps[] = (int) $matches[1];
                 }
             }
         }
