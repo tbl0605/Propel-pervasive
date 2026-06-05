@@ -160,7 +160,7 @@ class BuildPropelGenPEARPackageTask extends MatchingTask
         $package->addIgnoreToRelease('pear-propel-gen.bat');
 
         // "core" dependencies
-        $package->setPhpDep('5.2.4');
+        $package->setPhpDep('7.4.0');
         $package->setPearinstallerDep('1.4.0');
 
         // "package" dependencies

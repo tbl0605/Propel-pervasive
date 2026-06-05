@@ -115,7 +115,7 @@ class BuildPropelPEARPackageTask extends MatchingTask
         $package->addMaintainer('lead', 'couac', 'William Durand', 'william.durand1@[gmail].com');
 
         // "core" dependencies
-        $package->setPhpDep('5.2.0');
+        $package->setPhpDep('7.4.0');
         $package->setPearinstallerDep('1.4.0');
 
         // "package" dependencies

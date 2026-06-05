@@ -10,27 +10,40 @@
     "homepage": "http://www.willdurand.fr"
   }],
   "autoload": {
-      "classmap": ["runtime/lib", "generator/lib"]
+    "classmap": ["runtime/lib", "generator/lib"]
   },
   "include-path": ["runtime/lib", "generator/lib"],
-  "require": {
-    "php": ">=5.2.4",
+    "require": {
+    "php": ">=7.4",
     "phing/phing": "~2.4"
   },
+  "suggest": {
+    "ext-intl": "Required for locale date formats using strftime-style patterns (e.g. %x, %X) in temporal getters"
+  },
   "require-dev": {
-    "pear-pear.php.net/pear_packagefilemanager2": "@stable",
+    "pear/pear": "^1.10",
+    "pear/pear_packagefilemanager": "dev-trunk",
     "phpunit/phpunit": "~4.0||~5.0"
+  },
+  "config": {
+    "policy": {
+      "advisories": {
+        "ignore-id": [
+          "PKSA-z3gr-8qht-p93v",
+          "PKSA-w57n-mhp6-c9sd",
+          "PKSA-v5yj-8nmz-sk2q",
+          "PKSA-ft77-7h5f-p3r6",
+          "PKSA-b14r-zh1d-vdrc",
+          "PKSA-xxgb-wq2d-7gpg",
+          "PKSA-4y51-dgkc-x4zc"
+        ]
+      }
+    }
   },
   "extra": {
     "branch-alias": {
       "dev-master": "1.7-dev"
     }
   },
-  "repositories": [
-    {
-      "type": "pear",
-      "url": "https://pear.php.net"
-    }
-  ],
   "bin": ["generator/bin/propel-gen", "generator/bin/propel-gen.bat"]
 }
