@@ -23,7 +23,7 @@ class MysqlPlatformTest extends PlatformTestProvider
     /**
      * Get the Platform object for this class
      *
-     * @return Platform
+     * @return PropelPlatformInterface
      */
     protected function getPlatform()
     {

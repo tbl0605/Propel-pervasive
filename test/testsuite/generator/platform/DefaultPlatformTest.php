@@ -24,7 +24,7 @@ class DefaultPlatformTest extends PHPUnit_Framework_TestCase
     /**
      * Get the Platform object for this class
      *
-     * @return Platform
+     * @return PropelPlatformInterface
      */
     protected function getPlatform()
     {
