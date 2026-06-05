@@ -78,9 +78,9 @@ class PropelTypes
     const SMALLINT_NATIVE_TYPE = "int";
     const INTEGER_NATIVE_TYPE = "int";
     const BIGINT_NATIVE_TYPE = "string";
-    const REAL_NATIVE_TYPE = "double";
-    const FLOAT_NATIVE_TYPE = "double";
-    const DOUBLE_NATIVE_TYPE = "double";
+    const REAL_NATIVE_TYPE = "float";
+    const FLOAT_NATIVE_TYPE = "float";
+    const DOUBLE_NATIVE_TYPE = "float";
     const BINARY_NATIVE_TYPE = "string";
     const VARBINARY_NATIVE_TYPE = "string";
     const LONGVARBINARY_NATIVE_TYPE = "string";
@@ -90,8 +90,8 @@ class PropelTypes
     const TIME_NATIVE_TYPE = "string";
     const TIMESTAMP_NATIVE_TYPE = "string";
     const BU_TIMESTAMP_NATIVE_TYPE = "string";
-    const BOOLEAN_NATIVE_TYPE = "boolean";
-    const BOOLEAN_EMU_NATIVE_TYPE = "boolean";
+    const BOOLEAN_NATIVE_TYPE = "bool";
+    const BOOLEAN_EMU_NATIVE_TYPE = "bool";
     const OBJECT_NATIVE_TYPE = "";
     const PHP_ARRAY_NATIVE_TYPE = "array";
     const ENUM_NATIVE_TYPE = "int";
@@ -358,7 +358,7 @@ class PropelTypes
      */
     public static function isPhpPrimitiveType($phpType)
     {
-        return in_array($phpType, array("boolean", "int", "double", "float", "string"));
+        return in_array($phpType, array("bool", "boolean", "int", "integer", "double", "float", "string"));
     }
 
     /**
@@ -370,7 +370,7 @@ class PropelTypes
      */
     public static function isPhpPrimitiveNumericType($phpType)
     {
-        return in_array($phpType, array("boolean", "int", "double", "float"));
+        return in_array($phpType, array("bool", "boolean", "int", "integer", "double", "float"));
     }
 
     /**
