@@ -109,7 +109,7 @@ class DatabaseMap
      */
     public function hasTable($name)
     {
-        return array_key_exists($name, $this->tables);
+        return array_key_exists($name ?? '', $this->tables);
     }
 
     /**
@@ -173,7 +173,7 @@ class DatabaseMap
 
     public function getTableByPhpName($phpName)
     {
-        if (array_key_exists($phpName, $this->tablesByPhpName)) {
+        if (array_key_exists($phpName ?? '', $this->tablesByPhpName)) {
             return $this->tablesByPhpName[$phpName ?? ''];
         } elseif (defined($phpName . '::PEER')) {
             $peerClass = constant($phpName . '::PEER');

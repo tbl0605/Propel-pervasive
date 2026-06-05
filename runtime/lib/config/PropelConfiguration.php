@@ -62,7 +62,7 @@ class PropelConfiguration implements ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
-        $this->parameters[$offset ?? ''] = $value;
+        $this->parameters[$offset] = $value;
         $this->isFlattened = false;
     }
 
@@ -76,7 +76,7 @@ class PropelConfiguration implements ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        return $this->parameters[$offset ?? ''];
+        return $this->parameters[$offset];
     }
 
     /**
@@ -87,7 +87,7 @@ class PropelConfiguration implements ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
-        unset($this->parameters[$offset ?? '']);
+        unset($this->parameters[$offset]);
         $this->isFlattened = false;
     }
 

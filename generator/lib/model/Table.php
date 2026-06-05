@@ -1198,7 +1198,7 @@ class Table extends ScopedElement implements IDMethod
      */
     public function hasBehavior($name)
     {
-        return array_key_exists($name, $this->behaviors);
+        return array_key_exists($name ?? '', $this->behaviors);
     }
 
     /**
@@ -1659,9 +1659,9 @@ class Table extends ScopedElement implements IDMethod
             $col = $col->getName();
         }
         if ($caseInsensitive) {
-            return array_key_exists(strtolower($col), $this->columnsByLowercaseName);
+            return array_key_exists(strtolower($col ?? ''), $this->columnsByLowercaseName);
         } else {
-            return array_key_exists($col, $this->columnsByName);
+            return array_key_exists($col ?? '', $this->columnsByName);
         }
     }
 

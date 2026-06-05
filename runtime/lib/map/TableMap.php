@@ -623,7 +623,7 @@ class TableMap
      */
     public function hasRelation($name)
     {
-        return array_key_exists($name, $this->getRelations());
+        return array_key_exists($name ?? '', $this->getRelations());
     }
 
     /**
@@ -637,7 +637,7 @@ class TableMap
      */
     public function getRelation($name)
     {
-        if (!array_key_exists($name, $this->getRelations())) {
+        if (!array_key_exists($name ?? '', $this->getRelations())) {
             throw new PropelException('Calling getRelation() on an unknown relation, ' . $name);
         }
 

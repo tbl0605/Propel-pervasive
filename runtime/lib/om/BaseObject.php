@@ -321,7 +321,7 @@ abstract class BaseObject
      */
     public function hasVirtualColumn($name)
     {
-        return array_key_exists($name, $this->virtualColumns);
+        return array_key_exists($name ?? '', $this->virtualColumns);
     }
 
     /**

@@ -359,9 +359,9 @@ class Database extends ScopedElement
     public function hasTable($name, $caseInsensitive = false)
     {
         if ($caseInsensitive) {
-            return array_key_exists(strtolower($name), $this->tablesByLowercaseName);
+            return array_key_exists(strtolower($name ?? ''), $this->tablesByLowercaseName);
         } else {
-            return array_key_exists($name, $this->tablesByName);
+            return array_key_exists($name ?? '', $this->tablesByName);
         }
     }
 
@@ -395,7 +395,7 @@ class Database extends ScopedElement
      */
     public function hasTableByPhpName($phpName)
     {
-        return array_key_exists($phpName, $this->tablesByPhpName);
+        return array_key_exists($phpName ?? '', $this->tablesByPhpName);
     }
 
     /**
@@ -571,7 +571,7 @@ class Database extends ScopedElement
      */
     public function hasBehavior($name)
     {
-        return array_key_exists($name, $this->behaviors);
+        return array_key_exists($name ?? '', $this->behaviors);
     }
 
     /**
