@@ -70,7 +70,7 @@ class PropelCollection extends ArrayObject implements Serializable
     #[\ReturnTypeWillChange]
     public function exchangeArray($input)
     {
-        if (PHP_VERSION_ID >= 85000) {
+        if (PHP_VERSION_ID >= 80500) {
             $this->clearIterator();
         }
 
@@ -83,7 +83,7 @@ class PropelCollection extends ArrayObject implements Serializable
     #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
-        if (PHP_VERSION_ID >= 85000) {
+        if (PHP_VERSION_ID >= 80500) {
             $this->clearIterator();
         }
 
@@ -96,7 +96,7 @@ class PropelCollection extends ArrayObject implements Serializable
     #[\ReturnTypeWillChange]
     public function offsetUnset($key)
     {
-        if (PHP_VERSION_ID >= 85000) {
+        if (PHP_VERSION_ID >= 80500) {
             $this->clearIterator();
         }
 
@@ -439,7 +439,7 @@ class PropelCollection extends ArrayObject implements Serializable
     #[\ReturnTypeWillChange]
     public function getIterator()
     {
-        $this->iterator = PHP_VERSION_ID >= 85000 ? new ArrayIterator($this->getArrayCopy()) : new ArrayIterator($this);
+        $this->iterator = PHP_VERSION_ID >= 80500 ? new ArrayIterator($this->getArrayCopy()) : new ArrayIterator($this);
 
         return $this->iterator;
     }
