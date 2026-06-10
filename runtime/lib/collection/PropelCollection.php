@@ -66,15 +66,19 @@ class PropelCollection extends ArrayObject implements Serializable
 
     /**
      * {@inheritDoc}
+     *
+     * @param array|object $array
+     *
+     * @return array
      */
     #[\ReturnTypeWillChange]
-    public function exchangeArray($input)
+    public function exchangeArray($array)
     {
         if (PHP_VERSION_ID >= 80500) {
             $this->clearIterator();
         }
 
-        return parent::exchangeArray($input);
+        return parent::exchangeArray($array);
     }
 
     /**

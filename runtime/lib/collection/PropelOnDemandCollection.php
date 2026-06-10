@@ -144,76 +144,122 @@ class PropelOnDemandCollection extends PropelCollection
         return $this->iterator->count();
     }
 
-    // ArrayObject methods
+    // ArrayObject methods (untyped signatures for PHP 7.4 through 8.5 compatibility)
 
+    /**
+     * @param mixed $value
+     */
     #[\ReturnTypeWillChange]
     public function append($value)
     {
         throw new PropelException('The On Demand Collection is read only');
     }
 
+    /**
+     * @param mixed $value
+     */
     #[\ReturnTypeWillChange]
     public function prepend($value)
     {
         throw new PropelException('The On Demand Collection is read only');
     }
 
+    /**
+     * @param int $flags
+     *
+     * @return true
+     */
     #[\ReturnTypeWillChange]
-    public function asort()
+    public function asort($flags = SORT_REGULAR)
     {
         throw new PropelException('The On Demand Collection is read only');
     }
 
+    /**
+     * @param array|object $array
+     *
+     * @return array
+     */
     #[\ReturnTypeWillChange]
-    public function exchangeArray($input)
+    public function exchangeArray($array)
     {
         throw new PropelException('The On Demand Collection is read only');
     }
 
+    /**
+     * @return array
+     */
     #[\ReturnTypeWillChange]
     public function getArrayCopy()
     {
         throw new PropelException('The On Demand Collection does not allow access by offset');
     }
 
+    /**
+     * @return int
+     */
     #[\ReturnTypeWillChange]
     public function getFlags()
     {
         throw new PropelException('The On Demand Collection does not allow access by offset');
     }
 
+    /**
+     * @param int $flags
+     *
+     * @return true
+     */
     #[\ReturnTypeWillChange]
-    public function ksort()
+    public function ksort($flags = SORT_REGULAR)
     {
         throw new PropelException('The On Demand Collection is read only');
     }
 
+    /**
+     * @return true
+     */
     #[\ReturnTypeWillChange]
     public function natcasesort()
     {
         throw new PropelException('The On Demand Collection is read only');
     }
 
+    /**
+     * @return true
+     */
     #[\ReturnTypeWillChange]
     public function natsort()
     {
         throw new PropelException('The On Demand Collection is read only');
     }
 
+    /**
+     * @param int $flags
+     */
     #[\ReturnTypeWillChange]
     public function setFlags($flags)
     {
         throw new PropelException('The On Demand Collection does not allow acces by offset');
     }
 
+    /**
+     * @param callable $callback
+     *
+     * @return true
+     */
     #[\ReturnTypeWillChange]
-    public function uasort($cmp_function)
+    public function uasort($callback)
     {
         throw new PropelException('The On Demand Collection is read only');
     }
 
+    /**
+     * @param callable $callback
+     *
+     * @return true
+     */
     #[\ReturnTypeWillChange]
-    public function uksort($cmp_function)
+    public function uksort($callback)
     {
         throw new PropelException('The On Demand Collection is read only');
     }
