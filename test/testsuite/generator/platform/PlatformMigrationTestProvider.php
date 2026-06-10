@@ -20,7 +20,7 @@ require_once dirname(__FILE__) . '/../../../../generator/lib/model/diff/PropelCo
 abstract class PlatformMigrationTestProvider extends PlatformTestBase
 {
 
-    public function providerForTestGetModifyDatabaseDDL()
+    public static function providerForTestGetModifyDatabaseDDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -58,18 +58,18 @@ EOF;
     </table>
 </database>
 EOF;
-        $d1 = $this->getDatabaseFromSchema($schema1);
-        $d2 = $this->getDatabaseFromSchema($schema2);
+        $d1 = static::newForDataProvider()->getDatabaseFromSchema($schema1);
+        $d2 = static::newForDataProvider()->getDatabaseFromSchema($schema2);
 
         return array(array(PropelDatabaseComparator::computeDiff($d1, $d2)));
     }
 
-    public function providerForTestGetRenameTableDDL()
+    public static function providerForTestGetRenameTableDDL()
     {
         return array(array('foo1', 'foo2'));
     }
 
-    public function providerForTestGetModifyTableDDL()
+    public static function providerForTestGetModifyTableDDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -122,13 +122,13 @@ EOF;
     </table>
 </database>
 EOF;
-        $t1 = $this->getDatabaseFromSchema($schema1)->getTable('foo');
-        $t2 = $this->getDatabaseFromSchema($schema2)->getTable('foo');
+        $t1 = static::newForDataProvider()->getDatabaseFromSchema($schema1)->getTable('foo');
+        $t2 = static::newForDataProvider()->getDatabaseFromSchema($schema2)->getTable('foo');
 
         return array(array(PropelTableComparator::computeDiff($t1,$t2)));
     }
 
-    public function providerForTestGetModifyTableColumnsDDL()
+    public static function providerForTestGetModifyTableColumnsDDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -149,8 +149,8 @@ EOF;
     </table>
 </database>
 EOF;
-        $t1 = $this->getDatabaseFromSchema($schema1)->getTable('foo');
-        $t2 = $this->getDatabaseFromSchema($schema2)->getTable('foo');
+        $t1 = static::newForDataProvider()->getDatabaseFromSchema($schema1)->getTable('foo');
+        $t2 = static::newForDataProvider()->getDatabaseFromSchema($schema2)->getTable('foo');
         $tc = new PropelTableComparator();
         $tc->setFromTable($t1);
         $tc->setToTable($t2);
@@ -159,7 +159,7 @@ EOF;
         return array(array($tc->getTableDiff()));
     }
 
-    public function providerForTestGetModifyTablePrimaryKeysDDL()
+    public static function providerForTestGetModifyTablePrimaryKeysDDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -179,8 +179,8 @@ EOF;
     </table>
 </database>
 EOF;
-        $t1 = $this->getDatabaseFromSchema($schema1)->getTable('foo');
-        $t2 = $this->getDatabaseFromSchema($schema2)->getTable('foo');
+        $t1 = static::newForDataProvider()->getDatabaseFromSchema($schema1)->getTable('foo');
+        $t2 = static::newForDataProvider()->getDatabaseFromSchema($schema2)->getTable('foo');
         $tc = new PropelTableComparator();
         $tc->setFromTable($t1);
         $tc->setToTable($t2);
@@ -189,7 +189,7 @@ EOF;
         return array(array($tc->getTableDiff()));
     }
 
-    public function providerForTestGetModifyTableIndicesDDL()
+    public static function providerForTestGetModifyTableIndicesDDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -224,8 +224,8 @@ EOF;
     </table>
 </database>
 EOF;
-        $t1 = $this->getDatabaseFromSchema($schema1)->getTable('foo');
-        $t2 = $this->getDatabaseFromSchema($schema2)->getTable('foo');
+        $t1 = static::newForDataProvider()->getDatabaseFromSchema($schema1)->getTable('foo');
+        $t2 = static::newForDataProvider()->getDatabaseFromSchema($schema2)->getTable('foo');
         $tc = new PropelTableComparator();
         $tc->setFromTable($t1);
         $tc->setToTable($t2);
@@ -234,7 +234,7 @@ EOF;
         return array(array($tc->getTableDiff()));
     }
 
-    public function providerForTestGetModifyTableForeignKeysDDL()
+    public static function providerForTestGetModifyTableForeignKeysDDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -290,8 +290,8 @@ EOF;
     </table>
 </database>
 EOF;
-        $t1 = $this->getDatabaseFromSchema($schema1)->getTable('foo1');
-        $t2 = $this->getDatabaseFromSchema($schema2)->getTable('foo1');
+        $t1 = static::newForDataProvider()->getDatabaseFromSchema($schema1)->getTable('foo1');
+        $t2 = static::newForDataProvider()->getDatabaseFromSchema($schema2)->getTable('foo1');
         $tc = new PropelTableComparator();
         $tc->setFromTable($t1);
         $tc->setToTable($t2);
@@ -300,7 +300,7 @@ EOF;
         return array(array($tc->getTableDiff()));
     }
 
-    public function providerForTestGetModifyTableForeignKeysSkipSqlDDL()
+    public static function providerForTestGetModifyTableForeignKeysSkipSqlDDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -332,8 +332,8 @@ EOF;
     </table>
 </database>
 EOF;
-        $t1 = $this->getDatabaseFromSchema($schema1)->getTable('foo1');
-        $t2 = $this->getDatabaseFromSchema($schema2)->getTable('foo1');
+        $t1 = static::newForDataProvider()->getDatabaseFromSchema($schema1)->getTable('foo1');
+        $t2 = static::newForDataProvider()->getDatabaseFromSchema($schema2)->getTable('foo1');
         $tc = new PropelTableComparator();
         $tc->setFromTable($t1);
         $tc->setToTable($t2);
@@ -342,7 +342,7 @@ EOF;
         return array(array($tc->getTableDiff()));
     }
 
-    public function providerForTestGetModifyTableForeignKeysSkipSql2DDL()
+    public static function providerForTestGetModifyTableForeignKeysSkipSql2DDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -371,8 +371,8 @@ EOF;
     </table>
 </database>
 EOF;
-        $t1 = $this->getDatabaseFromSchema($schema1)->getTable('foo1');
-        $t2 = $this->getDatabaseFromSchema($schema2)->getTable('foo1');
+        $t1 = static::newForDataProvider()->getDatabaseFromSchema($schema1)->getTable('foo1');
+        $t2 = static::newForDataProvider()->getDatabaseFromSchema($schema2)->getTable('foo1');
         $tc = new PropelTableComparator();
         $tc->setFromTable($t1);
         $tc->setToTable($t2);
@@ -381,7 +381,7 @@ EOF;
         return array(array($tc->getTableDiff()));
     }
 
-    public function providerForTestGetRemoveColumnDDL()
+    public static function providerForTestGetRemoveColumnDDL()
     {
         $table = new Table('foo');
         $column = new Column('bar');
@@ -390,7 +390,7 @@ EOF;
         return array(array($column));
     }
 
-    public function providerForTestGetRenameColumnDDL()
+    public static function providerForTestGetRenameColumnDDL()
     {
         $t1 = new Table('foo');
         $c1 = new Column('bar1');
@@ -408,27 +408,27 @@ EOF;
         return array(array($c1, $c2));
     }
 
-    public function providerForTestGetModifyColumnDDL()
+    public static function providerForTestGetModifyColumnDDL()
     {
         $t1 = new Table('foo');
         $c1 = new Column('bar');
-        $c1->getDomain()->copy($this->getPlatform()->getDomainForType('DOUBLE'));
+        $c1->getDomain()->copy(static::newForDataProvider()->getPlatform()->getDomainForType('DOUBLE'));
         $c1->getDomain()->replaceSize(2);
         $t1->addColumn($c1);
         $t2 = new Table('foo');
         $c2 = new Column('bar');
-        $c2->getDomain()->copy($this->getPlatform()->getDomainForType('DOUBLE'));
+        $c2->getDomain()->copy(static::newForDataProvider()->getPlatform()->getDomainForType('DOUBLE'));
         $c2->getDomain()->replaceSize(3);
         $t2->addColumn($c2);
 
         return array(array(PropelColumnComparator::computeDiff($c1, $c2)));
     }
 
-    public function providerForTestGetModifyColumnsDDL()
+    public static function providerForTestGetModifyColumnsDDL()
     {
         $t1 = new Table('foo');
         $c1 = new Column('bar1');
-        $c1->getDomain()->copy($this->getPlatform()->getDomainForType('DOUBLE'));
+        $c1->getDomain()->copy(static::newForDataProvider()->getPlatform()->getDomainForType('DOUBLE'));
         $c1->getDomain()->replaceSize(2);
         $t1->addColumn($c1);
         $c2 = new Column('bar2');
@@ -437,7 +437,7 @@ EOF;
         $t1->addColumn($c2);
         $t2 = new Table('foo');
         $c3 = new Column('bar1');
-        $c3->getDomain()->copy($this->getPlatform()->getDomainForType('DOUBLE'));
+        $c3->getDomain()->copy(static::newForDataProvider()->getPlatform()->getDomainForType('DOUBLE'));
         $c3->getDomain()->replaceSize(3);
         $t2->addColumn($c3);
         $c4 = new Column('bar2');
@@ -452,7 +452,7 @@ EOF;
         )));
     }
 
-    public function providerForTestGetAddColumnDDL()
+    public static function providerForTestGetAddColumnDDL()
     {
         $schema = <<<EOF
 <database name="test">
@@ -462,12 +462,12 @@ EOF;
     </table>
 </database>
 EOF;
-        $column = $this->getDatabaseFromSchema($schema)->getTable('foo')->getColumn('bar');
+        $column = static::newForDataProvider()->getDatabaseFromSchema($schema)->getTable('foo')->getColumn('bar');
 
         return array(array($column));
     }
 
-    public function providerForTestGetAddColumnsDDL()
+    public static function providerForTestGetAddColumnsDDL()
     {
         $schema = <<<EOF
 <database name="test">
@@ -478,12 +478,12 @@ EOF;
     </table>
 </database>
 EOF;
-        $table = $this->getDatabaseFromSchema($schema)->getTable('foo');
+        $table = static::newForDataProvider()->getDatabaseFromSchema($schema)->getTable('foo');
 
         return array(array(array($table->getColumn('bar1'), $table->getColumn('bar2'))));
     }
 
-    public function providerForTestGetModifyColumnRemoveDefaultValueDDL()
+    public static function providerForTestGetModifyColumnRemoveDefaultValueDDL()
     {
         $t1 = new Table('test');
         $c1 = new Column();
@@ -500,7 +500,7 @@ EOF;
         return array(array(PropelColumnComparator::computeDiff($c1, $c2)));
     }
 
-    public function providerForTestGetModifyTableForeignKeysSkipSql3DDL()
+    public static function providerForTestGetModifyTableForeignKeysSkipSql3DDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -527,14 +527,14 @@ EOF;
   </table>
 </database>
 EOF;
-        $d1 = $this->getDatabaseFromSchema($schema1);
-        $d2 = $this->getDatabaseFromSchema($schema2);
+        $d1 = static::newForDataProvider()->getDatabaseFromSchema($schema1);
+        $d2 = static::newForDataProvider()->getDatabaseFromSchema($schema2);
         $diff = PropelDatabaseComparator::computeDiff($d1, $d2);
 
         return array(array($diff));
     }
 
-    public function providerForTestGetModifyTableForeignKeysSkipSql4DDL()
+    public static function providerForTestGetModifyTableForeignKeysSkipSql4DDL()
     {
         $schema1 = <<<EOF
 <database name="test">
@@ -561,8 +561,8 @@ EOF;
   </table>
 </database>
 EOF;
-        $d1 = $this->getDatabaseFromSchema($schema1);
-        $d2 = $this->getDatabaseFromSchema($schema2);
+        $d1 = static::newForDataProvider()->getDatabaseFromSchema($schema1);
+        $d2 = static::newForDataProvider()->getDatabaseFromSchema($schema2);
         $diff = PropelDatabaseComparator::computeDiff($d2, $d1);
 
         return array(array($diff));

@@ -12,7 +12,7 @@ require_once dirname(__FILE__) . '/../../../../../generator/lib/util/PropelQuick
 
 class GeneratedObjectWithInterfaceTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if (!class_exists('Foo\MyClassWithInterface')) {
             $schema = <<<EOF

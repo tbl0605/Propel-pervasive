@@ -22,7 +22,7 @@ abstract class BookstoreTestBase extends PHPUnit_Framework_TestCase
     /**
      * This is run before each unit test; it populates the database.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->con = Propel::getConnection(BookPeer::DATABASE_NAME);
@@ -32,7 +32,7 @@ abstract class BookstoreTestBase extends PHPUnit_Framework_TestCase
     /**
      * This is run after each unit test. It empties the database.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         // Only commit if the transaction hasn't failed.

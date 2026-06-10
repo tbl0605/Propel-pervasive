@@ -19,6 +19,14 @@ abstract class PlatformTestBase extends PHPUnit_Framework_TestCase
 
     abstract protected function getPlatform();
 
+    /**
+     * @return static
+     */
+    protected static function newForDataProvider()
+    {
+        return new static('__dataProvider__');
+    }
+
     protected function getDatabaseFromSchema($schema)
     {
         $xtad = new XmlToAppData($this->getPlatform());

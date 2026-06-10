@@ -35,7 +35,7 @@ class DefaultPlatformTest extends PHPUnit_Framework_TestCase
         return $this->platform;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->platform = null;
     }
@@ -55,7 +55,7 @@ class DefaultPlatformTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $quoted);
     }
 
-    protected function createColumn($type, $defaultValue)
+    protected static function createColumn($type, $defaultValue)
     {
         $column = new Column();
         $column->setType($type);
@@ -64,7 +64,7 @@ class DefaultPlatformTest extends PHPUnit_Framework_TestCase
         return $column;
     }
 
-    public function createEnumColumn($defaultValues, $defaultValue)
+    public static function createEnumColumn($defaultValues, $defaultValue)
     {
         $column = new Column();
         $column->setType(PropelTypes::ENUM);
@@ -74,22 +74,22 @@ class DefaultPlatformTest extends PHPUnit_Framework_TestCase
         return $column;
     }
 
-    public function getColumnDefaultValueDDLDataProvider()
+    public static function getColumnDefaultValueDDLDataProvider()
     {
         return array(
-            array($this->createColumn(PropelTypes::INTEGER, 0), "DEFAULT 0"),
-            array($this->createColumn(PropelTypes::INTEGER, '0'), "DEFAULT 0"),
-            array($this->createColumn(PropelTypes::VARCHAR, 'foo'), "DEFAULT 'foo'"),
-            array($this->createColumn(PropelTypes::VARCHAR, 0), "DEFAULT '0'"),
-            array($this->createColumn(PropelTypes::BOOLEAN, true), "DEFAULT 1"),
-            array($this->createColumn(PropelTypes::BOOLEAN, false), "DEFAULT 0"),
-            array($this->createColumn(PropelTypes::BOOLEAN, 'true'), "DEFAULT 1"),
-            array($this->createColumn(PropelTypes::BOOLEAN, 'false'), "DEFAULT 0"),
-            array($this->createColumn(PropelTypes::BOOLEAN, 'TRUE'), "DEFAULT 1"),
-            array($this->createColumn(PropelTypes::BOOLEAN, 'FALSE'), "DEFAULT 0"),
-            array($this->createEnumColumn(array('foo', 'bar', 'baz'), 'foo'), "DEFAULT 0"),
-            array($this->createEnumColumn(array('foo', 'bar', 'baz'), 'bar'), "DEFAULT 1"),
-            array($this->createEnumColumn(array('foo', 'bar', 'baz'), 'baz'), "DEFAULT 2"),
+            array(self::createColumn(PropelTypes::INTEGER, 0), "DEFAULT 0"),
+            array(self::createColumn(PropelTypes::INTEGER, '0'), "DEFAULT 0"),
+            array(self::createColumn(PropelTypes::VARCHAR, 'foo'), "DEFAULT 'foo'"),
+            array(self::createColumn(PropelTypes::VARCHAR, 0), "DEFAULT '0'"),
+            array(self::createColumn(PropelTypes::BOOLEAN, true), "DEFAULT 1"),
+            array(self::createColumn(PropelTypes::BOOLEAN, false), "DEFAULT 0"),
+            array(self::createColumn(PropelTypes::BOOLEAN, 'true'), "DEFAULT 1"),
+            array(self::createColumn(PropelTypes::BOOLEAN, 'false'), "DEFAULT 0"),
+            array(self::createColumn(PropelTypes::BOOLEAN, 'TRUE'), "DEFAULT 1"),
+            array(self::createColumn(PropelTypes::BOOLEAN, 'FALSE'), "DEFAULT 0"),
+            array(self::createEnumColumn(array('foo', 'bar', 'baz'), 'foo'), "DEFAULT 0"),
+            array(self::createEnumColumn(array('foo', 'bar', 'baz'), 'bar'), "DEFAULT 1"),
+            array(self::createEnumColumn(array('foo', 'bar', 'baz'), 'baz'), "DEFAULT 2"),
         );
     }
 

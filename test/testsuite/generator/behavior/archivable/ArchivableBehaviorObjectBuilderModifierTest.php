@@ -22,7 +22,7 @@ require_once dirname(__FILE__) . '/../../../../../runtime/lib/Propel.php';
  */
 class ArchivableBehaviorObjectBuilderModifierTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if (!class_exists('ArchivableTest10')) {
             $schema = <<<EOF

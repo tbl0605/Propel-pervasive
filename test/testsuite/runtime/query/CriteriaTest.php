@@ -34,7 +34,7 @@ class CriteriaTest extends BookstoreTestBase
      */
     private $savedAdapter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->c = new Criteria();
@@ -42,7 +42,7 @@ class CriteriaTest extends BookstoreTestBase
         Propel::setDB(null, new DBSQLite());
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Propel::setDB(null, $this->savedAdapter);
         parent::tearDown();
@@ -1172,7 +1172,7 @@ class CriteriaTest extends BookstoreTestBase
         $this->assertSame($c, $c2, 'setLimit() returns the current Criteria');
     }
 
-    public function dataLimit()
+    public static function dataLimit()
     {
         return array(
             'Negative value' => array(
@@ -1249,7 +1249,7 @@ class CriteriaTest extends BookstoreTestBase
         $this->assertSame($c, $c2, 'setOffset() returns the current Criteria');
     }
 
-    public function dataOffset()
+    public static function dataOffset()
     {
         return array(
             'Negative value' => array(

@@ -21,7 +21,7 @@ require_once dirname(__FILE__) . '/../../../../generator/lib/behavior/Alternativ
  */
 class AlternativeCodingStandardsBehaviorTest extends PHPUnit_Framework_TestCase
 {
-    public function convertBracketsNewlineDataProvider()
+    public static function convertBracketsNewlineDataProvider()
     {
         return array(
             array("class Foo {

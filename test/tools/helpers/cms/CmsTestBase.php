@@ -23,7 +23,7 @@ abstract class CmsTestBase extends PHPUnit_Framework_TestCase
     /**
      * This is run before each unit test; it populates the database.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->con = Propel::getConnection(PagePeer::DATABASE_NAME);
@@ -35,7 +35,7 @@ abstract class CmsTestBase extends PHPUnit_Framework_TestCase
     /**
      * This is run after each unit test.  It empties the database.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         CmsDataPopulator::depopulate($this->con);
         $this->con->commit();

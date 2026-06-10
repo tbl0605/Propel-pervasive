@@ -20,7 +20,7 @@ require_once dirname(__FILE__) . '/../../../tools/helpers/DummyPlatforms.php';
  */
 class DatabaseTest extends PHPUnit_Framework_TestCase
 {
-    public function providerForTestHasTable()
+    public static function providerForTestHasTable()
     {
         $database = new Database();
         $table = new Table('Foo');

@@ -57,12 +57,10 @@ class NameFactoryTest extends BaseTestCase
      */
     private $database;
 
-    /**
-     * Creates a new instance.
-     *
-     */
-    public function __construct()
+    public static function setUpBeforeClass(): void
     {
+        parent::setUpBeforeClass();
+
         self::$INPUTS = array(
                 array( array(self::makeString(61), "I", 1),
                         array(self::makeString(61), "I", 2),
@@ -87,7 +85,6 @@ class NameFactoryTest extends BaseTestCase
                             self::makeString(5) . "_FK_2"),
                         array("MyUser", "MYUSER", "MY_USER")
                     );
-
     }
 
     /**
@@ -109,7 +106,7 @@ class NameFactoryTest extends BaseTestCase
     }
 
     /** Sets up the Propel model. */
-    public function setUp()
+    public function setUp(): void
     {
         $appData = new AppData(new MysqlPlatform());
         $this->database = new Database();

@@ -20,7 +20,7 @@ class ArchivableAndConcreteInheritanceBehaviorTest extends PHPUnit_Framework_Tes
 {
     protected static $generatedSQL;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!class_exists('ArchivableConcretePagePeer')) {
             $schema = <<<EOF

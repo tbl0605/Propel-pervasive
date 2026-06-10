@@ -18,7 +18,7 @@ require_once dirname(__FILE__) . '/../../../../generator/lib/model/ColumnDefault
  */
 class ColumnDefaultValueTest extends PHPUnit_Framework_TestCase
 {
-    public function equalsProvider()
+    public static function equalsProvider()
     {
         return array(
             array(new ColumnDefaultValue('foo', 'bar'), new ColumnDefaultValue('foo', 'bar'), true),

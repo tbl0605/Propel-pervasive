@@ -19,7 +19,7 @@ require_once dirname(__FILE__) . '/../../../tools/helpers/bookstore/BookstoreTes
  */
 class PropelCollectionConvertTest extends BookstoreTestBase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $book1 = new Book();
@@ -43,7 +43,7 @@ class PropelCollectionConvertTest extends BookstoreTestBase
         $this->coll[]= $book2;
     }
 
-    public function toXmlDataProvider()
+    public static function toXmlDataProvider()
     {
         $expected = <<<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -95,7 +95,7 @@ EOF;
         $this->assertEquals($this->coll, $coll);
     }
 
-    public function toYamlDataProvider()
+    public static function toYamlDataProvider()
     {
         $expected = <<<EOF
 Book_0:
@@ -142,7 +142,7 @@ EOF;
         $this->assertEquals($this->coll, $coll);
     }
 
-    public function toJsonDataProvider()
+    public static function toJsonDataProvider()
     {
         $expected = <<<EOF
 {"Book_0":{"Id":9012,"Title":"Don Juan","ISBN":"0140422161","Price":12.99,"PublisherId":1234,"AuthorId":5678},"Book_1":{"Id":58,"Title":"Harry Potter and the Order of the Phoenix","ISBN":"043935806X","Price":10.99,"PublisherId":null,"AuthorId":null}}
@@ -175,7 +175,7 @@ EOF;
         $this->assertEquals($this->coll, $coll);
     }
 
-    public function toCsvDataProvider()
+    public static function toCsvDataProvider()
     {
         $expected = "Id,Title,ISBN,Price,PublisherId,AuthorId\r\n9012,Don Juan,0140422161,12.99,1234,5678\r\n58,Harry Potter and the Order of the Phoenix,043935806X,10.99,N;,N;\r\n";
 

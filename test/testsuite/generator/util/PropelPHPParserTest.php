@@ -16,7 +16,7 @@ require_once dirname(__FILE__) . '/../../../../generator/lib/util/PropelPHPParse
  */
 class PropelPHPParserTest extends PHPUnit_Framework_TestCase
 {
-    public function basicClassCodeProvider()
+    public static function basicClassCodeProvider()
     {
         $code = <<<EOF
 <?php

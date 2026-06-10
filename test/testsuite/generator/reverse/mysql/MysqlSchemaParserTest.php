@@ -28,7 +28,7 @@ require_once dirname(__FILE__) . '/../../../../../generator/lib/task/PropelConve
  */
 class MysqlSchemaParserTest extends PHPUnit_Framework_TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -41,7 +41,7 @@ class MysqlSchemaParserTest extends PHPUnit_Framework_TestCase
         Propel::initialize();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         Propel::init(dirname(__FILE__) . '/../../../../fixtures/bookstore/build/conf/bookstore-conf.php');

@@ -19,7 +19,7 @@ require_once dirname(__FILE__) . '/../../../tools/helpers/bookstore/BookstoreTes
  */
 class BaseObjectConvertTest extends BookstoreTestBase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $publisher = new Publisher();
@@ -39,7 +39,7 @@ class BaseObjectConvertTest extends BookstoreTestBase
         $this->book = $book;
     }
 
-    public function toXmlDataProvider()
+    public static function toXmlDataProvider()
     {
         $expected = <<<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -102,7 +102,7 @@ EOF;
         $this->assertEquals($this->book, $book);
     }
 
-    public function toYamlDataProvider()
+    public static function toYamlDataProvider()
     {
         $expected = <<<EOF
 Id: 9012
@@ -158,7 +158,7 @@ EOF;
         $this->assertEquals($this->book, $book);
     }
 
-    public function toJsonDataProvider()
+    public static function toJsonDataProvider()
     {
         $expected = <<<EOF
 {"Id":9012,"Title":"Don Juan","ISBN":"0140422161","Price":12.99,"PublisherId":1234,"AuthorId":5678,"Publisher":{"Id":1234,"Name":"Penguin","Books":{"Book_0":"*RECURSION*"}},"Author":{"Id":5678,"FirstName":"George","LastName":"Byron","Email":null,"Age":null,"Books":{"Book_0":"*RECURSION*"}}}
@@ -195,7 +195,7 @@ EOF;
         $this->assertEquals($this->book, $book);
     }
 
-    public function toCsvDataProvider()
+    public static function toCsvDataProvider()
     {
         $expected = "Id,Title,ISBN,Price,PublisherId,AuthorId,Publisher,Author\r\n9012,Don Juan,0140422161,12.99,1234,5678,\"a:3:{s:2:\\\"Id\\\";i:1234;s:4:\\\"Name\\\";s:7:\\\"Penguin\\\";s:5:\\\"Books\\\";a:1:{s:6:\\\"Book_0\\\";s:11:\\\"*RECURSION*\\\";}}\",\"a:6:{s:2:\\\"Id\\\";i:5678;s:9:\\\"FirstName\\\";s:6:\\\"George\\\";s:8:\\\"LastName\\\";s:5:\\\"Byron\\\";s:5:\\\"Email\\\";N;s:3:\\\"Age\\\";N;s:5:\\\"Books\\\";a:1:{s:6:\\\"Book_0\\\";s:11:\\\"*RECURSION*\\\";}}\"\r\n";
 

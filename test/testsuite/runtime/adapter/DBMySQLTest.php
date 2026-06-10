@@ -118,7 +118,7 @@ class DBMySQLTest extends DBAdapterTestAbstract
         $this->assertEquals($expectedSql, $sql, 'Generated SQL does not match expected SQL');
     }
 
-    public function dataApplyLimit()
+    public static function dataApplyLimit()
     {
         return array(
 

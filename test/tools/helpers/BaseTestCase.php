@@ -9,6 +9,7 @@
  */
 
 require_once dirname(__FILE__) . '/../../../runtime/lib/Propel.php';
+require_once dirname(__FILE__) . '/PropelTestCase.php';
 
 /**
  * Base functionality to be extended by all Propel test cases.  Test
@@ -19,7 +20,7 @@ require_once dirname(__FILE__) . '/../../../runtime/lib/Propel.php';
  * @author     Christopher Elkins <celkins@scardini.com> (Torque)
  * @version    $Revision$
  */
-abstract class BaseTestCase extends PHPUnit_Framework_TestCase
+abstract class BaseTestCase extends PropelTestCase
 {
     /**
      * Conditional compilation flag.

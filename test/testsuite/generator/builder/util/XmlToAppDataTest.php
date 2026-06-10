@@ -127,7 +127,7 @@ EOF;
     /**
      * @return array
      */
-    public function providePathsForIsAbsolutePath()
+    public static function providePathsForIsAbsolutePath()
     {
         return array(
             array('/var/lib', true),

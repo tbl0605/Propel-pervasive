@@ -5,3 +5,9 @@ if (file_exists($file = dirname(__FILE__) . '/../vendor/autoload.php')) {
 
     require_once $file;
 }
+
+require_once dirname(__FILE__) . '/tools/helpers/PropelTestCase.php';
+
+if (!class_exists('PHPUnit_Framework_TestCase', false)) {
+    class_alias('PropelTestCase', 'PHPUnit_Framework_TestCase');
+}

@@ -24,7 +24,7 @@ class OMBuilderRelatedByTest extends PHPUnit_Framework_TestCase
 {
     public static $database;
 
-    public function setUp()
+    public function setUp(): void
     {
         // run only once to save execution time
         if (null == self::$database) {

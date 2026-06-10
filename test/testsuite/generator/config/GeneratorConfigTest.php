@@ -18,7 +18,7 @@ class GeneratorConfigTest extends PHPUnit_Framework_TestCase
 {
     protected $pathToFixtureFiles;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->pathToFixtureFiles = dirname(__FILE__) . '/../../../fixtures/generator/config';
     }

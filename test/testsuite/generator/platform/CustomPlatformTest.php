@@ -7,7 +7,7 @@ class CustomPlatformTest extends PHPUnit_Framework_TestCase
      */
     protected $generatorConfig;
 
-    public function setUp()
+    public function setUp(): void
     {
         $projectDir = realpath(dirname(__FILE__) . '/../../../fixtures/generator/platform/');
         $platformClass = str_replace('/', '.', $projectDir) . '.CustomPlatform';

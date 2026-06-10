@@ -19,7 +19,7 @@ require_once dirname(__FILE__) . '/../../../tools/helpers/bookstore/BookstoreEmp
  */
 class PropelFormatterTest extends BookstoreEmptyTestBase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         BookstoreDataPopulator::populate();
@@ -30,7 +30,6 @@ class PropelFormatterTest extends BookstoreEmptyTestBase
         $formatter = $this->getMockForAbstractClass('PropelFormatter');
 
         $method = new ReflectionMethod('PropelFormatter', 'getWorkerObject');
-        $method->setAccessible(true);
 
         $classNames = array(
             'Bookstore',
@@ -52,7 +51,6 @@ class PropelFormatterTest extends BookstoreEmptyTestBase
         $formatter = $this->getMockForAbstractClass('PropelFormatter');
 
         $method = new ReflectionMethod('PropelFormatter', 'getWorkerObject');
-        $method->setAccessible(true);
 
         $className = 'Bookstore';
         $col = 0;

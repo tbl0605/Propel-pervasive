@@ -16,7 +16,7 @@ require_once dirname(__FILE__) . '/../../../../generator/lib/util/PropelSQLParse
  */
 class PropelSQLParserTest extends PHPUnit_Framework_TestCase
 {
-    public function stripSqlCommentsDataProvider()
+    public static function stripSqlCommentsDataProvider()
     {
         return array(
             array('', ''),
@@ -44,7 +44,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($output, $parser->getSQL());
     }
 
-    public function convertLineFeedsToUnixStyleDataProvider()
+    public static function convertLineFeedsToUnixStyleDataProvider()
     {
         return array(
             array('', ''),
@@ -67,7 +67,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($output, $parser->getSQL());
     }
 
-    public function explodeIntoStatementsDataProvider()
+    public static function explodeIntoStatementsDataProvider()
     {
         return array(
             array('', array()),
@@ -114,7 +114,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $parser->explodeIntoStatements());
     }
 
-    public function singleDelimiterExplodeIntoStatementsDataProvider()
+    public static function singleDelimiterExplodeIntoStatementsDataProvider()
     {
         return array(
             array("delimiter |", array()),
@@ -142,7 +142,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($output, $parser->explodeIntoStatements());
     }
 
-    public function twoCharDelimiterExplodeIntoStatementsDataProvider()
+    public static function twoCharDelimiterExplodeIntoStatementsDataProvider()
     {
         return array(
             array("delimiter ||", array()),
@@ -170,7 +170,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($output, $parser->explodeIntoStatements());
     }
 
-    public function threeCharDelimiterExplodeIntoStatementsDataProvider()
+    public static function threeCharDelimiterExplodeIntoStatementsDataProvider()
     {
         return array(
             array("delimiter |||", array()),
@@ -198,7 +198,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($output, $parser->explodeIntoStatements());
     }
 
-    public function fourCharDelimiterExplodeIntoStatementsDataProvider()
+    public static function fourCharDelimiterExplodeIntoStatementsDataProvider()
     {
         return array(
             array("delimiter ////", array()),

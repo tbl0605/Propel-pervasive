@@ -24,7 +24,7 @@ class RelationMapTest extends PHPUnit_Framework_TestCase
 {
   protected $databaseMap, $relationName, $rmap;
 
-  protected function setUp()
+  protected function setUp(): void
   {
     parent::setUp();
     $this->databaseMap = new DatabaseMap('foodb');
