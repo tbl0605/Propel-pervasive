@@ -8,6 +8,10 @@
  * @license    MIT License
  */
 
+require_once dirname(__FILE__) . '/../../../../generator/lib/util/PropelQuickBuilder.php';
+require_once dirname(__FILE__) . '/../../../../generator/lib/config/GeneratorConfig.php';
+require_once dirname(__FILE__) . '/../../../tools/helpers/bookstore/behavior/Testallhooksbehavior.php';
+
 /**
  * Tests the table structure behavior hooks.
  *
@@ -16,17 +20,29 @@
  */
 class TableBehaviorTest extends PHPUnit_Framework_TestCase
 {
-    protected function setUp(): void
+    public function testModifyTable()
     {
-        parent::setUp();
-        set_include_path(get_include_path() . PATH_SEPARATOR . "fixtures/bookstore/build/classes");
-        require_once 'behavior/alternative_coding_standards/map/Table3TableMap.php';
-        require_once 'behavior/alternative_coding_standards/Table3Peer.php';
-    }
+        if (!class_exists('Table3Peer')) {
+            $schema = <<<EOF
+<database name="bookstore-behavior" defaultIdMethod="native" package="behavior.alternative_coding_standards">
+    <table name="table3">
+        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
+        <column name="title" type="VARCHAR" size="100" primaryString="true" />
+        <behavior name="test_all_hooks" />
+    </table>
+</database>
+EOF;
+            $builder = new PropelQuickBuilder();
+            $builder->setSchema($schema);
+            $config = $builder->getConfig();
+            $config->setBuildProperty(
+                'propel.behavior.test_all_hooks.class',
+                'TestAllHooksBehavior'
+            );
+            $builder->build();
+        }
 
-  public function testModifyTable()
-  {
-    $t = Table3Peer::getTableMap();
-    $this->assertTrue($t->hasColumn('test'), 'modifyTable hook is called when building the model structure');
-  }
+        $t = Table3Peer::getTableMap();
+        $this->assertTrue($t->hasColumn('test'), 'modifyTable hook is called when building the model structure');
+    }
 }
