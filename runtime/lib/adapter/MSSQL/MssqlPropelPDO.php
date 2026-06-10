@@ -23,6 +23,7 @@ class MssqlPropelPDO extends PropelPDO
      *
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function beginTransaction()
     {
         $return = true;
@@ -49,6 +50,7 @@ class MssqlPropelPDO extends PropelPDO
      *
      * @throws PropelException
      */
+    #[\ReturnTypeWillChange]
     public function commit()
     {
         $return = true;
@@ -78,6 +80,7 @@ class MssqlPropelPDO extends PropelPDO
      *
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function rollBack()
     {
         $return = true;
@@ -132,6 +135,7 @@ class MssqlPropelPDO extends PropelPDO
      *
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function lastInsertId($seqname = null)
     {
         $result = self::query('SELECT SCOPE_IDENTITY()');
