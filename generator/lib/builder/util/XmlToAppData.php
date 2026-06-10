@@ -127,7 +127,10 @@ class XmlToAppData
                 xml_get_current_line_number($parser))
             );
         }
-        xml_parser_free($parser);
+        if (PHP_VERSION_ID < 80500) {
+            xml_parser_free($parser);
+            $parser = null;
+        }
 
         array_pop($this->schemasTagsStack);
 
