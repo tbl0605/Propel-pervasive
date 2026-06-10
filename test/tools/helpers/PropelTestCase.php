@@ -17,12 +17,14 @@ abstract class PropelTestCase extends TestCase
      * {@inheritdoc}
      *
      * Translates legacy @expectedException docblock annotations to expectException() calls.
+     * Uses assertPreConditions() so this runs even when a subclass overrides setUp()
+     * without calling parent::setUp().
      */
-    protected function runTest()
+    protected function assertPreConditions(): void
     {
-        $this->applyLegacyExpectedExceptionAnnotation();
+        parent::assertPreConditions();
 
-        return parent::runTest();
+        $this->applyLegacyExpectedExceptionAnnotation();
     }
 
     /**
