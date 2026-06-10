@@ -298,6 +298,10 @@ ALTER TABLE %s ADD
             $ddl[] = $sqlType;
         }
 
+        if ($default = $this->getColumnDefaultValueDDL($col)) {
+            $ddl[] = $default;
+        }
+
         if ($notNull = $this->getNullString($col->isNotNull())) {
             $ddl[] = $notNull;
         }

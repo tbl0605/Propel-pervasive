@@ -786,7 +786,11 @@ class TableMap
      */
     protected function hasPrefix($data)
     {
-        return (strpos($data, $this->prefix) === 0);
+        if ($this->prefix === null || $this->prefix === '') {
+            return false;
+        }
+
+        return (strpos($data ?? '', $this->prefix) === 0);
     }
 
     /**
