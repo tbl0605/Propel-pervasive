@@ -17,9 +17,6 @@
     "php": ">=7.4",
     "phing/phing": "~2.4"
   },
-  "suggest": {
-    "ext-intl": "Required for locale date formats using strftime-style patterns (e.g. %x, %X) in temporal getters"
-  },
   "require-dev": {
     "pear/pear": "^1.10",
     "pear/pear_packagefilemanager": "dev-trunk",

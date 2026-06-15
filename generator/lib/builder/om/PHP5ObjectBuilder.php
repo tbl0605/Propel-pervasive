@@ -855,7 +855,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
         }
         $script .= "
      *
-     * @param string \$format The date/time format string (either date()-style or strftime()-style).
+     * @param string \$format The date/time format string (date()-style).
      *				 If format is null, then the raw " . ($useDateTime ? 'DateTime object' : 'unix timestamp integer') . " will be returned.";
         if ($useDateTime) {
             $script .= "
@@ -1020,10 +1020,6 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
             return (int) \$dt->format('U');";
         }
         $script .= "
-        }
-
-        if (strpos(\$format, '%') !== false) {
-            return strftime(\$format, \$dt->format('U'));
         }
 
         return \$dt->format(\$format);
