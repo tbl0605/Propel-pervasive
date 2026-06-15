@@ -1,0 +1,13 @@
+# Normalize line endings to LF for cross-platform consistency.
+* text=auto eol=lf
+
+# Binary assets
+*.phar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
