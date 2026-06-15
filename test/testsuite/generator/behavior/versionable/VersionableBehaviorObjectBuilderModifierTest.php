@@ -948,8 +948,8 @@ XML;
     {
         $this->assertTrue(class_exists('VersionableBehaviorTest13Peer'));
 
-        $this->assertEquals('VersionableBehaviorTest13_version.VersionableBehaviorTest14_id', VersionableBehaviorTest13VersionPeer::VERSIONABLEBEHAVIORTEST14_ID);
-        $this->assertEquals('VersionableBehaviorTest13_version.VersionableBehaviorTest14_version', VersionableBehaviorTest13VersionPeer::VERSIONABLEBEHAVIORTEST14_VERSION);
+        $this->assertEquals('VersionableBehaviorTest13_version.VersionableBehaviorTest14_id', VersionableBehaviorTest13VersionPeer::VERSIONABLEBEHAVIORTEST14ID);
+        $this->assertEquals('VersionableBehaviorTest13_version.VersionableBehaviorTest14_version', VersionableBehaviorTest13VersionPeer::VERSIONABLEBEHAVIORTEST14VERSION);
     }
 
     public function testOneToOneRelatesSingle()
