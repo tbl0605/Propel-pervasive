@@ -179,12 +179,11 @@ class Index extends XMLElement
             if ($column->getSize()) {
                 $this->indexColumnSizes[$column->getName()] = $column->getSize();
             }
-        } else {
-            $attrib = $data;
-            $name = $attrib["name"];
+        } elseif (is_array($data)) {
+            $name = $data['name'];
             $this->indexColumns[] = $name;
-            if (isset($attrib["size"])) {
-                $this->indexColumnSizes[$name] = $attrib["size"];
+            if (isset($data['size'])) {
+                $this->indexColumnSizes[$name] = $data['size'];
             }
         }
     }
