@@ -1422,10 +1422,10 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
         if ($col->getType() === PropelTypes::CLOB && $platform instanceof OraclePlatform) {
             // PDO_OCI returns a stream for CLOB objects, while other PDO adapters return a string...
             $script .= "
-            \$this->$clo = stream_get_contents(\$row[0]);";
+            \$this->$clo = \$row !== false && \$row[0] !== null ? stream_get_contents(\$row[0]) : null;";
         } elseif ($col->isLobType() && !$platform->hasStreamBlobImpl()) {
             $script .= "
-            if (\$row[0] !== null) {
+            if (\$row !== false && \$row[0] !== null) {
                 \$this->$clo = fopen('php://memory', 'r+');
                 fwrite(\$this->$clo, \$row[0]);
                 rewind(\$this->$clo);
@@ -1434,13 +1434,13 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
             }";
         } elseif ($col->isPhpPrimitiveType()) {
             $script .= "
-            \$this->$clo = (\$row[0] !== null) ? (" . $col->getPhpType() . ") \$row[0] : null;";
+            \$this->$clo = \$row !== false && \$row[0] !== null ? (" . $col->getPhpType() . ") \$row[0] : null;";
         } elseif ($col->isPhpObjectType()) {
             $script .= "
-            \$this->$clo = (\$row[0] !== null) ? new " . $col->getPhpType() . "(\$row[0]) : null;";
+            \$this->$clo = \$row !== false && \$row[0] !== null ? new " . $col->getPhpType() . "(\$row[0]) : null;";
         } else {
             $script .= "
-            \$this->$clo = \$row[0];";
+            \$this->$clo = \$row !== false && \$row[0] !== null ? \$row[0] : null;";
         }
 
         $script .= "
