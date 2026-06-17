@@ -344,7 +344,7 @@ class PropelCollection extends ArrayObject implements Serializable
             throw new PropelException('Unknown key ' . $key);
         }
 
-        return $this->offsetUnset($key);
+        $this->offsetUnset($key);
     }
 
     /**

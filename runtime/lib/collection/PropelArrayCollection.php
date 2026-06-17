@@ -202,7 +202,7 @@ class PropelArrayCollection extends PropelCollection
     protected function getWorkerObject()
     {
         if (null === $this->workerObject) {
-            if ($this->model == '') {
+            if ($this->getModel() == '') {
                 throw new PropelException('You must set the collection model before interacting with it');
             }
             $class = $this->getModel();
