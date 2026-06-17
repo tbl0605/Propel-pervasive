@@ -491,8 +491,8 @@ class Column extends XMLElement
      */
     public static function toPeerConstantName($name)
     {
+        $name = trim($name ?? '');
         $name = preg_replace('/[^a-zA-Z0-9_\x7f-\xff]+/', '_', $name);
-        $name = trim($name, '_');
         $name = strtoupper($name);
 
         if ($name === '' || preg_match('/^[0-9]/', $name)) {
