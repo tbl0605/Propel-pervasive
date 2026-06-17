@@ -36,7 +36,7 @@ class PropelArrayCollectionTest extends BookstoreEmptyTestBase
         BookPeer::clearInstancePool();
         $books = PropelQuery::from('Book')->find();
         foreach ($books as $book) {
-            $this->assertEquals('foo', $book->getTitle('foo'));
+            $this->assertEquals('foo', $book->getTitle());
         }
     }
 
