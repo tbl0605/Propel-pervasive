@@ -42,6 +42,8 @@ abstract class BookstoreTestBase extends PHPUnit_Framework_TestCase
         // ('Cannot commit because a nested transaction was rolled back')
         if ($this->con->isCommitable()) {
             $this->con->commit();
+        } elseif ($this->con->isInTransaction()) {
+            $this->con->forceRollBack();
         }
     }
 }

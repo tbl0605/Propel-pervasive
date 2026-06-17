@@ -166,4 +166,34 @@ abstract class PropelTestCase extends TestCase
 
         return $builder->getMock();
     }
+
+    /**
+     * PHPUnit 4/5 compatible assertion for class properties.
+     *
+     * @param string $attributeName
+     * @param string $className
+     * @param string $message
+     *
+     * @return void
+     */
+    public static function assertClassHasAttribute($attributeName, $className, $message = '')
+    {
+        if (method_exists(TestCase::class, 'assertObjectHasProperty')) {
+            $reflection = new ReflectionClass($className);
+            static::assertTrue(
+                $reflection->hasProperty($attributeName),
+                $message ?: sprintf('Failed asserting that class "%s" has attribute "%s".', $className, $attributeName)
+            );
+
+            return;
+        }
+
+        if (method_exists(TestCase::class, 'assertClassHasAttribute')) {
+            parent::assertClassHasAttribute($attributeName, $className, $message);
+
+            return;
+        }
+
+        static::fail('assertClassHasAttribute() is not supported by this PHPUnit version.');
+    }
 }
