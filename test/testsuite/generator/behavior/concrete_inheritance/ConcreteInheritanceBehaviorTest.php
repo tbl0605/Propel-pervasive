@@ -312,10 +312,10 @@ EOF;
         try {
             $article = new ConcreteArticleSetPk();
             $article->setId(4);
-            $article->save();
+            $article->save($this->con);
             $article = new ConcreteArticleSetPk();
             $article->setId(4);
-            $article->save();
+            $article->save($this->con);
             $this->fail('getParentOrCreate() returns a new parent object on new child objects with pk set');
         } catch (PropelException $e) {
             $this->assertTrue(true, 'getParentOrCreate() returns a new parent object on new child objects with pk set');
