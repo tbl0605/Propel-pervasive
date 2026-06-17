@@ -476,10 +476,30 @@ class Column extends XMLElement
     {
         // was it overridden in schema.xml ?
         if ($this->getPeerName()) {
-            return strtoupper($this->getPeerName());
+            return self::toPeerConstantName($this->getPeerName());
         }
 
-        return strtoupper($this->getPhpName());
+        return self::toPeerConstantName($this->getName());
+    }
+
+    /**
+     * Turn a column or peer name into a valid PHP class constant identifier.
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    public static function toPeerConstantName($name)
+    {
+        $name = preg_replace('/[^a-zA-Z0-9_\x7f-\xff]+/', '_', $name);
+        $name = trim($name, '_');
+        $name = strtoupper($name);
+
+        if ($name === '' || preg_match('/^[0-9]/', $name)) {
+            $name = '_' . $name;
+        }
+
+        return $name;
     }
 
     /**

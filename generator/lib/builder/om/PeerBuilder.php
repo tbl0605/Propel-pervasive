@@ -271,12 +271,7 @@ abstract class PeerBuilder extends OMBuilder
      */
     public static function getColumnName(Column $col, $phpName = null)
     {
-        // was it overridden in schema.xml ?
-        if ($col->getPeerName()) {
-            $const = strtoupper($col->getPeerName());
-        } else {
-            $const = strtoupper($col->getPhpName());
-        }
+        $const = $col->getConstantColumnName();
         if ($phpName !== null) {
             return $phpName . 'Peer::' . $const;
         } else {

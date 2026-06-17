@@ -326,14 +326,8 @@ abstract class OMBuilder extends DataModelBuilder
         if ($classname === null) {
             return $this->getBuildProperty('classPrefix') . $col->getConstantName();
         }
-        // was it overridden in schema.xml ?
-        if ($col->getPeerName()) {
-            $const = strtoupper($col->getPeerName());
-        } else {
-            $const = strtoupper($col->getPhpName());
-        }
 
-        return $classname . '::' . $const;
+        return $classname . '::' . $col->getConstantColumnName();
     }
 
     /**
