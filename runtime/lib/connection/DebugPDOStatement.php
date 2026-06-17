@@ -75,17 +75,35 @@ class DebugPDOStatement extends PDOStatement
             for ($i = $size - 1; $i >= 0; $i--) {
                 $pos = $matches[1][$i];
 
-                // trimming extra quotes, making sure value is properly quoted afterwards
-                $boundValue = $boundValues[$pos];
-                if (is_string($boundValue)) { // quoting only needed for string values
-                    $boundValue = trim($boundValue, "'");
-                    $boundValue = $this->pdo->quote($boundValue);
-                }
-                $sql = str_replace($pos, $boundValue, $sql);
+                $sql = str_replace($pos, $this->formatBoundValueForQuery($boundValues[$pos]), $sql);
             }
         }
 
         return $sql;
+    }
+
+    /**
+     * @param mixed $boundValue
+     *
+     * @return string
+     */
+    protected function formatBoundValueForQuery($boundValue)
+    {
+        if (is_resource($boundValue)) {
+            return "'[LOB value]'";
+        }
+        if (is_string($boundValue)) {
+            $boundValue = trim($boundValue, "'");
+            return $this->pdo->quote($boundValue);
+        }
+        if (null === $boundValue) {
+            return 'NULL';
+        }
+        if (is_bool($boundValue)) {
+            return $boundValue ? '1' : '0';
+        }
+
+        return var_export($boundValue, true);
     }
 
     /**
