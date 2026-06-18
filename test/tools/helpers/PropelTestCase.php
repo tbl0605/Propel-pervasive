@@ -60,7 +60,7 @@ abstract class PropelTestCase extends TestCase
      *
      * @return void
      */
-    public static function assertInternalType($expected, $actual, $message = '')
+    public static function assertInternalType($expected, $actual, $message = ''): void
     {
         $map = array(
             'array' => 'assertIsArray',
@@ -176,7 +176,7 @@ abstract class PropelTestCase extends TestCase
      *
      * @return void
      */
-    public static function assertClassHasAttribute($attributeName, $className, $message = '')
+    public static function assertClassHasAttribute(string $attributeName, string $className, string $message = ''): void
     {
         if (method_exists(TestCase::class, 'assertObjectHasProperty')) {
             $reflection = new ReflectionClass($className);
