@@ -119,8 +119,7 @@ class XmlToAppData
 
         $parser = xml_parser_create();
         xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
-        xml_set_object($parser, $this);
-        xml_set_element_handler($parser, 'startElement', 'endElement');
+        xml_set_element_handler($parser, array($this, 'startElement'), array($this, 'endElement'));
         if (!xml_parse($parser, $xmlString)) {
             throw new Exception(sprintf("XML error: %s at line %d",
                 xml_error_string(xml_get_error_code($parser)),
@@ -411,6 +410,10 @@ class XmlToAppData
      */
     protected function isAbsolutePath($file)
     {
+        if ($file === null || $file === '') {
+            return false;
+        }
+
         if (strspn($file, '/\\', 0, 1)
             || (strlen($file) > 3 && ctype_alpha($file[0])
             && substr($file, 1, 1) === ':'
