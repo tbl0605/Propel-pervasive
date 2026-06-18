@@ -2,6 +2,8 @@
 # Reset Propel tests fixtures
 # 2011 - William Durand <william.durand1@gmail.com>
 
+set -euo pipefail
+
 CURRENT=`pwd`
 
 function rebuild
@@ -14,8 +16,8 @@ function rebuild
         rm -rf "$dir/build"
     fi
 
-    $ROOT/generator/bin/propel-gen $FIXTURES_DIR/$dir main > /dev/null
-    $ROOT/generator/bin/propel-gen $FIXTURES_DIR/$dir insert-sql > /dev/null
+    "$ROOT/generator/bin/propel-gen" "$FIXTURES_DIR/$dir" main > /dev/null
+    "$ROOT/generator/bin/propel-gen" "$FIXTURES_DIR/$dir" insert-sql > /dev/null
 }
 
 ROOT_DIR=""
@@ -32,7 +34,11 @@ else
     exit 1
 fi
 
-DIRS=`ls $FIXTURES_DIR`
+if command -v php >/dev/null 2>&1 ; then
+    php "$CURRENT/setup_mysql_databases.php"
+fi
+
+DIRS=`ls "$FIXTURES_DIR"`
 
 for dir in $DIRS ; do
     rebuild $dir
@@ -40,11 +46,11 @@ done
 
 # Special case for reverse fixtures
 
-REVERSE_DIRS=`ls $FIXTURES_DIR/reverse`
+REVERSE_DIRS=`ls "$FIXTURES_DIR/reverse"`
 
 for dir in $REVERSE_DIRS ; do
     if [ -f "$FIXTURES_DIR/reverse/$dir/build.properties" ] ; then
         echo "[ $dir ]"
-        $ROOT/generator/bin/propel-gen $FIXTURES_DIR/reverse/$dir insert-sql > /dev/null
+        "$ROOT/generator/bin/propel-gen" "$FIXTURES_DIR/reverse/$dir" insert-sql > /dev/null
     fi
 done
