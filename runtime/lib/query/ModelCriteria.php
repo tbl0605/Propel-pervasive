@@ -29,6 +29,7 @@
  * @version    $Revision$
  * @package    propel.runtime.query
  */
+#[\AllowDynamicProperties]
 class ModelCriteria extends Criteria
 {
     const MODEL_CLAUSE = "MODEL CLAUSE";

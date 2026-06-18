@@ -17,7 +17,7 @@
  */
 class NestedSetBehaviorObjectBuilderModifier
 {
-    protected $behavior, $table, $builder, $objectClassname, $peerClassname;
+    protected $behavior, $table, $builder, $objectClassname, $peerClassname, $queryClassname;
 
     public function __construct($behavior)
     {
@@ -1494,7 +1494,7 @@ public function deleteDescendants(?PropelPDO \$con = null)
  *
  * @return     RecursiveIterator
  */
-public function getIterator()
+public function getIterator(): \Traversable
 {
     return new NestedSetRecursiveIterator(\$this);
 }

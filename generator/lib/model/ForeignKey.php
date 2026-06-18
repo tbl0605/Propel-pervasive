@@ -20,6 +20,7 @@ require_once dirname(__FILE__) . '/XMLElement.php';
  * @version    $Revision$
  * @package    propel.generator.model
  */
+#[\AllowDynamicProperties]
 class ForeignKey extends XMLElement
 {
 

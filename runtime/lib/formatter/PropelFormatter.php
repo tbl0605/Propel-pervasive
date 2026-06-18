@@ -15,6 +15,7 @@
  * @version    $Revision$
  * @package    propel.runtime.formatter
  */
+#[\AllowDynamicProperties]
 abstract class PropelFormatter
 {
     protected

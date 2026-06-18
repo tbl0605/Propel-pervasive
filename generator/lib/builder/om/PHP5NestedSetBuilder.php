@@ -240,7 +240,7 @@ abstract class " . $this->getClassname() . " extends " . $this->getObjectBuilder
      *
      * @return NodeIterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new NestedSetRecursiveIterator(\$this);
     }

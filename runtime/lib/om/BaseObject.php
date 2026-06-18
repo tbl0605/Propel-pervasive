@@ -27,6 +27,7 @@
  * @version    $Revision$
  * @package    propel.runtime.om
  */
+#[\AllowDynamicProperties]
 abstract class BaseObject
 {
 

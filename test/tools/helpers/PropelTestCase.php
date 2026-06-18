@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @method mixed getMock(string $originalClassName, $methods = [], array $arguments = [], string $mockClassName = '', bool $callOriginalConstructor = true, bool $callOriginalClone = true, bool $callAutoload = true, bool $cloneArguments = false, bool $callOriginalMethods = false, $proxyTarget = null)
  */
+#[\AllowDynamicProperties]
 abstract class PropelTestCase extends TestCase
 {
     /**

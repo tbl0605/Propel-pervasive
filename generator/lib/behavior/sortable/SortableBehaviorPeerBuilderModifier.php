@@ -43,6 +43,11 @@ class SortableBehaviorPeerBuilderModifier
      */
     protected $peerClassname;
 
+    /**
+     * @var string
+     */
+    protected $queryClassname;
+
     public function __construct($behavior)
     {
         $this->behavior = $behavior;

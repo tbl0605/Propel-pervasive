@@ -29,6 +29,7 @@ class Behavior extends XMLElement
     protected $dirname;
     protected $additionalBuilders = array();
     protected $tableModificationOrder = 50;
+    protected $builder;
 
     /**
      * Sets the name of the Behavior

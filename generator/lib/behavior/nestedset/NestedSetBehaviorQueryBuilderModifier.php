@@ -16,7 +16,7 @@
  */
 class NestedSetBehaviorQueryBuilderModifier
 {
-    protected $behavior, $table, $builder, $objectClassname, $peerClassname;
+    protected $behavior, $table, $builder, $objectClassname, $peerClassname, $queryClassname;
 
     public function __construct($behavior)
     {
