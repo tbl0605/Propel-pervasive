@@ -3,6 +3,7 @@
 Propel is an open-source Object-Relational Mapping (ORM) for PHP5.
 
 [![PHPUnit](https://github.com/tbl0605/Propel-pervasive/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/tbl0605/Propel-pervasive/actions/workflows/phpunit.yml)
+[![Build Status](https://secure.travis-ci.org/propelorm/Propel.png?branch=master)](http://travis-ci.org/propelorm/Propel)
 [![Total Downloads](https://poser.pugx.org/propel/propel1/downloads.png)](https://packagist.org/packages/propel/propel1)
 [![Latest Stable Version](https://poser.pugx.org/propel/propel1/v/stable.png)](https://packagist.org/packages/propel/propel1)
 
