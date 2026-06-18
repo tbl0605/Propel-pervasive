@@ -41,6 +41,10 @@ fi
 DIRS=`ls "$FIXTURES_DIR"`
 
 for dir in $DIRS ; do
+    # "reverse" is handled separately below
+    if [ "$dir" = "reverse" ] ; then
+        continue
+    fi
     rebuild $dir
 done
 
