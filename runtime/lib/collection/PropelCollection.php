@@ -291,7 +291,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @param mixed $key
      *
-     * @return mixed The removed element
+     * @return void
      *
      * @throws PropelException
      */
