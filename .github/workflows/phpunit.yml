@@ -1,0 +1,112 @@
+name: PHPUnit
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: phpunit-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: PHP ${{ matrix.php }} PHPUnit ${{ matrix.phpunit }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+        phpunit: [9, 10, 11]
+        exclude:
+          # PHPUnit 10 requires PHP >= 8.1
+          - php: '7.4'
+            phpunit: 10
+          - php: '7.4'
+            phpunit: 11
+          - php: '8.0'
+            phpunit: 10
+          - php: '8.0'
+            phpunit: 11
+          # PHPUnit 11 requires PHP >= 8.2
+          - php: '8.1'
+            phpunit: 11
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          extensions: dom, json, pdo, pdo_mysql, mbstring, tokenizer, xml, xmlwriter
+          coverage: none
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: |
+            php-${{ matrix.php }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-dev
+
+      - name: Cache PHPUnit PHAR
+        id: phpunit-phar-cache
+        uses: actions/cache@v4
+        with:
+          path: test/tools/phpunit-phars/phpunit${{ matrix.phpunit }}.phar
+          key: phpunit-${{ matrix.phpunit }}-phar
+
+      - name: Download PHPUnit PHAR
+        if: steps.phpunit-phar-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p test/tools/phpunit-phars
+          curl -fsSL -o "test/tools/phpunit-phars/phpunit${{ matrix.phpunit }}.phar" \
+            "https://phar.phpunit.de/phpunit-${{ matrix.phpunit }}.phar"
+
+      - name: Wait for MySQL
+        run: |
+          for i in $(seq 1 30); do
+            if php -r "new PDO('mysql:host=127.0.0.1', 'root', '');" 2>/dev/null; then
+              echo "MySQL is ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "MySQL did not become ready in time"
+          exit 1
+
+      - name: Prepare test fixtures
+        run: |
+          chmod +x ../generator/bin/propel-gen
+          ./reset_tests.sh
+        working-directory: test
+
+      - name: Run PHPUnit
+        run: |
+          php "test/tools/phpunit-phars/phpunit${{ matrix.phpunit }}.phar" \
+            --configuration phpunit.xml.dist
