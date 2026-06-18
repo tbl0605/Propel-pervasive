@@ -282,7 +282,7 @@ class SortableBehaviorObjectBuilderModifierTest extends BookstoreSortableTestBas
         $this->assertEquals($expected, $this->getFixturesArray(), 'removeFromList() does not change the list until the object is saved');
         $t2->save();
         Table11Peer::clearInstancePool();
-        $expected = array(null => 'row2', 1 => 'row1', 2 => 'row3', 3 => 'row4');
+        $expected = array('__NULL__' => 'row2', 1 => 'row1', 2 => 'row3', 3 => 'row4');
         $this->assertEquals($expected, $this->getFixturesArray(), 'removeFromList() changes the list once the object is saved');
     }
 }

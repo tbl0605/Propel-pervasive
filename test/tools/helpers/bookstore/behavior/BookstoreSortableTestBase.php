@@ -156,7 +156,8 @@ abstract class BookstoreSortableTestBase extends BookstoreTestBase
         $ts = Table11Peer::doSelect($c);
         $ret = array();
         foreach ($ts as $t) {
-            $ret[$t->getRank()] = $t->getTitle();
+            $rank = $t->getRank();
+            $ret[$rank === null ? '__NULL__' : $rank] = $t->getTitle();
         }
 
         return $ret;
@@ -170,7 +171,8 @@ abstract class BookstoreSortableTestBase extends BookstoreTestBase
         $ts = Table12Peer::doSelect($c);
         $ret = array();
         foreach ($ts as $t) {
-            $ret[$t->getRank()] = $t->getTitle();
+            $rank = $t->getRank();
+            $ret[$rank === null ? '__NULL__' : $rank] = $t->getTitle();
         }
 
         return $ret;
@@ -184,7 +186,8 @@ abstract class BookstoreSortableTestBase extends BookstoreTestBase
         $ts = FkScopeTablePeer::doSelect($c);
         $ret = array();
         foreach ($ts as $t) {
-            $ret[$t->getRank()] = $t->getTitle();
+            $rank = $t->getRank();
+            $ret[$rank === null ? '__NULL__' : $rank] = $t->getTitle();
         }
 
         return $ret;
