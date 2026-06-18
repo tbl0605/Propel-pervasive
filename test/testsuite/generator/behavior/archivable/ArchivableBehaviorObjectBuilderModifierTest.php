@@ -182,6 +182,8 @@ EOF;
      */
     public function testArchiveThrowsExceptionOnNewObjects()
     {
+        $this->expectException(PropelException::class);
+
         $a = new ArchivableTest10();
         $a->archive();
     }
@@ -196,6 +198,8 @@ EOF;
      */
     public function testRestoreFromArchiveThrowsExceptionOnUnarchivedObjects()
     {
+        $this->expectException(PropelException::class);
+
         $a = new ArchivableTest10();
         $a->setTitle('foo');
         $a->setAge(12);

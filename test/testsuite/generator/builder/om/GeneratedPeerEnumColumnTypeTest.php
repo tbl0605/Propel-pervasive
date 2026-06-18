@@ -50,6 +50,7 @@ EOF;
     /**
      * @dataProvider valueSetConstantProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('valueSetConstantProvider')]
     public function testValueSetConstants($constantName, $value)
     {
         $this->assertTrue(defined($constantName));
@@ -73,6 +74,8 @@ EOF;
      */
     public function testGetValueSetInvalidColumn()
     {
+        $this->expectException(PropelException::class);
+
         ComplexColumnTypeEntity103Peer::getValueSet(ComplexColumnTypeEntity103Peer::ID);
     }
 

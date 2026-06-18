@@ -229,6 +229,7 @@ XML;
     /**
      * @dataProvider providerForNewActiveRecordTests
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForNewActiveRecordTests')]
     public function testVersionGetterAndSetter($class)
     {
         $o = new $class;
@@ -239,6 +240,7 @@ XML;
     /**
      * @dataProvider providerForNewActiveRecordTests
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForNewActiveRecordTests')]
     public function testVersionDefaultValue($class)
     {
         $o = new $class;
@@ -248,6 +250,7 @@ XML;
     /**
      * @dataProvider providerForNewActiveRecordTests
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForNewActiveRecordTests')]
     public function testVersionValueInitializesOnInsert($class)
     {
         $o = new $class;
@@ -258,6 +261,7 @@ XML;
     /**
      * @dataProvider providerForNewActiveRecordTests
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForNewActiveRecordTests')]
     public function testVersionValueIncrementsOnUpdate($class)
     {
         $o = new $class;
@@ -303,6 +307,7 @@ XML;
     /**
      * @dataProvider providerForNewActiveRecordTests
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForNewActiveRecordTests')]
     public function testVersionDoesNotIncrementOnUpdateWithNoChange($class)
     {
         $o = new $class;
@@ -317,6 +322,7 @@ XML;
     /**
      * @dataProvider providerForNewActiveRecordTests
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForNewActiveRecordTests')]
     public function testVersionDoesNotIncrementWhenVersioningIsDisabled($class)
     {
         $o = new $class;
@@ -450,6 +456,8 @@ XML;
      */
     public function testToVersionThrowsExceptionOnIncorrectVersion()
     {
+        $this->expectException(PropelException::class);
+
         $o = new VersionableBehaviorTest1();
         $o->setBar(123); // version 1
         $o->save();

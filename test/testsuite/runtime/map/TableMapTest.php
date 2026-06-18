@@ -169,6 +169,8 @@ class TableMapTest extends PHPUnit_Framework_TestCase
      */
   public function testLoadWrongRelations()
   {
+        $this->expectException(PropelException::class);
+
     $this->tmap->getRelation('Bar');
   }
 

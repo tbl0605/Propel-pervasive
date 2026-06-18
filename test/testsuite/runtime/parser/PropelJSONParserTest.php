@@ -39,6 +39,7 @@ class PropelJSONParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider arrayJsonConversionDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('arrayJsonConversionDataProvider')]
     public function testFromArray($arrayData, $jsonData, $type)
     {
         $parser = new PropelJSONParser();
@@ -48,6 +49,7 @@ class PropelJSONParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider arrayJsonConversionDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('arrayJsonConversionDataProvider')]
     public function testToJSON($arrayData, $jsonData, $type)
     {
         $parser = new PropelJSONParser();
@@ -57,6 +59,7 @@ class PropelJSONParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider arrayJsonConversionDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('arrayJsonConversionDataProvider')]
     public function testToArray($arrayData, $jsonData, $type)
     {
         $parser = new PropelJSONParser();
@@ -66,6 +69,7 @@ class PropelJSONParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider arrayJsonConversionDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('arrayJsonConversionDataProvider')]
     public function testFromJSON($arrayData, $jsonData, $type)
     {
         $parser = new PropelJSONParser();
@@ -89,6 +93,7 @@ EOF;
     /**
      * @dataProvider listToJSONDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('listToJSONDataProvider')]
     public function testListToJSON($list, $json)
     {
         $parser = new PropelJSONParser();
@@ -98,6 +103,7 @@ EOF;
     /**
      * @dataProvider listToJSONDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('listToJSONDataProvider')]
     public function testJSONToList($list, $json)
     {
         $parser = new PropelJSONParser();

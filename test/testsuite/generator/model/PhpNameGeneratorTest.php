@@ -36,6 +36,7 @@ class PhpNameGeneratorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider phpnameMethodDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('phpnameMethodDataProvider')]
     public function testPhpnameMethod($input, $output)
     {
         $generator = new TestablePhpNameGenerator();
@@ -59,6 +60,7 @@ class PhpNameGeneratorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider underscoreMethodDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('underscoreMethodDataProvider')]
     public function testUnderscoreMethod($input, $output)
     {
         $generator = new TestablePhpNameGenerator();

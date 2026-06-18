@@ -18,6 +18,7 @@ require_once dirname(__FILE__) . '/../../../tools/helpers/bookstore/BookstoreTes
  * @package    runtime.om
  * @group hashcode
  */
+#[\PHPUnit\Framework\Attributes\Group('hashcode')]
 class BaseObjectHashCodeTest extends BookstoreTestBase
 {
     public function testUnsavedObjectCallingHashCodeIsNotChangingObject()

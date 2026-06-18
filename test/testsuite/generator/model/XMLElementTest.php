@@ -18,6 +18,7 @@ class XMLElementTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForGetDefaultValueForArray
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForGetDefaultValueForArray')]
     public function testGetDefaultValueForArray($value, $expected)
     {
         $xmlElement = new TestableXmlElement();

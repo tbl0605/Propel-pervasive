@@ -37,6 +37,7 @@ class ModelCriteriaWithNamespaceTest extends NamespacesTestBase
     /**
      * @dataProvider conditionsForTestReplaceNamesWithNamespaces
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestReplaceNamesWithNamespaces')]
     public function testReplaceNamesWithNamespaces($origClause, $columnPhpName = false, $modifiedClause)
     {
         $c = new TestableModelCriteriaWithNamespace('bookstore_namespaced', 'Foo\\Bar\\NamespacedBook');

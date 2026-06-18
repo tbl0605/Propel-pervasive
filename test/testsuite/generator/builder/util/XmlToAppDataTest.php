@@ -44,6 +44,8 @@ class XmlToAppDataTest extends PHPUnit_Framework_TestCase
      */
     public function testParseStringIncorrectSchema()
     {
+        $this->expectException(SchemaException::class);
+
         $schema = '<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><foo/>';
         $xtad = new XmlToAppData();
         $appData = $xtad->parseString($schema);
@@ -116,6 +118,7 @@ EOF;
     /**
      * @dataProvider providePathsForIsAbsolutePath
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providePathsForIsAbsolutePath')]
     public function testIsAbsolutePath($path, $expectedResult)
     {
         $xmlToAppData = new OpenedXmlToAppData();

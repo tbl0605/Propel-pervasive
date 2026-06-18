@@ -237,6 +237,8 @@ class PropelOnDemandFormatterWithTest extends BookstoreEmptyTestBase
      */
     public function testFindOneWithOneToMany()
     {
+        $this->expectException(PropelException::class);
+
         BookstoreDataPopulator::populate();
         BookPeer::clearInstancePool();
         AuthorPeer::clearInstancePool();

@@ -56,6 +56,8 @@ class SortableBehaviorQueryBuilderModifierTest extends BookstoreSortableTestBase
      */
     public function testOrderByRankIncorrectDirection()
     {
+        $this->expectException(PropelException::class);
+
         Table11Query::create()->orderByRank('foo');
     }
 

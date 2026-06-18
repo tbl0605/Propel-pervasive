@@ -177,9 +177,10 @@ class GeneratedObjectRelTest extends BookstoreEmptyTestBase
         $this->assertNotNull($books->getCurrent(), 'getRelCol() initialize the internal iterator at the beginning');
     }
 
-   /**
-    * @group issue677
-    */
+    /**
+     * @group issue677
+     */
+    #[\PHPUnit\Framework\Attributes\Group('issue677')]
     public function testManyToManySetterIsNotLoosingAnyReference()
     {
         $list1 = new BookClubList();
@@ -938,17 +939,17 @@ class GeneratedObjectRelTest extends BookstoreEmptyTestBase
         $summary
             ->expects($this->once())
             ->method('isDeleted')
-            ->will($this->returnValue(false))
+            ->willReturn(false)
         ;
         $summary
             ->expects($this->once())
             ->method('isNew')
-            ->will($this->returnValue(false))
+            ->willReturn(false)
         ;
         $summary
             ->expects($this->once())
             ->method('isModified')
-            ->will($this->returnValue(false))
+            ->willReturn(false)
         ;
         $summary
             ->expects($this->never())

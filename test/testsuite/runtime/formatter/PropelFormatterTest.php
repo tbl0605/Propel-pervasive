@@ -27,7 +27,7 @@ class PropelFormatterTest extends BookstoreEmptyTestBase
 
     public function testGetWorkerObjectReturnsRightClass()
     {
-        $formatter = $this->getMockForAbstractClass('PropelFormatter');
+        $formatter = new PropelObjectFormatter();
 
         $method = new ReflectionMethod('PropelFormatter', 'getWorkerObject');
 
@@ -48,7 +48,7 @@ class PropelFormatterTest extends BookstoreEmptyTestBase
 
     public function testGetWorkerObjectCachedInstance()
     {
-        $formatter = $this->getMockForAbstractClass('PropelFormatter');
+        $formatter = new PropelObjectFormatter();
 
         $method = new ReflectionMethod('PropelFormatter', 'getWorkerObject');
 

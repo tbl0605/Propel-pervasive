@@ -59,6 +59,7 @@ class OMBuilderRelatedByTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getRelatedBySuffixDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getRelatedBySuffixDataProvider')]
     public function testGetRelatedBySuffix($table, $index, $expectedSuffix, $expectedReverseSuffix)
     {
         $fk = $this->getForeignKey($table, $index);

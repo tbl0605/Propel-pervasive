@@ -1163,6 +1163,7 @@ class CriteriaTest extends BookstoreTestBase
     /**
      * @dataProvider dataLimit
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataLimit')]
     public function testLimit($limit, $expected)
     {
         $c = new Criteria();
@@ -1240,6 +1241,7 @@ class CriteriaTest extends BookstoreTestBase
     /**
      * @dataProvider dataOffset
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataOffset')]
     public function testOffset($offset, $expected)
     {
         $c = new Criteria();

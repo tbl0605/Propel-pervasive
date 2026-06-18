@@ -56,6 +56,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testFindMethodNotExistsReturnsFalse($code)
     {
         $parser = new PropelPHPParser($code);
@@ -65,6 +66,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testFindMethodNReturnsMethod($code)
     {
         $parser = new PropelPHPParser($code);
@@ -81,6 +83,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testFindMethodPrecededByAttribute($code)
     {
         $parser = new PropelPHPParser($code);
@@ -98,6 +101,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testFindMethodPrecededByComment($code)
     {
         $parser = new PropelPHPParser($code);
@@ -118,6 +122,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testFindMethodWithWrongCurlyBraces($code)
     {
         $parser = new PropelPHPParser($code);
@@ -136,6 +141,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testRemoveMethodNotExistsReturnsFalse($code)
     {
         $parser = new PropelPHPParser($code);
@@ -145,6 +151,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testRemoveMethodReturnsMethod($code)
     {
         $parser = new PropelPHPParser($code);
@@ -161,6 +168,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testRemoveMethodRemovesMethod($code)
     {
         $parser = new PropelPHPParser($code);
@@ -198,6 +206,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testReplaceMethodNotExistsReturnsFalse($code)
     {
         $parser = new PropelPHPParser($code);
@@ -207,6 +216,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testReplaceMethodReturnsMethod($code)
     {
         $parser = new PropelPHPParser($code);
@@ -223,6 +233,7 @@ EOF;
     /**
      * @dataProvider basicClassCodeProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('basicClassCodeProvider')]
     public function testReplaceMethodReplacesMethod($code)
     {
         $parser = new PropelPHPParser($code);

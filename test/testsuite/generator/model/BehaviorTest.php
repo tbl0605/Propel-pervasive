@@ -100,6 +100,8 @@ EOF;
    */
     public function testUnknownBehavior()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $xmlToAppData = new XmlToAppData();
         $schema = <<<EOF
 <database name="test1">

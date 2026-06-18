@@ -62,6 +62,8 @@ EOF;
      */
     public function testGetterThrowsExceptionOnUnknownKey()
     {
+        $this->expectException(PropelException::class);
+
         $e = new PublicComplexColumnTypeEntity3();
         $e->bar = 156;
         $e->getBar();
@@ -92,6 +94,8 @@ EOF;
      */
     public function testSetterThrowsExceptionOnUnknownValue()
     {
+        $this->expectException(PropelException::class);
+
         $e = new ComplexColumnTypeEntity3();
         $e->setBar('bazz');
     }

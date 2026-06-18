@@ -167,6 +167,8 @@ CREATE TABLE `bar`
      */
     public function testUniqueColumnName()
     {
+        $this->expectException(EngineException::class);
+
         $xmlToAppData = new XmlToAppData();
         $schema = <<<EOF
 <database name="columnTest" defaultIdMethod="native">
@@ -186,6 +188,8 @@ EOF;
      */
     public function testUniqueTableName()
     {
+        $this->expectException(EngineException::class);
+
         $xmlToAppData = new XmlToAppData();
         $schema = <<<EOF
 <database name="columnTest" defaultIdMethod="native">
@@ -217,6 +221,7 @@ EOF;
     /**
      * @dataProvider providerForTestHasColumn
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasColumn')]
     public function testHasColumn($table, $column)
     {
         $this->assertTrue($table->hasColumn('Foo'));
@@ -227,6 +232,7 @@ EOF;
     /**
      * @dataProvider providerForTestHasColumn
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasColumn')]
     public function testHasColumnCaseInsensitive($table, $column)
     {
         $this->assertTrue($table->hasColumn('Foo', true));
@@ -237,6 +243,7 @@ EOF;
     /**
      * @dataProvider providerForTestHasColumn
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasColumn')]
     public function testGetColumn($table, $column)
     {
         $this->assertEquals($column, $table->getColumn('Foo'));
@@ -247,6 +254,7 @@ EOF;
     /**
      * @dataProvider providerForTestHasColumn
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasColumn')]
     public function testGetColumnCaseInsensitive($table, $column)
     {
         $this->assertEquals($column, $table->getColumn('Foo', true));
@@ -257,6 +265,7 @@ EOF;
     /**
      * @dataProvider providerForTestHasColumn
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasColumn')]
     public function testRemoveColumnFromObject($table, $column)
     {
         $table->removeColumn($column);
@@ -266,6 +275,7 @@ EOF;
     /**
      * @dataProvider providerForTestHasColumn
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasColumn')]
     public function testRemoveColumnFromName($table, $column)
     {
         $table->removeColumn($column->getName());

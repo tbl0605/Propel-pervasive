@@ -40,6 +40,8 @@ class BaseObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetVirtualColumnWrongKey()
     {
+        $this->expectException(PropelException::class);
+
         $b = new TestableBaseObject();
         $b->getVirtualColumn('foo');
     }

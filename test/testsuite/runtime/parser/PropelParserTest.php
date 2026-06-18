@@ -31,6 +31,8 @@ class PropelParserTest extends PHPUnit_Framework_TestCase
      */
     public function testGetParserThrowsExceptionOnWrongParser()
     {
+        $this->expectException(PropelException::class);
+
         $parser = PropelParser::getParser('Foo');
     }
 

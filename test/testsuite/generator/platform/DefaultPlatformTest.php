@@ -96,6 +96,7 @@ class DefaultPlatformTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getColumnDefaultValueDDLDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getColumnDefaultValueDDLDataProvider')]
     public function testGetColumnDefaultValueDDL($column, $default)
     {
         $this->assertEquals($default, $this->getPlatform()->getColumnDefaultValueDDL($column));

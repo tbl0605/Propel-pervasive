@@ -35,6 +35,7 @@ class PropelCSVParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider arrayCsvConversionDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('arrayCsvConversionDataProvider')]
     public function testFromArray($arrayData, $csvData, $type)
     {
         $parser = new PropelCSVParser();
@@ -44,6 +45,7 @@ class PropelCSVParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider arrayCsvConversionDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('arrayCsvConversionDataProvider')]
     public function testToCSV($arrayData, $csvData, $type)
     {
         $parser = new PropelCSVParser();
@@ -53,6 +55,7 @@ class PropelCSVParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider arrayCsvConversionDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('arrayCsvConversionDataProvider')]
     public function testToArray($arrayData, $csvData, $type)
     {
         $parser = new PropelCSVParser();
@@ -62,6 +65,7 @@ class PropelCSVParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider arrayCsvConversionDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('arrayCsvConversionDataProvider')]
     public function testFromCSV($arrayData, $csvData, $type)
     {
         $parser = new PropelCSVParser();
@@ -92,6 +96,7 @@ EOF;
     /**
      * @dataProvider listToCSVDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('listToCSVDataProvider')]
     public function testListToCSV($list, $heading, $csv)
     {
         $parser = new PropelCSVParser();
@@ -104,6 +109,7 @@ EOF;
     /**
      * @dataProvider listToCSVDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('listToCSVDataProvider')]
     public function testCSVToList($list, $heading, $csv)
     {
         $parser = new PropelCSVParser();

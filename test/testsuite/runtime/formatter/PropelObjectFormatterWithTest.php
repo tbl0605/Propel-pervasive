@@ -286,6 +286,8 @@ class PropelObjectFormatterWithTest extends BookstoreEmptyTestBase
      */
     public function testFindOneWithOneToManyAndLimit()
     {
+        $this->expectException(PropelException::class);
+
         $c = new ModelCriteria('bookstore', 'Book');
         $c->add(BookPeer::ISBN, '043935806X');
         $c->leftJoin('Book.Review');

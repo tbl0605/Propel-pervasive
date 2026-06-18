@@ -44,6 +44,7 @@ class MysqlPlatformMigrationTest extends PlatformMigrationTestProvider
     /**
      * @dataProvider providerForTestGetModifyDatabaseDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyDatabaseDDL')]
     public function testGetModifyDatabaseDDL($databaseDiff)
     {
         $expected = "
@@ -79,6 +80,7 @@ SET FOREIGN_KEY_CHECKS = 1;
     /**
      * @dataProvider providerForTestGetRenameTableDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetRenameTableDDL')]
     public function testGetRenameTableDDL($fromName, $toName)
     {
         $expected = "
@@ -90,6 +92,7 @@ RENAME TABLE `foo1` TO `foo2`;
     /**
      * @dataProvider providerForTestGetModifyTableDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyTableDDL')]
     public function testGetModifyTableDDL($tableDiff)
     {
         $expected = "
@@ -124,6 +127,7 @@ ALTER TABLE `foo` ADD CONSTRAINT `foo1_FK_1`
     /**
      * @dataProvider providerForTestGetModifyTableColumnsDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyTableColumnsDDL')]
     public function testGetModifyTableColumnsDDL($tableDiff)
     {
         $expected = "
@@ -140,6 +144,7 @@ ALTER TABLE `foo`
     /**
      * @dataProvider providerForTestGetModifyTablePrimaryKeysDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyTablePrimaryKeysDDL')]
     public function testGetModifyTablePrimaryKeysDDL($tableDiff)
     {
         $expected = "
@@ -153,6 +158,7 @@ ALTER TABLE `foo` ADD PRIMARY KEY (`id`,`bar`);
     /**
      * @dataProvider providerForTestGetModifyTableIndicesDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyTableIndicesDDL')]
     public function testGetModifyTableIndicesDDL($tableDiff)
     {
         $expected = "
@@ -170,6 +176,7 @@ CREATE INDEX `bar_baz_FK` ON `foo` (`id`,`bar`,`baz`);
     /**
      * @dataProvider providerForTestGetModifyTableForeignKeysDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyTableForeignKeysDDL')]
     public function testGetModifyTableForeignKeysDDL($tableDiff)
     {
         $expected = "
@@ -191,6 +198,7 @@ ALTER TABLE `foo1` ADD CONSTRAINT `foo1_FK_2`
     /**
      * @dataProvider providerForTestGetModifyTableForeignKeysSkipSqlDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyTableForeignKeysSkipSqlDDL')]
     public function testGetModifyTableForeignKeysSkipSqlDDL($tableDiff)
     {
         $expected = "
@@ -208,6 +216,7 @@ ALTER TABLE `foo1` ADD CONSTRAINT `foo1_FK_1`
     /**
      * @dataProvider providerForTestGetModifyTableForeignKeysSkipSql2DDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyTableForeignKeysSkipSql2DDL')]
     public function testGetModifyTableForeignKeysSkipSql2DDL($tableDiff)
     {
         $expected = '';
@@ -219,6 +228,7 @@ ALTER TABLE `foo1` ADD CONSTRAINT `foo1_FK_1`
     /**
      * @dataProvider providerForTestGetRemoveColumnDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetRemoveColumnDDL')]
     public function testGetRemoveColumnDDL($column)
     {
         $expected = "
@@ -230,6 +240,7 @@ ALTER TABLE `foo` DROP `bar`;
     /**
      * @dataProvider providerForTestGetRenameColumnDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetRenameColumnDDL')]
     public function testGetRenameColumnDDL($fromColumn, $toColumn)
     {
         $expected = "
@@ -241,6 +252,7 @@ ALTER TABLE `foo` CHANGE `bar1` `bar2` DOUBLE(2);
     /**
      * @dataProvider providerForTestGetModifyColumnDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyColumnDDL')]
     public function testGetModifyColumnDDL($columnDiff)
     {
         $expected = "
@@ -252,6 +264,7 @@ ALTER TABLE `foo` CHANGE `bar` `bar` DOUBLE(3);
     /**
      * @dataProvider providerForTestGetModifyColumnsDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetModifyColumnsDDL')]
     public function testGetModifyColumnsDDL($columnDiffs)
     {
         $expected = "
@@ -265,6 +278,7 @@ ALTER TABLE `foo` CHANGE `bar2` `bar2` INTEGER NOT NULL;
     /**
      * @dataProvider providerForTestGetAddColumnDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetAddColumnDDL')]
     public function testGetAddColumnDDL($column)
     {
         $expected = "
@@ -276,6 +290,7 @@ ALTER TABLE `foo` ADD `bar` INTEGER;
     /**
      * @dataProvider providerForTestGetAddColumnsDDL
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestGetAddColumnsDDL')]
     public function testGetAddColumnsDDL($columns)
     {
         $expected = "

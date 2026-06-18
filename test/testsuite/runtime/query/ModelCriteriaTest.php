@@ -92,6 +92,7 @@ class ModelCriteriaTest extends BookstoreTestBase
     /**
      * @dataProvider conditionsForTestReplaceNames
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestReplaceNames')]
     public function testReplaceNames($origClause, $columnPhpName = false, $modifiedClause)
     {
         $c = new TestableModelCriteria('bookstore', 'Book');
@@ -121,6 +122,7 @@ class ModelCriteriaTest extends BookstoreTestBase
     /**
      * @dataProvider conditionsForTestReplaceMultipleNames
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestReplaceMultipleNames')]
     public function testReplaceMultipleNames($origClause, $expectedColumns, $modifiedClause)
     {
         $c = new TestableModelCriteria('bookstore', 'Book');
@@ -222,6 +224,7 @@ class ModelCriteriaTest extends BookstoreTestBase
     /**
      * @dataProvider conditionsForTestWhere
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestWhere')]
     public function testWhere($clause, $value, $sql, $params)
     {
         $c = new ModelCriteria('bookstore', 'Book');
@@ -562,6 +565,8 @@ class ModelCriteriaTest extends BookstoreTestBase
      */
     public function testGroupByClassThrowsExceptionOnUnknownClass()
     {
+        $this->expectException(PropelException::class);
+
         $c = new ModelCriteria('bookstore', 'Book');
         $c->groupByClass('Author');
     }
@@ -1068,6 +1073,8 @@ class ModelCriteriaTest extends BookstoreTestBase
      */
     public function testWithThrowsExceptionWhenJoinLacks()
     {
+        $this->expectException(PropelException::class);
+
         $c = new ModelCriteria('bookstore', 'Book');
         $c->with('Author');
     }
@@ -1086,6 +1093,8 @@ class ModelCriteriaTest extends BookstoreTestBase
      */
     public function testWithThrowsExceptionWhenNotUsingAlias()
     {
+        $this->expectException(PropelException::class);
+
         $c = new ModelCriteria('bookstore', 'Book');
         $c->join('Book.Author a');
         $c->with('Author');
@@ -1329,6 +1338,7 @@ class ModelCriteriaTest extends BookstoreTestBase
     /**
      * @dataProvider conditionsForTestWithColumn
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestWithColumn')]
     public function testWithColumn($clause, $alias, $selectTranslation)
     {
         $c = new ModelCriteria('bookstore', 'Book');
@@ -1357,6 +1367,7 @@ class ModelCriteriaTest extends BookstoreTestBase
     /**
      * @dataProvider conditionsForTestWithColumnAndQuotes
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestWithColumnAndQuotes')]
     public function testWithColumnAndQuotes($clause, $alias, $selectTranslation)
     {
         $c = new ModelCriteria('bookstore', 'Author');
@@ -1582,6 +1593,8 @@ class ModelCriteriaTest extends BookstoreTestBase
      */
     public function testFindOneOrCreateThrowsExceptionWhenQueryContainsJoin()
     {
+        $this->expectException(PropelException::class);
+
         $book = BookQuery::create('b')
             ->filterByPrice(125)
             ->useAuthorQuery()
@@ -1742,6 +1755,8 @@ class ModelCriteriaTest extends BookstoreTestBase
      */
     public function testFindPksCompositeKey()
     {
+        $this->expectException(PropelException::class);
+
         $c = new ModelCriteria('bookstore', 'BookListRel');
         $bookListRel = $c->findPks(array(array(1, 2)));
 
@@ -2015,6 +2030,7 @@ class ModelCriteriaTest extends BookstoreTestBase
     /**
      * @dataProvider conditionsForTestGetRelationName
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestGetRelationName')]
     public function testGetRelationName($relation, $relationName)
     {
         $this->assertEquals($relationName, ModelCriteria::getrelationName($relation));

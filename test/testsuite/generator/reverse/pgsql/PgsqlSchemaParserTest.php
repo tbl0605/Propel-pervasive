@@ -75,6 +75,7 @@ class PgsqlSchemaParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider parseDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('parseDataProvider')]
     public function testParse($columnDDL, $expectedColumnPhpName, $expectedColumnDefaultType, $expectedColumnDefaultValue, $expectedSize, $expectedScale)
     {
         $this->con->query("create table foo ( {$columnDDL} );");

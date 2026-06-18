@@ -116,6 +116,8 @@ class SortableBehaviorObjectBuilderModifierTest extends BookstoreSortableTestBas
      */
     public function testInsertAtNegativeRank()
     {
+        $this->expectException(PropelException::class);
+
         $t = new Table11();
         $t->insertAtRank(0);
     }
@@ -125,6 +127,8 @@ class SortableBehaviorObjectBuilderModifierTest extends BookstoreSortableTestBas
      */
     public function testInsertAtOverMaxRank()
     {
+        $this->expectException(PropelException::class);
+
         $t = new Table11();
         $t->insertAtRank(6);
     }
@@ -175,6 +179,8 @@ class SortableBehaviorObjectBuilderModifierTest extends BookstoreSortableTestBas
      */
     public function testMoveToNewObject()
     {
+        $this->expectException(PropelException::class);
+
         $t = new Table11();
         $t->moveToRank(2);
     }
@@ -184,6 +190,8 @@ class SortableBehaviorObjectBuilderModifierTest extends BookstoreSortableTestBas
      */
     public function testMoveToNegativeRank()
     {
+        $this->expectException(PropelException::class);
+
         $t = Table11Peer::retrieveByRank(2);
         $t->moveToRank(0);
     }
@@ -193,6 +201,8 @@ class SortableBehaviorObjectBuilderModifierTest extends BookstoreSortableTestBas
      */
     public function testMoveToOverMaxRank()
     {
+        $this->expectException(PropelException::class);
+
         $t = Table11Peer::retrieveByRank(2);
         $t->moveToRank(5);
     }

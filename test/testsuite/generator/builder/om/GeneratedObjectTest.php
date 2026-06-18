@@ -1274,6 +1274,8 @@ EOF;
      */
     public function testMagicCallUndefined()
     {
+        $this->expectException(PropelException::class);
+
         $book = new Book();
         $book->fooMethodName();
     }
@@ -1291,6 +1293,7 @@ EOF;
     /**
      * @dataProvider conditionsForTestReadOnly
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestReadOnly')]
     public function testReadOnly($method)
     {
         $cv = new ContestView();
@@ -1714,6 +1717,8 @@ EOF;
      */
     public function testDoInsert()
     {
+        $this->expectException(PropelException::class);
+
         if (!class_exists('Unexistent')) {
             $schema = <<<EOF
 <database name="a-database">

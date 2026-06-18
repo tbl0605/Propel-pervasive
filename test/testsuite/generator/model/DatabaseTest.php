@@ -51,6 +51,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForTestHasTable
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasTable')]
     public function testHasTable($database, $table)
     {
         $this->assertTrue($database->hasTable('Foo'));
@@ -61,6 +62,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForTestHasTable
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasTable')]
     public function testHasTableCaseInsensitive($database, $table)
     {
         $this->assertTrue($database->hasTable('Foo', true));
@@ -71,6 +73,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForTestHasTable
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasTable')]
     public function testGetTable($database, $table)
     {
         $this->assertEquals($table, $database->getTable('Foo'));
@@ -81,6 +84,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForTestHasTable
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestHasTable')]
     public function testGetTableCaseInsensitive($database, $table)
     {
         $this->assertEquals($table, $database->getTable('Foo', true));

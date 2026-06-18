@@ -36,6 +36,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider stripSqlCommentsDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('stripSqlCommentsDataProvider')]
     public function testStripSQLComments($input, $output)
     {
         $parser = new PropelSQLParser();
@@ -59,6 +60,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider convertLineFeedsToUnixStyleDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('convertLineFeedsToUnixStyleDataProvider')]
     public function testConvertLineFeedsToUnixStyle($input, $output)
     {
         $parser = new PropelSQLParser();
@@ -85,6 +87,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider explodeIntoStatementsDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('explodeIntoStatementsDataProvider')]
     public function testExplodeIntoStatements($input, $output)
     {
         $parser = new PropelSQLParser();
@@ -135,6 +138,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider singleDelimiterExplodeIntoStatementsDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('singleDelimiterExplodeIntoStatementsDataProvider')]
     public function testSingleDelimiterExplodeIntoStatements($input, $output)
     {
         $parser = new PropelSQLParser();
@@ -163,6 +167,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider twoCharDelimiterExplodeIntoStatementsDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('twoCharDelimiterExplodeIntoStatementsDataProvider')]
     public function testTwoCharDelimiterExplodeIntoStatements($input, $output)
     {
         $parser = new PropelSQLParser();
@@ -191,6 +196,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider threeCharDelimiterExplodeIntoStatementsDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('threeCharDelimiterExplodeIntoStatementsDataProvider')]
     public function testThreeCharDelimiterExplodeIntoStatements($input, $output)
     {
         $parser = new PropelSQLParser();
@@ -219,6 +225,7 @@ class PropelSQLParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider fourCharDelimiterExplodeIntoStatementsDataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('fourCharDelimiterExplodeIntoStatementsDataProvider')]
     public function testFourCharDelimiterExplodeIntoStatements($input, $output)
     {
         $parser = new PropelSQLParser();

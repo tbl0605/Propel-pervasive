@@ -137,6 +137,7 @@ class PropelDateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideValidNewInstanceValues
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('provideValidNewInstanceValues')]
     public function testNewInstance($value, $expected)
     {
         $originalTimezone = date_default_timezone_get();
@@ -151,6 +152,7 @@ class PropelDateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideValidNewInstanceValuesGmt1
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('provideValidNewInstanceValuesGmt1')]
     public function testNewInstanceGmt1($value, $expected)
     {
         $originalTimezone = date_default_timezone_get();
@@ -167,6 +169,8 @@ class PropelDateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testNewInstanceInvalidValue()
     {
+        $this->expectException(PropelException::class);
+
         $dt = PropelDateTime::newInstance('some string');
     }
 

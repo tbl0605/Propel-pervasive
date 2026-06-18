@@ -25,6 +25,8 @@ class ModelCriteriaSelectTest extends BookstoreTestBase
      */
     public function testSelectThrowsExceptionWhenCalledWithAnEmptyString()
     {
+        $this->expectException(PropelException::class);
+
         $c = new ModelCriteria('bookstore', 'Book');
         $c->select('');
     }
@@ -34,6 +36,8 @@ class ModelCriteriaSelectTest extends BookstoreTestBase
      */
     public function testSelectThrowsExceptionWhenCalledWithAnEmptyArray()
     {
+        $this->expectException(PropelException::class);
+
         $c = new ModelCriteria('bookstore', 'Book');
         $c->select(array());
     }
@@ -107,10 +111,12 @@ class ModelCriteriaSelectTest extends BookstoreTestBase
     }
 
     /**
-    * @expectedException PropelException
-    */
+     * @expectedException PropelException
+     */
     public function testSelectStringFindCalledWithNonExistingColumn()
     {
+        $this->expectException(PropelException::class);
+
         BookstoreDataPopulator::depopulate($this->con);
         BookstoreDataPopulator::populate($this->con);
 

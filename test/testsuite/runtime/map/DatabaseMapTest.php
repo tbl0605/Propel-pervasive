@@ -122,6 +122,7 @@ class DatabaseMapTest extends BookstoreTestBase
   /**
    * @dataProvider phpNameData
    */
+  #[\PHPUnit\Framework\Attributes\DataProvider('phpNameData')]
   public function testGetTableByPhpNameNamespaced($name, $phpName, $classname)
   {
       try {

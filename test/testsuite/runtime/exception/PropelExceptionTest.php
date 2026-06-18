@@ -44,6 +44,8 @@ class PropelExceptionTest extends PHPUnit_Framework_TestCase
      */
     public function testIsThrowable()
     {
+        $this->expectException(PropelException::class);
+
         $e = new PropelException('this is an error');
         throw $e;
     }

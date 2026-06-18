@@ -39,8 +39,11 @@ class DBMySQLTest extends DBAdapterTestAbstract
      * @dataProvider getConParams
      * @expectedException PropelException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getConParams')]
     public function testPrepareParamsThrowsException($conparams)
     {
+        $this->expectException(PropelException::class);
+
         if (version_compare(PHP_VERSION, '5.3.6', '>=')) {
             $this->markTestSkipped('PHP_VERSION >= 5.3.6, no need to throw an exception.');
         }
@@ -52,6 +55,7 @@ class DBMySQLTest extends DBAdapterTestAbstract
     /**
      * @dataProvider getConParams
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getConParams')]
     public function testPrepareParams($conparams)
     {
         if (version_compare(PHP_VERSION, '5.3.6', '<')) {
@@ -69,6 +73,7 @@ class DBMySQLTest extends DBAdapterTestAbstract
     /**
      * @dataProvider getConParams
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getConParams')]
     public function testNoSetNameQueryExecuted($conparams)
     {
         if (version_compare(PHP_VERSION, '5.3.6', '<')) {
@@ -108,6 +113,7 @@ class DBMySQLTest extends DBAdapterTestAbstract
     /**
      * @dataProvider dataApplyLimit
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataApplyLimit')]
     public function testApplyLimit($offset, $limit, $expectedSql)
     {
         $sql = '';

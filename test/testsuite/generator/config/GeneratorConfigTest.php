@@ -58,10 +58,12 @@ class GeneratorConfigTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * @expectedException BuildException
-      */
+     * @expectedException BuildException
+     */
     public function testGetClassnameOnInexistantProperty()
     {
+        $this->expectException(BuildException::class);
+
         $generator = new GeneratorConfig();
         $generator->getClassname('propel.foo.bar');
     }

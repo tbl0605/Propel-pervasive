@@ -126,6 +126,8 @@ class TimestampableBehaviorTest extends BookstoreTestBase
      * @depends testPreSave
      * @depends testPreSaveManuallyUpdated
      */
+    #[\PHPUnit\Framework\Attributes\Depends('testPreSave')]
+    #[\PHPUnit\Framework\Attributes\Depends('testPreSaveManuallyUpdated')]
     public function testObjectKeepUpdateDateUnchanged()
     {
         $tsave = time() - 10;
