@@ -48,7 +48,7 @@ class Issue617Test extends PlatformDatabaseBuildTimeBase
          * Create issue617 tables with foreign keys
          */
         $schema = '
-<database name="bookstore">
+<database name="bookstore" defaultIdMethod="native">
 <table name="issue617_user">
   <vendor type="mysql">
     <parameter name="Engine" value="InnoDB"/>
@@ -132,7 +132,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
         $this->readDatabase();
         $updatedSchema = '
-<database name="reverse-bookstore">
+<database name="reverse-bookstore" defaultIdMethod="native">
 <table name="issue617_user">
   <vendor type="mysql">
     <parameter name="Engine" value="InnoDB"/>

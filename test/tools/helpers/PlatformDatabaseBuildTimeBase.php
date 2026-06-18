@@ -48,6 +48,7 @@ class PlatformDatabaseBuildTimeBase extends PHPUnit_Framework_TestCase
     {
         $this->database = new Database();
         $this->database->setPlatform(new MysqlPlatform());
+        $this->database->setDefaultIdMethod(IDMethod::NATIVE);
         $this->parser->parse($this->database);
     }
 
