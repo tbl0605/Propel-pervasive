@@ -720,20 +720,20 @@ class Table extends ScopedElement implements IDMethod
     {
         if ($data instanceof Column) {
             $col = $data;
-            if (isset($this->columnsByName[$col->getName()])) {
+            if (isset($this->columnsByName[$col->getName() ?? ''])) {
                 throw new EngineException(sprintf('Column "%s" declared twice in table "%s"', $col->getName(), $this->getName()));
             }
             $col->setTable($this);
             if ($col->isInheritance()) {
                 $this->inheritanceColumn = $col;
             }
-            if (isset($this->columnsByName[$col->getName()])) {
+            if (isset($this->columnsByName[$col->getName() ?? ''])) {
                 throw new EngineException('Duplicate column declared: ' . $col->getName());
             }
             $this->columnList[] = $col;
-            $this->columnsByName[$col->getName()] = $col;
-            $this->columnsByLowercaseName[strtolower($col->getName())] = $col;
-            $this->columnsByPhpName[$col->getPhpName()] = $col;
+            $this->columnsByName[$col->getName() ?? ''] = $col;
+            $this->columnsByLowercaseName[strtolower($col->getName() ?? '')] = $col;
+            $this->columnsByPhpName[$col->getPhpName() ?? ''] = $col;
             $col->setPosition(count($this->columnList));
             $this->needsTransactionInPostgres |= $col->requiresTransactionInPostgres();
 
@@ -756,7 +756,7 @@ class Table extends ScopedElement implements IDMethod
      */
     public function removeColumn($col)
     {
-        if (is_string($col)) {
+        if (is_string($col ?? '')) {
             $col = $this->getColumn($col);
         }
         $pos = array_search($col, $this->columnList);
@@ -764,9 +764,9 @@ class Table extends ScopedElement implements IDMethod
             throw new EngineException(sprintf('No column named %s found in table %s', $col->getName(), $this->getName()));
         }
         unset($this->columnList[$pos]);
-        unset($this->columnsByName[$col->getName()]);
-        unset($this->columnsByLowercaseName[strtolower($col->getName())]);
-        unset($this->columnsByPhpName[$col->getPhpName()]);
+        unset($this->columnsByName[$col->getName() ?? '']);
+        unset($this->columnsByLowercaseName[strtolower($col->getName() ?? '')]);
+        unset($this->columnsByPhpName[$col->getPhpName() ?? '']);
         $this->adjustColumnPositions();
         // FIXME: also remove indexes and validators on this column?
     }
@@ -1151,7 +1151,7 @@ class Table extends ScopedElement implements IDMethod
         if ($bdata instanceof Behavior) {
             $behavior = $bdata;
             $behavior->setTable($this);
-            $this->behaviors[$behavior->getName()] = $behavior;
+            $this->behaviors[$behavior->getName() ?? ''] = $behavior;
 
             return $behavior;
         } else {
