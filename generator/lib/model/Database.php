@@ -377,7 +377,7 @@ class Database extends ScopedElement
     {
         if ($this->hasTable($name, $caseInsensitive)) {
             if ($caseInsensitive) {
-                return $this->tablesByLowercaseName[strtolower($name)];
+                return $this->tablesByLowercaseName[strtolower($name ?? '')];
             } else {
                 return $this->tablesByName[$name ?? ''];
             }
@@ -422,16 +422,16 @@ class Database extends ScopedElement
         if ($data instanceof Table) {
             $tbl = $data; // alias
             $tbl->setDatabase($this);
-            if (isset($this->tablesByName[$tbl->getName()])) {
+            if (isset($this->tablesByName[$tbl->getName() ?? ''])) {
                 throw new EngineException(sprintf('Table "%s" declared twice', $tbl->getName()));
             }
             if ($tbl->getSchema() === null) {
                 $tbl->setSchema($this->getSchema());
             }
             $this->tableList[] = $tbl;
-            $this->tablesByName[$tbl->getName()] = $tbl;
-            $this->tablesByLowercaseName[strtolower($tbl->getName())] = $tbl;
-            $this->tablesByPhpName[$tbl->getPhpName()] = $tbl;
+            $this->tablesByName[$tbl->getName() ?? ''] = $tbl;
+            $this->tablesByLowercaseName[strtolower($tbl->getName() ?? '')] = $tbl;
+            $this->tablesByPhpName[$tbl->getPhpName() ?? ''] = $tbl;
             if (strpos($tbl->getNamespace() ?? '', '\\') === 0) {
                 $tbl->setNamespace(substr($tbl->getNamespace(), 1));
             } elseif ($namespace = $this->getNamespace()) {
@@ -486,7 +486,7 @@ class Database extends ScopedElement
         if ($data instanceof Domain) {
             $domain = $data; // alias
             $domain->setDatabase($this);
-            $this->domainMap[$domain->getName()] = $domain;
+            $this->domainMap[$domain->getName() ?? ''] = $domain;
 
             return $domain;
         } else {
@@ -540,7 +540,7 @@ class Database extends ScopedElement
         if ($bdata instanceof Behavior) {
             $behavior = $bdata;
             $behavior->setDatabase($this);
-            $this->behaviors[$behavior->getName()] = $behavior;
+            $this->behaviors[$behavior->getName() ?? ''] = $behavior;
 
             return $behavior;
         } else {
