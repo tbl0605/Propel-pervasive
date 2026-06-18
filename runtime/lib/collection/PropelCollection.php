@@ -65,49 +65,6 @@ class PropelCollection extends ArrayObject implements Serializable
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @param array|object $array
-     *
-     * @return array
-     */
-    #[\ReturnTypeWillChange]
-    public function exchangeArray($array)
-    {
-        if (PHP_VERSION_ID >= 80500) {
-            $this->clearIterator();
-        }
-
-        return parent::exchangeArray($array);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($key, $value)
-    {
-        if (PHP_VERSION_ID >= 80500) {
-            $this->clearIterator();
-        }
-
-        parent::offsetSet($key, $value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($key)
-    {
-        if (PHP_VERSION_ID >= 80500) {
-            $this->clearIterator();
-        }
-
-        parent::offsetUnset($key);
-    }
-
-    /**
      * Gets the position of the internal pointer
      * This position can be later used in seek()
      *
@@ -443,7 +400,11 @@ class PropelCollection extends ArrayObject implements Serializable
     #[\ReturnTypeWillChange]
     public function getIterator()
     {
-        $this->iterator = PHP_VERSION_ID >= 80500 ? new ArrayIterator($this->getArrayCopy()) : new ArrayIterator($this);
+        // Use ArrayObject's iterator so foreach (including by-reference) mutates this
+        // collection. new ArrayIterator($this) is deprecated since PHP 8.5; iterating
+        // over getArrayCopy() using new ArrayIterator($this->getArrayCopy()) would
+        // break reference updates.
+        $this->iterator = PHP_VERSION_ID >= 80500 ? parent::getIterator() : new ArrayIterator($this);
 
         return $this->iterator;
     }
