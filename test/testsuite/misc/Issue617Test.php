@@ -39,6 +39,53 @@ class Issue617Test extends PlatformDatabaseBuildTimeBase
         $this->con->query('DROP TABLE IF EXISTS `issue617_group`');
     }
 
+    public function readDatabase()
+    {
+        parent::readDatabase();
+        $this->normalizeReversedDatabase();
+    }
+
+    /**
+     * Align reverse-engineered model with XmlToAppData conventions for schema diff.
+     *
+     * Thierry Blind: this test compares a live database (via MysqlSchemaParser) against
+     * an XML schema (via PropelQuickBuilder). Those two code paths do not produce identical
+     * model objects, so PropelDatabaseComparator would report false differences and generate
+     * spurious migration SQL unless we normalize the parsed result first.
+     */
+    private function normalizeReversedDatabase()
+    {
+        // MySQL default display widths (e.g. int(11)); XmlToAppData leaves size unset for INTEGER.
+        $defaultTypeSizes = array(
+            PropelTypes::TINYINT => 4,
+            PropelTypes::SMALLINT => 6,
+            PropelTypes::INTEGER => 11,
+            PropelTypes::BIGINT => 20,
+            PropelTypes::DECIMAL => 10,
+            PropelTypes::CHAR => 1,
+        );
+
+        foreach ($this->database->getTables() as $table) {
+            // MysqlSchemaParser adds PRIMARY as an Index; XmlToAppData only marks columns
+            // as primaryKey, so a PRIMARY index would trigger DROP INDEX / spurious diffs.
+            if ($table->hasIndex('PRIMARY')) {
+                $table->removeIndex('PRIMARY');
+            }
+
+            foreach ($table->getColumns() as $column) {
+                $type = $column->getType();
+                // Strip default MySQL sizes so column DDL matches XML-built columns
+                // (must use setSize(null); Domain::replaceSize(null) is a no-op).
+                if (isset($defaultTypeSizes[$type])
+                    && $column->getSize() == $defaultTypeSizes[$type]
+                    && $column->getScale() === null
+                ) {
+                    $column->getDomain()->setSize(null);
+                }
+            }
+        }
+    }
+
     /**
      * Setups the initial schema.
      */
