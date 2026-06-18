@@ -100,6 +100,12 @@ jobs:
           echo "MySQL did not become ready in time"
           exit 1
 
+      - name: Patch MySQL DSNs for TCP
+        run: |
+          # Linux resolves host-less mysql DSNs via Unix socket; the service listens on TCP.
+          find test/fixtures \( -name 'build.properties' -o -name 'runtime-conf.xml' \) -print0 \
+            | xargs -0 sed -i 's|mysql:dbname=|mysql:host=127.0.0.1;dbname=|g'
+
       - name: Prepare test fixtures
         run: |
           chmod +x ../generator/bin/propel-gen
