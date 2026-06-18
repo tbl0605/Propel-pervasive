@@ -21,9 +21,22 @@ if not exist "%PROPEL_GEN%" (
     exit /b 1
 )
 
+for %%P in (php.exe php) do (
+    where %%P >nul 2>&1
+    if not errorlevel 1 (
+        "%%P" "%SCRIPT_DIR%\setup_mysql_databases.php"
+        if errorlevel 1 exit /b 1
+        goto :php_found
+    )
+)
+echo WARNING: PHP executable not found in PATH, skipping setup_mysql_databases.php
+:php_found
+
 for /d %%D in ("%FIXTURES_DIR%\*") do (
-    call :rebuild "%%~nxD"
-    if errorlevel 1 exit /b 1
+    if /i not "%%~nxD"=="reverse" (
+        call :rebuild "%%~nxD"
+        if errorlevel 1 exit /b 1
+    )
 )
 
 rem Special case for reverse fixtures
