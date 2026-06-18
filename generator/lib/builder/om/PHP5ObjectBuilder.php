@@ -2441,7 +2441,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
         $referrers = $this->getTable()->getReferrers();
         $hasFks = count($fks) > 0 || count($referrers) > 0;
         $objectClassName = $this->getObjectClassname();
-        $pkGetter = $this->getTable()->hasCompositePrimaryKey() ? 'serialize($this->getPrimaryKey())' : '$this->getPrimaryKey()';
+        $pkGetter = $this->getTable()->hasCompositePrimaryKey() ? 'serialize($this->getPrimaryKey())' : '$this->getPrimaryKey() ?? \'\'';
         $defaultKeyType = $this->getDefaultKeyType();
         $script .= "
     /**

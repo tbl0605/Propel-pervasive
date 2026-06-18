@@ -1106,8 +1106,8 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
     public static function getInstanceFromPool(\$key)
     {
         if (Propel::isInstancePoolingEnabled()) {
-            if (isset(" . $this->getPeerClassname() . "::\$instances[\$key])) {
-                return " . $this->getPeerClassname() . "::\$instances[\$key];
+            if (isset(" . $this->getPeerClassname() . "::\$instances[\$key ?? ''])) {
+                return " . $this->getPeerClassname() . "::\$instances[\$key ?? ''];
             }
         }
 
