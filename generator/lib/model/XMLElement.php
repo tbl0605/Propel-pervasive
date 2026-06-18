@@ -87,15 +87,21 @@ abstract class XMLElement
      */
     protected function booleanValue($val)
     {
+        if ($val === null || $val === '') {
+            return false;
+        }
         if (is_numeric($val)) {
             return (bool) $val;
         } else {
-            return (in_array(strtolower($val), array('true', 't', 'y', 'yes'), true) ? true : false);
+            return (in_array(strtolower((string) $val), array('true', 't', 'y', 'yes'), true) ? true : false);
         }
     }
 
     protected function getDefaultValueForArray($stringValue)
     {
+        if ($stringValue === null) {
+            return null;
+        }
         $stringValue = trim($stringValue);
 
         if (empty($stringValue)) {
