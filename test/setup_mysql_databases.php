@@ -154,6 +154,11 @@ try {
     exit(1);
 }
 
+// https://www.stevenchang.tw/blog/2021/06/07/disable-sql-mode-only-full-group-by-in-mysql
+// https://stackoverflow.com/a/51629259/2332350
+// Legacy Propel tests assume pre-MySQL-8 GROUP BY behavior (no ONLY_FULL_GROUP_BY).
+$pdo->exec("SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'");
+
 foreach ($databases as $database) {
     $pdo->exec('CREATE DATABASE IF NOT EXISTS `' . str_replace('`', '``', $database) . '`');
     echo 'Database ready: ' . $database . PHP_EOL;

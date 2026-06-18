@@ -30,6 +30,7 @@ class PropelFormatterTest extends BookstoreEmptyTestBase
         $formatter = new PropelObjectFormatter();
 
         $method = new ReflectionMethod('PropelFormatter', 'getWorkerObject');
+        $method->setAccessible(true);
 
         $classNames = array(
             'Bookstore',
@@ -51,6 +52,7 @@ class PropelFormatterTest extends BookstoreEmptyTestBase
         $formatter = new PropelObjectFormatter();
 
         $method = new ReflectionMethod('PropelFormatter', 'getWorkerObject');
+        $method->setAccessible(true);
 
         $className = 'Bookstore';
         $col = 0;
