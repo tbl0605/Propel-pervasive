@@ -276,7 +276,7 @@ class GeneratorConfig implements GeneratorConfigInterface
                 // probably using the command line, which doesn't accept whitespace
                 // therefore base64 encoded
                 $this->parseBuildConnections(base64_decode($buildTimeConfigString));
-            } elseif (file_exists($buildTimeConfigPath)) {
+            } elseif ($buildTimeConfigPath !== null && file_exists($buildTimeConfigPath)) {
                 // configuration stored in a buildtime-conf.xml file
                 $this->parseBuildConnections(file_get_contents($buildTimeConfigPath));
             } else {
