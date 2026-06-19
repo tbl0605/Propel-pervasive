@@ -95,7 +95,8 @@ jobs:
 
       - name: Build generator PEAR package
         run: |
-          php -d error_reporting=22517 -d display_errors=0 "${PHING_PHAR}" \
+          chmod +x ../../test/tools/run_pear_package_build.sh
+          ../../test/tools/run_pear_package_build.sh \
             -f build-pear-package.xml \
             -Dversion="${{ steps.meta.outputs.version }}" \
             -Dstate="${{ steps.meta.outputs.state }}"
@@ -103,7 +104,8 @@ jobs:
 
       - name: Build runtime PEAR package
         run: |
-          php -d error_reporting=22517 -d display_errors=0 "${PHING_PHAR}" \
+          chmod +x ../../test/tools/run_pear_package_build.sh
+          ../../test/tools/run_pear_package_build.sh \
             -f build-pear-package.xml \
             -Dversion="${{ steps.meta.outputs.version }}" \
             -Dstate="${{ steps.meta.outputs.state }}"
