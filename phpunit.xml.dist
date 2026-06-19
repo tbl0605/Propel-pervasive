@@ -5,6 +5,7 @@
          failOnWarning="false"
          failOnRisky="false"
          beStrictAboutTestsThatDoNotTestAnything="false"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
          >
 
     <testsuites>
