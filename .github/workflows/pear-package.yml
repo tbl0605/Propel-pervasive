@@ -1,0 +1,105 @@
+name: PEAR packages
+
+on:
+  push:
+  release:
+    types: [published]
+
+concurrency:
+  group: pear-package-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build PEAR packages
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+          extensions: dom, json, pdo, xml, xsl, mbstring, tokenizer
+          coverage: none
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: pear-php82-composer-${{ hashFiles('composer.json') }}
+          restore-keys: |
+            pear-php82-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Determine package version
+        id: meta
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+            STATE="stable"
+          else
+            SHORT_SHA="${GITHUB_SHA:0:7}"
+            BASE="$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo "latest")"
+            VERSION="${BASE}-dev.${SHORT_SHA}"
+            STATE="devel"
+          fi
+
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "state=${STATE}" >> "$GITHUB_OUTPUT"
+          echo "Building propel_generator and propel_runtime ${VERSION} (${STATE})"
+
+      - name: Build generator PEAR package
+        run: |
+          php ../../vendor/bin/phing \
+            -f build-pear-package.xml \
+            -Dversion="${{ steps.meta.outputs.version }}" \
+            -Dstate="${{ steps.meta.outputs.state }}"
+        working-directory: generator/pear
+
+      - name: Build runtime PEAR package
+        run: |
+          php ../../vendor/bin/phing \
+            -f build-pear-package.xml \
+            -Dversion="${{ steps.meta.outputs.version }}" \
+            -Dstate="${{ steps.meta.outputs.state }}"
+        working-directory: runtime/pear
+
+      - name: Collect package artifacts
+        run: |
+          mkdir -p dist/pear
+          cp generator/pear/build/*.tgz dist/pear/
+          cp runtime/pear/build/*.tgz dist/pear/
+          cp generator/pear/build/package.xml dist/pear/propel_generator-package.xml
+          cp runtime/pear/build/package.xml dist/pear/propel_runtime-package.xml
+          ls -la dist/pear/
+
+      - name: Upload workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pear-packages-${{ steps.meta.outputs.version }}
+          path: dist/pear/
+          if-no-files-found: error
+
+      - name: Attach packages to GitHub release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/pear/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
