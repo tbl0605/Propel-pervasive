@@ -9,6 +9,10 @@ concurrency:
   group: pear-package-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  PHING_VERSION: 2.17.4
+  PHING_PHAR: ${{ github.workspace }}/test/tools/phing-phars/phing-2.17.4.phar
+
 jobs:
   build:
     name: Build PEAR packages
@@ -27,7 +31,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          # PEAR PackageFileManager2 uses PHP 7 curly-brace syntax; Phing 2.4 is noisy on PHP 8+.
+          # PEAR PackageFileManager2 uses PHP 7 curly-brace syntax; Phing 2.17 PHAR runs on PHP 7.4.
           php-version: '7.4'
           tools: composer:v2
           extensions: dom, json, pdo, xml, xsl, mbstring, tokenizer
@@ -48,6 +52,20 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
+
+      - name: Cache Phing PHAR
+        id: phing-phar-cache
+        uses: actions/cache@v4
+        with:
+          path: test/tools/phing-phars/phing-${{ env.PHING_VERSION }}.phar
+          key: phing-${{ env.PHING_VERSION }}-phar
+
+      - name: Download Phing PHAR
+        if: steps.phing-phar-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p test/tools/phing-phars
+          curl -fsSL -o "test/tools/phing-phars/phing-${PHING_VERSION}.phar" \
+            "https://github.com/phingofficial/phing/releases/download/${PHING_VERSION}/phing-${PHING_VERSION}.phar"
 
       - name: Determine package version
         id: meta
@@ -77,7 +95,7 @@ jobs:
 
       - name: Build generator PEAR package
         run: |
-          php -d error_reporting=22517 -d display_errors=0 ../../vendor/bin/phing \
+          php -d error_reporting=22517 -d display_errors=0 "${PHING_PHAR}" \
             -f build-pear-package.xml \
             -Dversion="${{ steps.meta.outputs.version }}" \
             -Dstate="${{ steps.meta.outputs.state }}"
@@ -85,7 +103,7 @@ jobs:
 
       - name: Build runtime PEAR package
         run: |
-          php -d error_reporting=22517 -d display_errors=0 ../../vendor/bin/phing \
+          php -d error_reporting=22517 -d display_errors=0 "${PHING_PHAR}" \
             -f build-pear-package.xml \
             -Dversion="${{ steps.meta.outputs.version }}" \
             -Dstate="${{ steps.meta.outputs.state }}"
