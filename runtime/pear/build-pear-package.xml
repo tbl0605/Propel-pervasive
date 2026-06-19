@@ -4,6 +4,9 @@
 	This build file creates a minimal package of propel-runtime files,
 	builds a package.xml for installation using PEAR and creates the necessary TGZ file.
 
+	CI and local builds should use test/tools/run_pear_package_build.sh instead of
+	calling phing directly: it pins Phing 2.17.x, loads Composer PEAR libraries, and
+	sets error_reporting=22517 so Phing 2 does not fail on legacy warnings.
 -->
 
 <project name="propel_runtime" default="main">
