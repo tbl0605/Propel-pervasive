@@ -39,6 +39,8 @@ jobs:
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: test
+          # Skip tzinfo import; avoids harmless zoneinfo warnings in container logs at job teardown.
+          MYSQL_INITDB_SKIP_TZINFO: 1
         ports:
           - 3306:3306
         options: >-
