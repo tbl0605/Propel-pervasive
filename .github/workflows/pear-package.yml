@@ -55,15 +55,24 @@ jobs:
           if [ "${{ github.event_name }}" = "release" ]; then
             VERSION="${GITHUB_REF_NAME#v}"
             STATE="stable"
+            LABEL="${VERSION}"
           else
             SHORT_SHA="${GITHUB_SHA:0:7}"
-            BASE="$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo "latest")"
-            VERSION="${BASE}-dev.${SHORT_SHA}"
+            BASE="$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo "X.Y.Z")"
+            MA="${BASE%%.*}"
+            REST="${BASE#*.}"
+            MI="${REST%%.*}"
+            PA="${REST#*.}"
+            DEV_NUM="$(git rev-list --count HEAD)"
+            # PEAR accepts X.Y.ZdevN (numeric suffix only, no hyphens).
+            VERSION="${MA}.${MI}.${PA}dev${DEV_NUM}"
             STATE="devel"
+            LABEL="${VERSION}-${SHORT_SHA}"
           fi
 
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           echo "state=${STATE}" >> "$GITHUB_OUTPUT"
+          echo "label=${LABEL}" >> "$GITHUB_OUTPUT"
           echo "Building propel_generator and propel_runtime ${VERSION} (${STATE})"
 
       - name: Build generator PEAR package
@@ -94,7 +103,7 @@ jobs:
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: pear-packages-${{ steps.meta.outputs.version }}
+          name: pear-packages-${{ steps.meta.outputs.label }}
           path: dist/pear/
           if-no-files-found: error
 
