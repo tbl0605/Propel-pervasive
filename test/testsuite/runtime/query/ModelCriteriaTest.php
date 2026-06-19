@@ -74,18 +74,18 @@ class ModelCriteriaTest extends BookstoreTestBase
     public static function conditionsForTestReplaceNames()
     {
         return array(
-            array('Book.Title = ?', 'Title', 'book.title = ?'), // basic case
-            array('Book.Title=?', 'Title', 'book.title=?'), // without spaces
-            array('Book.Id<= ?', 'Id', 'book.id<= ?'), // with non-equal comparator
-            array('Book.AuthorId LIKE ?', 'AuthorId', 'book.author_id LIKE ?'), // with SQL keyword separator
-            array('(Book.AuthorId) LIKE ?', 'AuthorId', '(book.author_id) LIKE ?'), // with parenthesis
-            array('(Book.Id*1.5)=1', 'Id', '(book.id*1.5)=1'), // ignore numbers
+            array('Book.Title = ?', 'book.title = ?', 'Title'), // basic case
+            array('Book.Title=?', 'book.title=?', 'Title'), // without spaces
+            array('Book.Id<= ?', 'book.id<= ?', 'Id'), // with non-equal comparator
+            array('Book.AuthorId LIKE ?', 'book.author_id LIKE ?', 'AuthorId'), // with SQL keyword separator
+            array('(Book.AuthorId) LIKE ?', '(book.author_id) LIKE ?', 'AuthorId'), // with parenthesis
+            array('(Book.Id*1.5)=1', '(book.id*1.5)=1', 'Id'), // ignore numbers
             // dealing with quotes
-            array("Book.Id + ' ' + Book.AuthorId", null, "book.id + ' ' + book.author_id"),
-            array("'Book.Id' + Book.AuthorId", null, "'Book.Id' + book.author_id"),
-            array("Book.Id + 'Book.AuthorId'", null, "book.id + 'Book.AuthorId'"),
-            array('1=1', null, '1=1'), // with no name
-            array('', null, '') // with empty string
+            array("Book.Id + ' ' + Book.AuthorId", "book.id + ' ' + book.author_id", null),
+            array("'Book.Id' + Book.AuthorId", "'Book.Id' + book.author_id", null),
+            array("Book.Id + 'Book.AuthorId'", "book.id + 'Book.AuthorId'", null),
+            array('1=1', '1=1', null), // with no name
+            array('', '', null) // with empty string
         );
     }
 
@@ -93,13 +93,13 @@ class ModelCriteriaTest extends BookstoreTestBase
      * @dataProvider conditionsForTestReplaceNames
      */
     #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestReplaceNames')]
-    public function testReplaceNames($origClause, $columnPhpName = false, $modifiedClause)
+    public function testReplaceNames($origClause, $modifiedClause, $columnPhpName = false)
     {
         $c = new TestableModelCriteria('bookstore', 'Book');
-        $this->doTestReplaceNames($c, BookPeer::getTableMap(), $origClause, $columnPhpName = false, $modifiedClause);
+        $this->doTestReplaceNames($c, BookPeer::getTableMap(), $origClause, $modifiedClause, $columnPhpName);
     }
 
-    public function doTestReplaceNames($c, $tableMap, $origClause, $columnPhpName = false, $modifiedClause)
+    public function doTestReplaceNames($c, $tableMap, $origClause, $modifiedClause, $columnPhpName = false)
     {
         $c->replaceNames($origClause);
         $columns = $c->replacedColumns;

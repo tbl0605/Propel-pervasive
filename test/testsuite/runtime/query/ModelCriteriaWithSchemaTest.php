@@ -32,12 +32,12 @@ class ModelCriteriaWithSchemaTest extends SchemasTestBase
     public static function conditionsForTestReplaceNamesWithSchemas()
     {
         return array(
-            array('ContestBookstoreContest.PrizeBookId = ?', 'PrizeBookId', 'contest.bookstore_contest.prize_book_id = ?'), // basic case
-            array('ContestBookstoreContest.PrizeBookId=?', 'PrizeBookId', 'contest.bookstore_contest.prize_book_id=?'), // without spaces
-            array('ContestBookstoreContest.Id<= ?', 'Id', 'contest.bookstore_contest.id<= ?'), // with non-equal comparator
-            array('ContestBookstoreContest.BookstoreId LIKE ?', 'BookstoreId', 'contest.bookstore_contest.bookstore_id LIKE ?'), // with SQL keyword separator
-            array('(ContestBookstoreContest.BookstoreId) LIKE ?', 'BookstoreId', '(contest.bookstore_contest.bookstore_id) LIKE ?'), // with parenthesis
-            array('(ContestBookstoreContest.Id*1.5)=1', 'Id', '(contest.bookstore_contest.id*1.5)=1') // ignore numbers
+            array('ContestBookstoreContest.PrizeBookId = ?', 'contest.bookstore_contest.prize_book_id = ?', 'PrizeBookId'), // basic case
+            array('ContestBookstoreContest.PrizeBookId=?', 'contest.bookstore_contest.prize_book_id=?', 'PrizeBookId'), // without spaces
+            array('ContestBookstoreContest.Id<= ?', 'contest.bookstore_contest.id<= ?', 'Id'), // with non-equal comparator
+            array('ContestBookstoreContest.BookstoreId LIKE ?', 'contest.bookstore_contest.bookstore_id LIKE ?', 'BookstoreId'), // with SQL keyword separator
+            array('(ContestBookstoreContest.BookstoreId) LIKE ?', '(contest.bookstore_contest.bookstore_id) LIKE ?', 'BookstoreId'), // with parenthesis
+            array('(ContestBookstoreContest.Id*1.5)=1', '(contest.bookstore_contest.id*1.5)=1', 'Id') // ignore numbers
         );
     }
 
@@ -45,13 +45,13 @@ class ModelCriteriaWithSchemaTest extends SchemasTestBase
      * @dataProvider conditionsForTestReplaceNamesWithSchemas
      */
     #[\PHPUnit\Framework\Attributes\DataProvider('conditionsForTestReplaceNamesWithSchemas')]
-    public function testReplaceNamesWithSchemas($origClause, $columnPhpName = false, $modifiedClause)
+    public function testReplaceNamesWithSchemas($origClause, $modifiedClause, $columnPhpName = false)
     {
         $c = new TestableModelCriteriaWithSchema('bookstore-schemas', 'ContestBookstoreContest');
-        $this->doTestReplaceNames($c, ContestBookstoreContestPeer::getTableMap(),  $origClause, $columnPhpName = false, $modifiedClause);
+        $this->doTestReplaceNames($c, ContestBookstoreContestPeer::getTableMap(), $origClause, $modifiedClause, $columnPhpName);
     }
 
-    public function doTestReplaceNames($c, $tableMap, $origClause, $columnPhpName = false, $modifiedClause)
+    public function doTestReplaceNames($c, $tableMap, $origClause, $modifiedClause, $columnPhpName = false)
     {
         $c->replaceNames($origClause);
         $columns = $c->replacedColumns;

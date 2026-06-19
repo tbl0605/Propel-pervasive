@@ -40,7 +40,7 @@
   "require-dev": {
     "pear/pear": "^1.10",
     "pear/pear_packagefilemanager": "dev-trunk",
-    "phpunit/phpunit": "^9.6.21 || ^10.5 || ^11.0"
+    "phpunit/phpunit": "^9.6.21 || ^10.5 || ^11.0 || ^12.0 || ^13.0"
   },
   "config": {
     "policy": {
