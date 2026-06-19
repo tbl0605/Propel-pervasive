@@ -11,6 +11,8 @@
 /**
  * This is used to connect to a Pervasive database.
  *
+ * Known limitations (pagination, LOB hex inlining): see docs/pervasive.md
+ *
  * @author     Hans Lellelid <hans@xmpl.org> (Propel)
  * @version    $Revision$
  * @package    propel.runtime.adapter

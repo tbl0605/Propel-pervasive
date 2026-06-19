@@ -12,6 +12,8 @@ require_once dirname(__FILE__) . '/../BaseSchemaParser.php';
 /**
  * Pervasive database schema parser.
  *
+ * Known limitations (type maps, column order, legacy hacks): see docs/pervasive.md
+ *
  * @author     Thierry Blind
  * @version    $Revision$
  * @package    propel.generator.reverse.pervasive

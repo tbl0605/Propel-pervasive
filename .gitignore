@@ -1,12 +1,29 @@
-test/fixtures/bookstore-packaged/build/
-test/fixtures/bookstore/build/
-test/fixtures/generator/build/
-test/fixtures/namespaced/build/
-test/fixtures/nestedset/build/
-test/fixtures/schemas/build/
-test/fixtures/treetest/build/
+# Generated fixture builds
+test/fixtures/**/build/
+
+# Composer / PHP tooling
 vendor/
 composer.lock
 composer.phar
+.phpunit.result.cache
+
+# PEAR packaging output
 generator/pear/build/
 runtime/pear/build/
+dist/pear/
+
+# CI-downloaded PHARs (see .github/workflows/)
+test/tools/phpunit-phars/
+test/tools/phing-phars/
+test/tools/pear-home/
+
+# IDE and local machine files
+.project
+.buildpath
+.settings/
+.idea/
+.vscode/
+
+# OS junk
+Thumbs.db
+.DS_Store
