@@ -27,10 +27,12 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          # PEAR PackageFileManager2 uses PHP 7 curly-brace syntax; Phing 2.4 is noisy on PHP 8+.
+          php-version: '7.4'
           tools: composer:v2
           extensions: dom, json, pdo, xml, xsl, mbstring, tokenizer
           coverage: none
+          ini-values: error_reporting=22517, display_errors=Off
 
       - name: Get Composer cache directory
         id: composer-cache
@@ -40,9 +42,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: pear-php82-composer-${{ hashFiles('composer.json') }}
+          key: pear-php74-composer-${{ hashFiles('composer.json') }}
           restore-keys: |
-            pear-php82-composer-
+            pear-php74-composer-
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
@@ -66,7 +68,7 @@ jobs:
 
       - name: Build generator PEAR package
         run: |
-          php ../../vendor/bin/phing \
+          php -d error_reporting=22517 -d display_errors=0 ../../vendor/bin/phing \
             -f build-pear-package.xml \
             -Dversion="${{ steps.meta.outputs.version }}" \
             -Dstate="${{ steps.meta.outputs.state }}"
@@ -74,7 +76,7 @@ jobs:
 
       - name: Build runtime PEAR package
         run: |
-          php ../../vendor/bin/phing \
+          php -d error_reporting=22517 -d display_errors=0 ../../vendor/bin/phing \
             -f build-pear-package.xml \
             -Dversion="${{ steps.meta.outputs.version }}" \
             -Dstate="${{ steps.meta.outputs.state }}"
