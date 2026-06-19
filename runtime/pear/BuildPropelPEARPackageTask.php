@@ -95,7 +95,7 @@ class BuildPropelPEARPackageTask extends MatchingTask
         $package->setPackage('propel_runtime');
         $package->setSummary('Runtime component of the Propel PHP object persistence layer');
         $package->setDescription('Propel is an object persistence layer for PHP5 based on Apache Torque. This package provides the runtime engine that transparently handles object persistence and retrieval.');
-        $package->setChannel('pear.propelorm.org');
+        $package->setChannel('__uri');
         $package->setPackageType('php');
 
         $package->setReleaseVersion($this->version);
