@@ -1,6 +1,12 @@
 # Changelog Of The Propel 1.x Branch #
 
-## ????-??-??: Version 1.7.15 ##
+## 2026-06-19: Version 1.8.0 ##
+- PHP 7.4 to 8.5 support
+- PHPUnit 9 to 11 support
+- MySQL 8 CI
+- GitHub Actions replacing Travis
+- modernized test infrastructure
+- fork-specific PEAR packaging
 
 ## 2025-02-27: Version 1.7.14 ##
 - comment some unused variable
