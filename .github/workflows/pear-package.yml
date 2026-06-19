@@ -25,12 +25,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v2.37.2
         with:
           # PHP 7.4: pear/pear_packagefilemanager uses $var{0} syntax removed in PHP 8.0.
           # Phing is pinned to 2.17.x (see test/tools/run_pear_package_build.sh).
@@ -47,7 +47,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
 
       - name: Cache Composer dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: pear-php74-composer-${{ hashFiles('composer.json') }}
@@ -59,7 +59,7 @@ jobs:
 
       - name: Cache Phing PHAR
         id: phing-phar-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: test/tools/phing-phars/phing-${{ env.PHING_VERSION }}.phar
           key: phing-${{ env.PHING_VERSION }}-phar
@@ -125,7 +125,7 @@ jobs:
           ls -la dist/pear/
 
       - name: Upload workflow artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pear-packages-${{ steps.meta.outputs.label }}
           path: dist/pear/
@@ -133,7 +133,7 @@ jobs:
 
       - name: Attach packages to GitHub release
         if: github.event_name == 'release'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: dist/pear/*
         env:
