@@ -70,11 +70,12 @@ class PgsqlPlatform extends DefaultPlatform
      */
     public function disconnectedEscapeText($text)
     {
-        if (function_exists('pg_escape_string')) {
+        // pg_escape_string() without a connection relies on the default link and is
+        // deprecated since PHP 8.1; this method is only used when disconnected.
+        if (PHP_VERSION_ID < 80100 && function_exists('pg_escape_string')) {
             return pg_escape_string($text);
-        } else {
-            return parent::disconnectedEscapeText($text);
         }
+        return parent::disconnectedEscapeText($text);
     }
 
     public function getBooleanString($b)
