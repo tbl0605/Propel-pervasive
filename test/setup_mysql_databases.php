@@ -4,10 +4,17 @@
  * Create MySQL databases required by Propel test fixtures.
  *
  * Connection settings are read from test/fixtures/bookstore/runtime-conf.xml.
+ *
+ * Legacy Propel tests assume pre-MySQL-8 GROUP BY behavior (no ONLY_FULL_GROUP_BY).
+ * We try SET GLOBAL first (needed for connections opened later by PHPUnit). If the MySQL
+ * user lacks SUPER privileges, SESSION is applied on this connection only and a note is printed.
  */
 
 $fixturesDir = __DIR__ . '/fixtures';
 $configPath = $fixturesDir . '/bookstore/runtime-conf.xml';
+
+/** @var string MySQL 5.7-compatible sql_mode without ONLY_FULL_GROUP_BY */
+define('PROPEL_TEST_MYSQL_SQL_MODE', 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION');
 
 /**
  * @return array{host: string, port: ?string, user: string, password: string, dbname: ?string}
@@ -125,6 +132,30 @@ function propel_test_collect_mysql_database_names($fixturesDir)
     return array_values(array_unique($databases));
 }
 
+/**
+ * @param PDO $pdo
+ */
+function propel_test_configure_mysql_sql_mode(PDO $pdo)
+{
+    $sqlMode = PROPEL_TEST_MYSQL_SQL_MODE;
+
+    try {
+        $pdo->exec("SET GLOBAL sql_mode = '" . $sqlMode . "'");
+        echo 'MySQL GLOBAL sql_mode configured' . PHP_EOL;
+
+        return;
+    } catch (PDOException $e) {
+        fwrite(STDERR, 'Note: SET GLOBAL sql_mode failed (' . $e->getMessage() . ').' . PHP_EOL);
+    }
+
+    try {
+        $pdo->exec("SET SESSION sql_mode = '" . $sqlMode . "'");
+        echo 'MySQL SESSION sql_mode configured (GLOBAL unavailable; PHPUnit may still need SUPER on MySQL 8+)' . PHP_EOL;
+    } catch (PDOException $e) {
+        fwrite(STDERR, 'WARNING: Unable to configure sql_mode: ' . $e->getMessage() . PHP_EOL);
+    }
+}
+
 try {
     $connection = propel_test_mysql_connection_from_runtime_conf($configPath);
 } catch (RuntimeException $e) {
@@ -154,10 +185,7 @@ try {
     exit(1);
 }
 
-// https://www.stevenchang.tw/blog/2021/06/07/disable-sql-mode-only-full-group-by-in-mysql
-// https://stackoverflow.com/a/51629259/2332350
-// Legacy Propel tests assume pre-MySQL-8 GROUP BY behavior (no ONLY_FULL_GROUP_BY).
-$pdo->exec("SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'");
+propel_test_configure_mysql_sql_mode($pdo);
 
 foreach ($databases as $database) {
     $pdo->exec('CREATE DATABASE IF NOT EXISTS `' . str_replace('`', '``', $database) . '`');
