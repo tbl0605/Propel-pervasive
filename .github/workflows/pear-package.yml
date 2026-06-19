@@ -10,6 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  # Last stable Phing 2.x release. Phing 3.x is not usable here (see run_pear_package_build.sh).
   PHING_VERSION: 2.17.4
   PHING_PHAR: ${{ github.workspace }}/test/tools/phing-phars/phing-2.17.4.phar
 
@@ -31,11 +32,14 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          # PEAR PackageFileManager2 uses PHP 7 curly-brace syntax; Phing 2.17 PHAR runs on PHP 7.4.
+          # PHP 7.4: pear/pear_packagefilemanager uses $var{0} syntax removed in PHP 8.0.
+          # Phing is pinned to 2.17.x (see test/tools/run_pear_package_build.sh).
           php-version: '7.4'
           tools: composer:v2
           extensions: dom, json, pdo, xml, xsl, mbstring, tokenizer
           coverage: none
+          # error_reporting=22517 = E_ALL without warnings, notices, strict, and deprecations.
+          # Phing 2 registers a PHP error handler that fails the build on those levels.
           ini-values: error_reporting=22517, display_errors=Off
 
       - name: Get Composer cache directory
