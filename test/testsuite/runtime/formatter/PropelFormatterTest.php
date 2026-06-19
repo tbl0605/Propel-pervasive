@@ -25,12 +25,24 @@ class PropelFormatterTest extends BookstoreEmptyTestBase
         BookstoreDataPopulator::populate();
     }
 
+    /**
+     * @return ReflectionMethod
+     */
+    private function getWorkerObjectReflectionMethod()
+    {
+        $method = new ReflectionMethod('PropelFormatter', 'getWorkerObject');
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
+
+        return $method;
+    }
+
     public function testGetWorkerObjectReturnsRightClass()
     {
         $formatter = new PropelObjectFormatter();
 
-        $method = new ReflectionMethod('PropelFormatter', 'getWorkerObject');
-        $method->setAccessible(true);
+        $method = $this->getWorkerObjectReflectionMethod();
 
         $classNames = array(
             'Bookstore',
@@ -51,8 +63,7 @@ class PropelFormatterTest extends BookstoreEmptyTestBase
     {
         $formatter = new PropelObjectFormatter();
 
-        $method = new ReflectionMethod('PropelFormatter', 'getWorkerObject');
-        $method->setAccessible(true);
+        $method = $this->getWorkerObjectReflectionMethod();
 
         $className = 'Bookstore';
         $col = 0;
