@@ -1,4 +1,18 @@
-I N S T A L L I N G    P R O P E L
+Installing Propel (Pervasive fork)
 ==================================
 
-See: http://www.propelorm.org/documentation/01-installation.html
+This fork is installed with Composer:
+
+    composer require tbl0605/propel1-pervasive
+
+Development setup:
+
+    git clone https://github.com/tbl0605/Propel-pervasive.git
+    cd Propel-pervasive
+    composer install
+
+See README.md for running tests.
+
+Legacy PEAR packages are published as release artifacts on GitHub, not via pear.propelorm.org.
+
+For general Propel 1.x usage, see: http://www.propelorm.org/documentation/

@@ -1,6 +1,6 @@
 # Propel #
 
-Propel is an open-source Object-Relational Mapping (ORM) for PHP5.
+Propel is an open-source Object-Relational Mapping (ORM) for PHP. **This repository is a fork** of [Propel 1.x](https://github.com/propelorm/Propel) with experimental support for **Pervasive DB**, PHP **7.4+**, and modern PHPUnit versions.
 
 [![PHPUnit](https://github.com/tbl0605/Propel-pervasive/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/tbl0605/Propel-pervasive/actions/workflows/phpunit.yml)
 [![Total Downloads](https://poser.pugx.org/tbl0605/propel1-pervasive/downloads)](https://packagist.org/packages/tbl0605/propel1-pervasive)
@@ -36,11 +36,43 @@ What's partially working:
 
  - All the rest is untested but is probably working (concerning the Pervasive DB support);
 
-## Installation ##
+## Installation
 
-Read the [Propel documentation](http://propelorm.org/Propel/).
+### Composer (recommended) ###
 
+```bash
+composer require tbl0605/propel1-pervasive
+```
+
+The `propel-gen` CLI is available from `vendor/bin/propel-gen` (Unix) or `vendor/bin/propel-gen.bat` (Windows).
+
+### From source ###
+
+```bash
+git clone https://github.com/tbl0605/Propel-pervasive.git
+cd Propel-pervasive
+composer install
+```
+
+Legacy PEAR `.tgz` packages (`propel_generator`, `propel_runtime`) are attached to [GitHub releases](https://github.com/tbl0605/Propel-pervasive/releases) when published.
+
+For original Propel 1.x concepts (schemas, behaviors, migrations), the [Propel 1 documentation](http://propelorm.org/documentation/) remains useful background reading.
+
+## Running tests
+
+Tests require **PHP 7.4+**, **Composer**, **MySQL**, and the **Phing** build tool (installed via Composer).
+
+```bash
+composer install
+composer test:setup    # create MySQL databases
+test/reset_tests.sh    # rebuild fixtures (use test\reset_tests.cmd on Windows)
+composer test          # run PHPUnit (requires phpunit in PATH or use CI PHAR flow)
+```
+
+GitHub Actions runs the full matrix automatically: see [.github/workflows/phpunit.yml](.github/workflows/phpunit.yml).
+
+**Note:** Test fixtures use `root` with an empty password on `127.0.0.1` by default (`test/fixtures/bookstore/runtime-conf.xml`). Do not reuse these settings outside a local/CI test environment.
 
 ## License ##
 
-Propel is an open-source project released under the MIT license. See the `LICENSE` file for more information.
+Propel is an open-source project released under the MIT license. See the [LICENSE](LICENSE) file for more information.
