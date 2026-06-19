@@ -1,5 +1,8 @@
 # Changelog Of The Propel 1.x Branch #
 
+## 2026-06-19: Version 1.8.1 ##
+- PHPUnit warning: fix pg_escape_string() wrong use
+
 ## 2026-06-19: Version 1.8.0 ##
 - PHP 7.4 to 8.5 support
 - PHPUnit 9 to 11 support
