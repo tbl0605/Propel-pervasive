@@ -36,7 +36,7 @@ What's partially working:
 
  - All the rest is untested but is probably working (concerning the Pervasive DB support);
 
-## Installation
+## Installation ##
 
 ### Composer (recommended) ###
 
