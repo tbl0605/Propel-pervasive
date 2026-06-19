@@ -885,24 +885,19 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
         $defaultfmt = null;
         $visibility = $col->getAccessorVisibility();
 
-        if ($this->getBuildProperty('useDateTimeClass')) {
-            // Return a DateTime object by default; formatted strings are opt-in.
+        // Default date/time formatter strings are specified in build.properties
+        if ($col->getType() === PropelTypes::DATE) {
+            $defaultfmt = $this->getBuildProperty('defaultDateFormat');
+        } elseif ($col->getType() === PropelTypes::TIME) {
+            $defaultfmt = $this->getBuildProperty('defaultTimeFormat');
+        } elseif ($col->getType() === PropelTypes::TIMESTAMP) {
+            $defaultfmt = $this->getBuildProperty('defaultTimeStampFormat');
+        }
+
+        if (empty($defaultfmt)) {
             $defaultfmt = 'null';
         } else {
-            // Default date/time formatter strings are specified in build.properties
-            if ($col->getType() === PropelTypes::DATE) {
-                $defaultfmt = $this->getBuildProperty('defaultDateFormat');
-            } elseif ($col->getType() === PropelTypes::TIME) {
-                $defaultfmt = $this->getBuildProperty('defaultTimeFormat');
-            } elseif ($col->getType() === PropelTypes::TIMESTAMP) {
-                $defaultfmt = $this->getBuildProperty('defaultTimeStampFormat');
-            }
-
-            if (empty($defaultfmt)) {
-                $defaultfmt = 'null';
-            } else {
-                $defaultfmt = var_export($defaultfmt, true);
-            }
+            $defaultfmt = var_export($defaultfmt, true);
         }
 
         $script .= "
