@@ -1,5 +1,7 @@
-# Generated fixture builds
+# Generated fixture builds (see exception below for reverse/mysql)
 test/fixtures/**/build/
+!test/fixtures/reverse/mysql/build/sql/schema.sql
+!test/fixtures/reverse/mysql/build/sql/sqldb.map
 
 # Composer / PHP tooling
 vendor/
@@ -16,6 +18,10 @@ dist/pear/
 test/tools/phpunit-phars/
 test/tools/phing-phars/
 test/tools/pear-home/
+test/tools/*.txt
+
+# Local helper scripts (not part of the project)
+create_autoload_files.cmd
 
 # IDE and local machine files
 .project
