@@ -1,40 +1,33 @@
-# Propel #
+# Propel Pervasive #
 
-Propel is an open-source Object-Relational Mapping (ORM) for PHP. **This repository is a fork** of [Propel 1.x](https://github.com/propelorm/Propel) with experimental support for **Pervasive DB**, PHP **7.4+**, and modern PHPUnit versions.
+**Propel-pervasive** (`tbl0605/propel1-pervasive`) is a maintained fork of [Propel 1.x](https://github.com/propelorm/Propel) that adds a native **`pervasive`** database adapter for **Pervasive PSQL** (Actian Zen) to the Propel ORM: schema reverse-engineering, XML schema generation, and PHP model code generation over PDO/ODBC.
+
+Use it when you need **Propel with Pervasive SQL** on PHP **7.4 through 8.5**, with a modern test suite (PHPUnit 9 to 13). MySQL, PostgreSQL, SQLite, Oracle, and MSSQL remain supported as in upstream Propel 1.x.
 
 [![PHPUnit](https://github.com/tbl0605/Propel-pervasive/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/tbl0605/Propel-pervasive/actions/workflows/phpunit.yml)
 [![Total Downloads](https://poser.pugx.org/tbl0605/propel1-pervasive/downloads)](https://packagist.org/packages/tbl0605/propel1-pervasive)
 [![Latest Stable Version](https://poser.pugx.org/tbl0605/propel1-pervasive/v/stable)](https://packagist.org/packages/tbl0605/propel1-pervasive)
 [![License](https://poser.pugx.org/tbl0605/propel1-pervasive/license)](https://packagist.org/packages/tbl0605/propel1-pervasive)
 
-## A quick tour of the features ##
+## Pervasive PSQL support in this fork ##
 
-Propel has some nice features you should know about:
+| Area | Status |
+|------|--------|
+| Reverse-engineer an existing Pervasive schema to Propel XML | Working |
+| `pervasive` adapter, platform, and SQL builders | Implemented |
+| PHPUnit coverage for Pervasive | Missing |
+| Other Pervasive workflows (migrations, runtime CRUD) | Untested but likely working |
 
- - It's a fast and easy way to manage your database;
- - It provides command line tools for generating code (well documented with an IDE-friendly syntax);
- - It's very flexible: you can simply extend Propel;
- - It uses PDO (PHP Data Objects) so it allows you to use the RDBMS of your choice (MySQL, SQLite, PostgreSQL, Oracle, MSSQL, and **Pervasive** in this fork);
- - Propel is an open-source project which is [well documented](http://propelorm.org/Propel/documentation/).
+Also includes pending fixes from the upstream Propel 1.x branch.
 
-THIS IS AN EXPERIMENTAL FORK TO PROVIDE SUPPORT FOR PERVASIVE DB.
+## Features ##
 
-What's new:
+Propel is an open-source Object-Relational Mapping (ORM) for PHP:
 
- - Introduced a new database type called "pervasive";
- - Included most pending pull requests from the Propel's upstream (master) branch;
-
-What's working:
-
- - Create an XML Schema from an existing Pervasive DB Structure;
-
-What's not working:
-
- - Testsuite for Pervasive DB is missing;
-
-What's partially working:
-
- - All the rest is untested but is probably working (concerning the Pervasive DB support);
+ - Fast, IDE-friendly code generation via `propel-gen`;
+ - Flexible behaviors, validators, and migrations;
+ - PDO-based adapters for MySQL, SQLite, PostgreSQL, Oracle, MSSQL, and **Pervasive PSQL** (this fork);
+ - Background reading: [Propel 1 documentation](http://propelorm.org/Propel/documentation/).
 
 ## Installation ##
 
