@@ -67,8 +67,6 @@ class MysqlSchemaParserTest extends PHPUnit_Framework_TestCase
 
     public function testDecimal()
     {
-        $t1 = new Table('foo');
-
         $schema = '<database name="reverse_bookstore"><table name="foo"><column name="longitude" type="DECIMAL" scale="7" size="10" /></table></database>';
         $xtad = new XmlToAppData();
         $appData = $xtad->parseString($schema);
