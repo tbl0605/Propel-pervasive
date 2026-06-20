@@ -4,9 +4,9 @@
  * Build a self-contained propel_generator PHAR (propel-gen CLI + generator + runtime + Phing 2.17.x).
  *
  * Usage:
- *   php -d phar.readonly=0 test/tools/build_propel_gen_phar.php --version=1.8.1
- *   php -d phar.readonly=0 test/tools/build_propel_gen_phar.php --version=1.8.1 \
- *     --output=dist/pear/propel_generator-1.8.1.phar --phing-phar=test/tools/phing-phars/phing-2.17.4.phar
+ *   php -d phar.readonly=0 test/tools/build_propel_gen_phar.php --version=X.Y.Z
+ *   php -d phar.readonly=0 test/tools/build_propel_gen_phar.php --version=X.Y.Z \
+ *     --output=dist/pear/propel_generator-X.Y.Z.phar --phing-phar=test/tools/phing-phars/phing-2.17.4.phar
  */
 
 if (PHP_SAPI !== 'cli') {
