@@ -54,7 +54,19 @@ cd Propel-pervasive
 composer install
 ```
 
-Legacy PEAR `.tgz` packages (`propel_generator`, `propel_runtime`) are attached to [GitHub releases](https://github.com/tbl0605/Propel-pervasive/releases) when published.
+Legacy PEAR `.tgz` packages (`propel_generator`, `propel_runtime`) and a standalone **`propel_generator-*.phar`** (generator + runtime + Phing) are attached to [GitHub releases](https://github.com/tbl0605/Propel-pervasive/releases) when published. Run the PHAR with:
+
+```bash
+php propel_generator-X.Y.Z.phar om
+php propel_generator-X.Y.Z.phar /path/to/project insert-sql
+```
+
+Build the PHAR locally (requires PHP `phar` extension and a Phing 2.17 PHAR). Use the release tag or `propel.version` from `generator/default.properties`:
+
+```bash
+VERSION=X.Y.Z
+php -d phar.readonly=0 test/tools/build_propel_gen_phar.php --version="$VERSION"
+```
 
 For original Propel 1.x concepts (schemas, behaviors, migrations), the [Propel 1 documentation](http://propelorm.org/documentation/) remains useful background reading.
 
