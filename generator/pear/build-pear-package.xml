@@ -23,7 +23,7 @@
 
     <!-- some default properties -->
     <property name="notes"><![CDATA[
-        This is a release of the 1.7 branch of the Propel Generator.
+        This is a release of the 1.* branch of the Propel Generator (tbl0605/Propel-pervasive fork).
 	]]></property>
     <property name="state" value="stable"/>
 

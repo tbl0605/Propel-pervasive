@@ -39,7 +39,7 @@ if (isset($options['help']) || !isset($options['version']) || $options['version'
 $version = $options['version'];
 $outputFile = isset($options['output'])
     ? $options['output']
-    : $repoRoot . DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR . 'phar' . DIRECTORY_SEPARATOR . 'propel_generator-' . $version . '.phar';
+    : $repoRoot . DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR . 'pear' . DIRECTORY_SEPARATOR . 'propel_generator-' . $version . '.phar';
 
 $phingPhar = isset($options['phing-phar']) ? $options['phing-phar'] : null;
 if ($phingPhar === null) {

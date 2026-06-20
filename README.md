@@ -14,7 +14,7 @@ Propel has some nice features you should know about:
  - It's a fast and easy way to manage your database;
  - It provides command line tools for generating code (well documented with an IDE-friendly syntax);
  - It's very flexible: you can simply extend Propel;
- - It uses PDO (PHP Data Objects) so it allows you to use the RDBMS of your choice (MySQL, SQLite, PostgreSQL, Oracle and MSSQL are supported);
+ - It uses PDO (PHP Data Objects) so it allows you to use the RDBMS of your choice (MySQL, SQLite, PostgreSQL, Oracle, MSSQL, and **Pervasive** in this fork);
  - Propel is an open-source project which is [well documented](http://propelorm.org/Propel/documentation/).
 
 THIS IS AN EXPERIMENTAL FORK TO PROVIDE SUPPORT FOR PERVASIVE DB.
@@ -44,7 +44,7 @@ What's partially working:
 composer require tbl0605/propel1-pervasive
 ```
 
-The `propel-gen` CLI is available from `vendor/bin/propel-gen` (Unix) or `vendor/bin/propel-gen.bat` (Windows).
+The `propel-gen` CLI is available from `vendor/bin/propel-gen` (Composer creates a `.bat` wrapper on Windows automatically).
 
 ### From source ###
 
@@ -61,7 +61,7 @@ php propel_generator-X.Y.Z.phar om
 php propel_generator-X.Y.Z.phar /path/to/project insert-sql
 ```
 
-Build the PHAR locally (requires PHP `phar` extension and a Phing 2.17 PHAR). Use the release tag or `propel.version` from `generator/default.properties`:
+Build the PHAR locally (requires PHP `phar` extension and a Phing 2.17 PHAR). Use the release tag or `propel.version` from `generator/default.properties`. Output defaults to `dist/pear/`:
 
 ```bash
 php -d phar.readonly=0 test/tools/build_propel_gen_phar.php --version=X.Y.Z
@@ -71,16 +71,18 @@ For original Propel 1.x concepts (schemas, behaviors, migrations), the [Propel 1
 
 ## Running tests
 
-Tests require **PHP 7.4+**, **Composer**, **MySQL**, and the **Phing** build tool (installed via Composer).
+Tests require **PHP 7.4+**, **Composer**, **MySQL**, and the **Phing** build tool (installed via Composer). CI runs **PHPUnit 9 through 13** on PHP 7.4 to 8.5.
 
 ```bash
 composer install
 composer test:setup    # create MySQL databases
 test/reset_tests.sh    # rebuild fixtures (use test\reset_tests.cmd on Windows)
-composer test          # run PHPUnit (requires phpunit in PATH or use CI PHAR flow)
+composer test          # run PHPUnit from vendor/bin/phpunit
 ```
 
 GitHub Actions runs the full matrix automatically: see [.github/workflows/phpunit.yml](.github/workflows/phpunit.yml).
+
+**Composer security advisories:** `composer.json` ignores a small set of PKSA IDs for transitive dev/build dependencies (Phing 2.x, legacy PEAR tooling). These do not affect runtime-only installs that omit `require-dev`.
 
 **Note:** Test fixtures use `root` with an empty password on `127.0.0.1` by default (`test/fixtures/bookstore/runtime-conf.xml`). Do not reuse these settings outside a local/CI test environment.
 
