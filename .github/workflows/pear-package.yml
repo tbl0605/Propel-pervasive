@@ -1,4 +1,4 @@
-name: PEAR packages
+name: PEAR packages and PHAR
 
 on:
   push:
@@ -18,7 +18,7 @@ env:
 
 jobs:
   build:
-    name: Build PEAR packages
+    name: Build PEAR packages and propel-gen PHAR
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -116,6 +116,21 @@ jobs:
             -Dversion="${{ steps.meta.outputs.version }}" \
             -Dstate="${{ steps.meta.outputs.state }}"
         working-directory: runtime/pear
+
+      - name: Build propel-gen PHAR
+        run: |
+          mkdir -p dist/pear
+          php -d phar.readonly=0 test/tools/build_propel_gen_phar.php \
+            --version="${{ steps.meta.outputs.version }}" \
+            --output="dist/pear/propel_generator-${{ steps.meta.outputs.version }}.phar" \
+            --phing-phar="${{ env.PHING_PHAR }}"
+
+      - name: Smoke-test propel-gen PHAR
+        run: |
+          PHAR="${{ github.workspace }}/dist/pear/propel_generator-${{ steps.meta.outputs.version }}.phar"
+          php "$PHAR" 2>&1 | tee /tmp/propel-phar-smoke.out
+          grep -E "Buildfile:|Welcome to Propel" /tmp/propel-phar-smoke.out
+        working-directory: /tmp
 
       - name: Collect package artifacts
         run: |
