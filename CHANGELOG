@@ -1,5 +1,11 @@
 # Changelog Of The Propel 1.x Branch #
 
+## 2026-06-20: Version 1.8.3 ##
+- Add phar generation
+
+## 2026-06-19: Version 1.8.2 ##
+- Add support for PHPUnit 12 and 13
+
 ## 2026-06-19: Version 1.8.1 ##
 - PHPUnit warning: fix pg_escape_string() wrong use
 
