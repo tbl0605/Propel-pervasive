@@ -1678,7 +1678,7 @@ class Table extends ScopedElement implements IDMethod
     {
         if ($this->hasColumn($name, $caseInsensitive)) {
             if ($caseInsensitive) {
-                return $this->columnsByLowercaseName[strtolower($name)];
+                return $this->columnsByLowercaseName[strtolower($name ?? '')];
             } else {
                 return $this->columnsByName[$name ?? ''];
             }

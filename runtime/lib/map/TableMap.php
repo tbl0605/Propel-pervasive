@@ -325,7 +325,7 @@ class TableMap
 
         $this->columns[$name ?? ''] = $col;
         $this->columnsByPhpName[$phpName ?? ''] = $col;
-        $this->columnsByInsensitiveCase[strtolower($phpName)] = $col;
+        $this->columnsByInsensitiveCase[strtolower($phpName ?? '')] = $col;
 
         return $col;
     }
