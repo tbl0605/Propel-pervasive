@@ -1,5 +1,9 @@
 # Changelog Of The Propel 1.x Branch #
 
+## 2027-07-20: Version 1.8.4 ##
+- MssqlSchemaParser: normalize reversed column default values
+- More PHP 8.4 and 8.5 compatibility fixes
+
 ## 2026-06-20: Version 1.8.3 ##
 - Add phar generation
 - Code cleanup
