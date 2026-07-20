@@ -103,8 +103,16 @@ class ColumnDefaultValue
         if ($this == $other) {
             return true;
         }
-        // special case for current timestamp
-        $equivalents = array('CURRENT_TIMESTAMP', 'CURRENT_TIMESTAMP()', 'NOW()');
+        // special case for current timestamp (including MSSQL getdate() equivalents)
+        $equivalents = array(
+            'CURRENT_TIMESTAMP',
+            'CURRENT_TIMESTAMP()',
+            'NOW()',
+            'GETDATE()',
+            'GETUTCDATE()',
+            'SYSDATETIME()',
+            'SYSUTCDATETIME()',
+        );
         if (in_array(strtoupper($this->getValue()), $equivalents) && in_array(strtoupper($other->getValue()), $equivalents)) {
             return true;
         }

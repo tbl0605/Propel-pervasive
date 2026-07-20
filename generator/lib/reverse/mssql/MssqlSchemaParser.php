@@ -167,7 +167,10 @@ class MssqlSchemaParser extends BaseSchemaParser
             $column->getDomain()->replaceSize($size);
             $column->getDomain()->replaceScale($scale);
             if ($default !== null) {
-                $column->getDomain()->setDefaultValue(new ColumnDefaultValue($default, ColumnDefaultValue::TYPE_VALUE));
+                $columnDefault = $this->createColumnDefaultValue($default);
+                if ($columnDefault !== null) {
+                    $column->getDomain()->setDefaultValue($columnDefault);
+                }
             }
             $column->setAutoIncrement($autoincrement);
             $column->setNotNull(!$is_nullable);
@@ -293,5 +296,149 @@ class MssqlSchemaParser extends BaseSchemaParser
     protected function cleanDelimitedIdentifiers($identifier)
     {
         return preg_replace('/^\'(.*)\'$/U', '$1', $identifier);
+    }
+
+    /**
+     * Normalize a raw COLUMN_DEF value into a ColumnDefaultValue.
+     *
+     * SQL Server stores null defaults as (NULL); these are skipped because they
+     * do not represent a usable default value in Propel.
+     *
+     * @param string $default
+     *
+     * @return ColumnDefaultValue|null
+     */
+    protected function createColumnDefaultValue($default)
+    {
+        $default = $this->cleanColumnDefault($default);
+        if ($this->isNullColumnDefault($default)) {
+            return null;
+        }
+
+        $type = $this->isColumnDefaultExpression($default)
+            ? ColumnDefaultValue::TYPE_EXPR
+            : ColumnDefaultValue::TYPE_VALUE;
+
+        return new ColumnDefaultValue($default, $type);
+    }
+
+    /**
+     * Whether the cleaned default represents SQL NULL (no default value).
+     *
+     * @param string $default
+     *
+     * @return boolean
+     */
+    protected function isNullColumnDefault($default)
+    {
+        return strtoupper(trim($default)) === 'NULL';
+    }
+
+    /**
+     * Whether the cleaned default is a SQL expression (not a literal value).
+     *
+     * @param string $default
+     *
+     * @return boolean
+     */
+    protected function isColumnDefaultExpression($default)
+    {
+        return !$this->isColumnDefaultLiteral($default);
+    }
+
+    /**
+     * Whether the cleaned default is a literal SQL value.
+     *
+     * MSSQL COLUMN_DEF values are normalized first; remaining literals are
+     * numeric, hex, or quoted strings. Everything else is treated as SQL.
+     *
+     * @param string $default
+     *
+     * @return boolean
+     */
+    protected function isColumnDefaultLiteral($default)
+    {
+        $default = trim($default);
+        if ($default === '') {
+            return false;
+        }
+
+        if (preg_match('/^-?\d+(\.\d+)?([eE][+-]?\d+)?$/', $default)) {
+            return true;
+        }
+
+        if (preg_match('/^0[xX][0-9a-fA-F]+$/', $default)) {
+            return true;
+        }
+
+        if (preg_match("/^'(?:''|[^'])*'$/s", $default)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * SQL Server stores column defaults wrapped in one or more pairs of parentheses
+     * (e.g. ((0)), ('foo'), (getdate())). Strip matching outer parentheses while
+     * respecting string literals and leaving expressions like (1)+(2) intact.
+     * Also strip the Unicode N prefix from string literals (N'foo' -> 'foo').
+     *
+     * @param string $default
+     *
+     * @return string
+     */
+    protected function cleanColumnDefault($default)
+    {
+        $default = trim((string) $default);
+        while ($this->hasMatchingOuterParentheses($default)) {
+            $default = trim(substr($default, 1, -1));
+        }
+
+        // MSSQL Unicode string literals: N'...' -> '...'
+        if (preg_match("/^N('(?:''|[^'])*')$/s", $default, $matches)) {
+            $default = $matches[1];
+        }
+
+        return $default;
+    }
+
+    /**
+     * Whether $value is wrapped in a single matching pair of parentheses.
+     *
+     * @param string $value
+     *
+     * @return boolean
+     */
+    protected function hasMatchingOuterParentheses($value)
+    {
+        $len = strlen($value);
+        if ($len < 2 || $value[0] !== '(' || $value[$len - 1] !== ')') {
+            return false;
+        }
+
+        $depth = 1;
+        $inString = false;
+        for ($i = 1; $i < $len; $i++) {
+            $ch = $value[$i];
+            if ($ch === "'") {
+                if ($inString && $i + 1 < $len && $value[$i + 1] === "'") {
+                    $i++;
+                } else {
+                    $inString = !$inString;
+                }
+                continue;
+            }
+            if ($inString) {
+                continue;
+            }
+            if ($ch === '(') {
+                $depth++;
+            } elseif ($ch === ')' && --$depth === 0 && $i < $len - 1) {
+                return false;
+            }
+        }
+
+        return !$inString && $depth === 0;
     }
 }

@@ -26,6 +26,10 @@ class ColumnDefaultValueTest extends PHPUnit_Framework_TestCase
             array(new ColumnDefaultValue('foo', 'bar'), new ColumnDefaultValue('foo', 'bar1'), false),
             array(new ColumnDefaultValue('current_timestamp', 'bar'), new ColumnDefaultValue('now()', 'bar'), true),
             array(new ColumnDefaultValue('current_timestamp', 'bar'), new ColumnDefaultValue('now()', 'bar1'), false),
+            array(new ColumnDefaultValue('getdate()', ColumnDefaultValue::TYPE_EXPR), new ColumnDefaultValue('CURRENT_TIMESTAMP', ColumnDefaultValue::TYPE_EXPR), true),
+            array(new ColumnDefaultValue('GETDATE()', ColumnDefaultValue::TYPE_EXPR), new ColumnDefaultValue('now()', ColumnDefaultValue::TYPE_EXPR), true),
+            array(new ColumnDefaultValue('sysdatetime()', ColumnDefaultValue::TYPE_EXPR), new ColumnDefaultValue('CURRENT_TIMESTAMP', ColumnDefaultValue::TYPE_EXPR), true),
+            array(new ColumnDefaultValue('getdate()', ColumnDefaultValue::TYPE_EXPR), new ColumnDefaultValue('CURRENT_TIMESTAMP', ColumnDefaultValue::TYPE_VALUE), false),
         );
     }
 
