@@ -63,6 +63,7 @@ class MssqlSchemaParserTest extends PHPUnit_Framework_TestCase
   /**
    * @dataProvider providerForTestCleanColumnDefault
    */
+  #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestCleanColumnDefault')]
   public function testCleanColumnDefault($input, $expected)
   {
     $parser = new TestableMssqlSchemaParser(null);
@@ -98,6 +99,7 @@ class MssqlSchemaParserTest extends PHPUnit_Framework_TestCase
   /**
    * @dataProvider providerForTestCreateColumnDefaultValue
    */
+  #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestCreateColumnDefaultValue')]
   public function testCreateColumnDefaultValue($input, $expectedValue, $expectedType)
   {
     $parser = new TestableMssqlSchemaParser(null);
@@ -141,6 +143,7 @@ class MssqlSchemaParserTest extends PHPUnit_Framework_TestCase
   /**
    * @dataProvider providerForTestIsColumnDefaultLiteral
    */
+  #[\PHPUnit\Framework\Attributes\DataProvider('providerForTestIsColumnDefaultLiteral')]
   public function testIsColumnDefaultLiteral($default, $expected)
   {
     $parser = new TestableMssqlSchemaParser(null);
